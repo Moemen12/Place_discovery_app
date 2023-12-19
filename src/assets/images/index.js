@@ -4,7 +4,7 @@ import image3 from "./image3.jpeg";
 import image4 from "./image4.jpeg";
 import image5 from "./image5.jpeg";
 import landingImage from "./landing.svg";
-import line_1 from "./line_1.svg";
+import line_1 from "./Line_1.svg";
 import butterfly from "./butterfly.svg";
 export {
   image1,
