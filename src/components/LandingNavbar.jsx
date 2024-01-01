@@ -16,8 +16,12 @@ const LandingNavbar = () => {
         <b className="top-7 text-2xl md:top-0 relative">Wanderwise</b>
         <div className="space-x-8">
           <div className="hidden md:block">
-            <Link className="text-white btn px-12 mr-4">Log in</Link>
-            <Link className="border-black btn px-12">Sign up</Link>
+            <Link className="text-white btn px-12 mr-4" to="/auth/login">
+              Log in
+            </Link>
+            <Link className="border-black btn px-12" to="/auth/register">
+              Sign up
+            </Link>
           </div>
 
           <label className="swap swap-rotate md:hidden z-20 top-8 -right-4 text-slate-700">
@@ -55,8 +59,12 @@ const LandingNavbar = () => {
         }`}
       >
         <p className="capitalize text-white text-lg pb-8">wanderwise</p>
-        <Link className="pb-2">Sign up</Link>
-        <Link className="pb-2">Log in</Link>
+        <Link className="pb-2" to="/auth/register">
+          Sign up
+        </Link>
+        <Link className="pb-2" to="/auth/login">
+          Log in
+        </Link>
       </div>
     </Wrapper>
   );

@@ -1,4 +1,4 @@
-import { ClientSays, Header, Letters, Slider, Statistic } from "../components";
+import { ClientSays, Header, Letters, Statistic } from "../components";
 
 const Landing = () => {
   return (
@@ -6,7 +6,7 @@ const Landing = () => {
       <div className="h-screen flex flex-col">
         <Header />
       </div>
-      <Slider />
+
       <Statistic />
       <ClientSays />
       <Letters />

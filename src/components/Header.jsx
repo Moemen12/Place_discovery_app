@@ -22,13 +22,16 @@ const Header = () => {
             <br className="hidden md:block" />
             world&apos;s most captivating places.
           </div>
-          <Link className="btn max-w-xs mr-auto mt-12 px-8 rounded-2xl tracking-widest">
+          <Link
+            to="/trips"
+            className="btn max-w-xs mr-auto mt-12 px-8 rounded-2xl tracking-widest"
+          >
             <PiStarFourFill size="1.1rem" />
             Discover
           </Link>
         </div>
         <div className="hidden md:block">
-          <img className="max-h-96" src={landingImage} alt="" />
+          <img className="max-h-96" src={landingImage} alt="" loading="lazy" />
         </div>
       </Wrapper>
     </>
