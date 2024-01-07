@@ -35,3 +35,36 @@ export const loginAction = async ({ request }, store) => {
     return null;
   }
 };
+
+/* Review Action */
+
+export const reviewAction = async (params, request, store) => {
+  const { dispatch } = store;
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
+  const user = store.getState().userState.user;
+
+  try {
+    if (!user || user.id === null) {
+      const errorMessage = "Unauthorized, Please Login";
+      dispatch(setMessage({ error: true, message: errorMessage }));
+
+      return redirect("/auth/login");
+    }
+
+    const response = await customFetch.post(
+      `trip/${params.id}/${user.id}/create/review/`,
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      }
+    );
+
+    return response;
+  } catch (error) {
+    dispatch(setMessage(error.response.data.message));
+    return error;
+  }
+};

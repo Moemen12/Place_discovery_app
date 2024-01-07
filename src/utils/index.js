@@ -5,6 +5,9 @@ const Travel_api = "http://127.0.0.1:8000/api";
 
 export const customFetch = axios.create({
   baseURL: Travel_api,
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
 
 export const getUserFromLocalStorage = () => {

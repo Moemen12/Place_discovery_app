@@ -12,18 +12,22 @@ const Login = () => {
   const dispatch = useDispatch();
   const message = useSelector((state) => state.userState.message);
   const userFromLocalStorage = localStorage.getItem("user");
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(resetMessage());
-    if (
-      userFromLocalStorage &&
-      userFromLocalStorage !== "null" &&
-      userFromLocalStorage !== "undefined"
-    ) {
-      navigate("/trips");
-    }
-  }, [dispatch, navigate, userFromLocalStorage]);
+    // dispatch(resetMessage());
+    // if (
+    //   userFromLocalStorage &&
+    //   userFromLocalStorage !== "null" &&
+    //   userFromLocalStorage !== "undefined"
+    // ) {
+    //   navigate("/trips");
+    // }
+    return () => {
+      // Cleanup function runs on unmount
+      dispatch(resetMessage());
+    };
+  }, [dispatch, userFromLocalStorage]);
 
   return (
     <div

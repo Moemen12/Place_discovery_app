@@ -13,8 +13,12 @@ import TripCategory from "./TripCategory";
 import Accordion from "./Accordion";
 import Card from "./Card";
 import SharedNavbar from "./SharedNavbar";
+import Footer from "./Footer";
+import Reviews from "./Reviews";
 export {
   LandingNavbar,
+  Footer,
+  Reviews,
   Header,
   Slider,
   Statistic,

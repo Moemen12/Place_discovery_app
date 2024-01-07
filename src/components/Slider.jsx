@@ -1,14 +1,13 @@
 import PropTypes from "prop-types";
-// import SliderHelper from "./SliderHelper";
 import React from "react";
 
-const Slider = ({ perView = 3, speed = 500, loop = false, children }) => {
+const Slider = ({ id, perView = 0, speed = 500, loop = false, children }) => {
   return (
     <swiper-container
-      autoplay-delay="5000"
       slides-per-view={perView}
       speed={speed}
       loop={loop}
+      id={id}
       lazy={true}
     >
       {React.Children.map(children, (child, index) => (
@@ -19,6 +18,7 @@ const Slider = ({ perView = 3, speed = 500, loop = false, children }) => {
 };
 
 Slider.propTypes = {
+  id: PropTypes.string,
   perView: PropTypes.number,
   speed: PropTypes.number,
   loop: PropTypes.bool,
