@@ -57,7 +57,7 @@ const SingleTrip = () => {
               <img
                 src={
                   profile_image ||
-                  "https://cdn-icons-png.flaticon.com/512/1144/1144760.png?ga=GA1.1.1229095363.1703014299&"
+                  "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/768px-Default_pfp.svg.png"
                 }
                 className="rounded-full w-14"
                 alt=""
@@ -85,7 +85,7 @@ const SingleTrip = () => {
                       <img
                         src={
                           person.image_url ||
-                          "https://cdn-icons-png.flaticon.com/512/1144/1144760.png?ga=GA1.1.1229095363.1703014299&"
+                          "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/768px-Default_pfp.svg.png"
                         }
                         alt={`Person ${index + 1}`}
                       />
@@ -147,7 +147,7 @@ const SingleTrip = () => {
               <img
                 src={
                   profile_image ||
-                  "https://cdn-icons-png.flaticon.com/512/1144/1144760.png?ga=GA1.1.1229095363.1703014299&"
+                  "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/768px-Default_pfp.svg.png"
                 }
                 className="rounded-full w-10"
                 alt=""

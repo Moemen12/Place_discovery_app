@@ -3,8 +3,11 @@ import {
   Error,
   Landing,
   Login,
+  Profile,
   Register,
   Saved,
+  SettingLayout,
+  Settings,
   SingleTrip,
   Trips,
 } from "../pages";
@@ -44,5 +47,22 @@ export const router = createBrowserRouter([
   {
     path: "/trips/saved/",
     element: <Saved />,
+  },
+  {
+    element: <SettingLayout />,
+    errorElement: <Error />,
+    children: [
+      {
+        index: true,
+        path: "auth/profile/",
+        element: <Profile />,
+        errorElement: <Error />,
+      },
+      {
+        element: <Settings />,
+        path: "/auth/settings/",
+        errorElement: <Error />,
+      },
+    ],
   },
 ]);

@@ -15,7 +15,10 @@ import Card from "./Card";
 import SharedNavbar from "./SharedNavbar";
 import Footer from "./Footer";
 import Reviews from "./Reviews";
+import Sidebar from "./SideBar";
+import Info from "./Info";
 export {
+  Info,
   LandingNavbar,
   Footer,
   Reviews,
@@ -32,5 +35,6 @@ export {
   TripsNavbar,
   TripCategory,
   Card,
+  Sidebar,
   SharedNavbar,
 };
