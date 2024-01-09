@@ -1,10 +1,12 @@
-import { Link } from "react-router-dom";
 import { FaRegEdit } from "react-icons/fa";
 import { useState, useRef } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { updateProfileImage } from "../features/user/userSlice";
+import { Link } from "react-router-dom";
 
 const SideBar = () => {
   const store = useSelector((store) => store.userState);
+  const dispatch = useDispatch();
   const { image } = store.user;
   const [isFileInputOpen, setIsFileInputOpen] = useState(false);
   const [profileImage, setProfileImage] = useState(image);
@@ -18,12 +20,20 @@ const SideBar = () => {
   const handleFileInputChange = (event) => {
     // Handle the selected file here
     const selectedFile = event.target.files[0];
-    console.log("Selected file:", selectedFile);
 
     // Update the profile image with the selected file
     if (selectedFile) {
       const imageURL = URL.createObjectURL(selectedFile);
       setProfileImage(imageURL);
+
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        const base64String = e.target.result.split(",")[1];
+        dispatch(updateProfileImage(base64String));
+      };
+
+      reader.readAsDataURL(selectedFile);
     }
 
     // Close the file input after handling the file
@@ -48,6 +58,7 @@ const SideBar = () => {
       >
         <FaRegEdit className="absolute right-5 bottom-3" size="1.5rem" />
         <input
+          name="image_url"
           type="file"
           accept="image/*"
           className="hidden"

@@ -11,7 +11,12 @@ import {
   SingleTrip,
   Trips,
 } from "../pages";
-import { loginAction, registerAction, reviewAction } from "../actions/actions";
+import {
+  loginAction,
+  registerAction,
+  reviewAction,
+  updateProfileAction,
+} from "../actions/actions";
 import { store } from "../store";
 import { singleProductLoader } from "../loaders/loaders";
 export const router = createBrowserRouter([
@@ -53,10 +58,11 @@ export const router = createBrowserRouter([
     errorElement: <Error />,
     children: [
       {
-        index: true,
         path: "auth/profile/",
         element: <Profile />,
         errorElement: <Error />,
+        action: (request) => updateProfileAction(request, store),
+        // loader: userProfileLoader,
       },
       {
         element: <Settings />,

@@ -3,7 +3,8 @@ import { getUserFromLocalStorage } from "../../utils";
 
 const initialState = {
   user: getUserFromLocalStorage(),
-  message: null, // Add this line
+  message: null,
+  profile_image: null,
 };
 
 const userSlice = createSlice({
@@ -21,9 +22,13 @@ const userSlice = createSlice({
     resetMessage: (state) => {
       state.message = null;
     },
+    updateProfileImage: (state, action) => {
+      state.profile_image = action.payload;
+    },
   },
 });
 
-export const { loginUser, setMessage, resetMessage } = userSlice.actions; // Export the new action
+export const { loginUser, setMessage, resetMessage, updateProfileImage } =
+  userSlice.actions; // Export the new action
 
 export default userSlice.reducer;

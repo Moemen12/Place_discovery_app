@@ -68,3 +68,35 @@ export const reviewAction = async (params, request, store) => {
     return error;
   }
 };
+
+/* Update Profile Action */
+
+export const updateProfileAction = async ({ request }, store) => {
+  const { dispatch } = store;
+
+  const newData = new FormData(document.getElementById("update_form"));
+
+  const data = Object.fromEntries(newData);
+
+  const user = store.getState().userState.user;
+
+  try {
+    if (!user || user.id === null) {
+      const errorMessage = "Unauthorized, Please Login";
+      dispatch(setMessage({ error: true, message: errorMessage }));
+
+      return redirect("/auth/login");
+    }
+
+    const response = await customFetch.put(`/auth/user/profile`, data, {
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
+    });
+
+    return response;
+  } catch (error) {
+    dispatch(setMessage(error.response.data.message));
+    return error;
+  }
+};
