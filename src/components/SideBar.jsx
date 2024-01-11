@@ -2,14 +2,16 @@ import { FaRegEdit } from "react-icons/fa";
 import { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateProfileImage } from "../features/user/userSlice";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 
-const SideBar = () => {
-  const store = useSelector((store) => store.userState);
+const SideBar = ({ profile_image }) => {
+  // const store = useSelector((store) => store.userState);
+
   const dispatch = useDispatch();
-  const { image } = store.user;
+  // const { image } = store.user;
   const [isFileInputOpen, setIsFileInputOpen] = useState(false);
-  const [profileImage, setProfileImage] = useState(image);
+  // const [profileImage, setProfileImage] = useState(image);
+
   const fileInputRef = useRef(null);
 
   const handleImageClick = () => {
@@ -24,7 +26,7 @@ const SideBar = () => {
     // Update the profile image with the selected file
     if (selectedFile) {
       const imageURL = URL.createObjectURL(selectedFile);
-      setProfileImage(imageURL);
+      // setProfileImage(imageURL);
 
       const reader = new FileReader();
 
@@ -49,7 +51,7 @@ const SideBar = () => {
         className="relative w-48 h-48 rounded-full cursor-pointer"
         style={{
           backgroundImage: `url('${
-            profileImage ||
+            profile_image ||
             "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/768px-Default_pfp.svg.png"
           }')`,
           backgroundSize: "cover",

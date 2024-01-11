@@ -18,7 +18,7 @@ import {
   updateProfileAction,
 } from "../actions/actions";
 import { store } from "../store";
-import { singleProductLoader } from "../loaders/loaders";
+import { singleProductLoader, userProfileLoader } from "../loaders/loaders";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -55,6 +55,7 @@ export const router = createBrowserRouter([
   },
   {
     element: <SettingLayout />,
+    loader: () => userProfileLoader(store),
     errorElement: <Error />,
     children: [
       {
@@ -62,7 +63,7 @@ export const router = createBrowserRouter([
         element: <Profile />,
         errorElement: <Error />,
         action: (request) => updateProfileAction(request, store),
-        // loader: userProfileLoader,
+        loader: () => userProfileLoader(store),
       },
       {
         element: <Settings />,

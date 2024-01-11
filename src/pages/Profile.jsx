@@ -1,15 +1,15 @@
 import { Info, InputForm } from "../components";
 import { GrUpdate } from "react-icons/gr";
-import { Form, useNavigation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Form, useLoaderData, useNavigation } from "react-router-dom";
 
 const Profile = () => {
-  const store = useSelector((store) => store.userState);
+  const responseData = useLoaderData();
+  const {
+    data: { name, email, published_trip_num, bio },
+  } = responseData;
 
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
-
-  const { name, email, published_trip_number, bio } = store.user;
 
   return (
     <Form method="post" id="update_form">
@@ -21,7 +21,7 @@ const Profile = () => {
           <Info label="Email" data={email} />
           <Info
             label="Published Trip Number"
-            data={published_trip_number}
+            data={published_trip_num}
             className="w-1/6"
           />
 
@@ -29,7 +29,7 @@ const Profile = () => {
           <InputForm value={bio} name="bio" />
         </div>
       </div>
-      <input type="hidden" name="image_url" value={store.profile_image || ""} />
+      {/* <input type="hidden" name="image_url" value={profile_image || ""} /> */}
       <button
         type="submit"
         className="capitalize text-white flex items-center w-fit rounded-md fixed right-8 bottom-8 gap-2 py-4 px-6"
