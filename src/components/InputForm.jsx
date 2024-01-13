@@ -4,7 +4,7 @@ import { useState } from "react";
 const InputForm = ({
   type = "text",
   name,
-  className = "input input-bordered w-full max-w-xs",
+  className,
   placeholder,
   style,
   disabled = false,
@@ -21,12 +21,15 @@ const InputForm = ({
   return (
     <>
       <input
+        id={name}
         type={type}
         name={name}
         value={newValue}
         onChange={changeValue}
         disabled={disabled}
-        className={`${className}`}
+        className={`input input-bordered w-full max-w-xs${
+          className ? ` ${className}` : ""
+        }`}
         placeholder={placeholder}
         style={defaultStyle}
         autoComplete="on"
@@ -36,6 +39,7 @@ const InputForm = ({
 };
 
 InputForm.propTypes = {
+  id: PropTypes.string,
   type: PropTypes.string,
   name: PropTypes.string,
   placeholder: PropTypes.string,

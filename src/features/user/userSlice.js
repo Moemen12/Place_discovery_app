@@ -25,10 +25,18 @@ const userSlice = createSlice({
     updateProfileImage: (state, action) => {
       state.profile_image = action.payload;
     },
+    resetProfileImage: (state) => {
+      state.profile_image = null;
+    },
   },
 });
 
-export const { loginUser, setMessage, resetMessage, updateProfileImage } =
-  userSlice.actions; // Export the new action
+export const {
+  loginUser,
+  setMessage,
+  resetMessage,
+  updateProfileImage,
+  resetProfileImage,
+} = userSlice.actions; // Export the new action
 
 export default userSlice.reducer;

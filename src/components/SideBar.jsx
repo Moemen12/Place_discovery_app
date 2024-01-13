@@ -1,95 +1,138 @@
-import { FaRegEdit } from "react-icons/fa";
 import { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateProfileImage } from "../features/user/userSlice";
-import { Link, useLoaderData } from "react-router-dom";
+import {
+  updateProfileImage,
+  resetProfileImage,
+} from "../features/user/userSlice";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
-const SideBar = ({ profile_image }) => {
-  // const store = useSelector((store) => store.userState);
+// Icons
 
+import { FaUser } from "react-icons/fa6";
+import { IoMdSettings } from "react-icons/io";
+import { FaMoon } from "react-icons/fa";
+import { BiLogOut } from "react-icons/bi";
+import { IoIosArrowForward } from "react-icons/io";
+import MobileNavbar from "./MobileNavbar";
+import { ProfileSide } from ".";
+
+const SideBar = ({ profile_image, onLinkClick }) => {
+  const baseUrl = useSelector((store) => store.baseUrl);
   const dispatch = useDispatch();
-  // const { image } = store.user;
-  const [isFileInputOpen, setIsFileInputOpen] = useState(false);
-  // const [profileImage, setProfileImage] = useState(image);
+  const [profileImage, setProfileImage] = useState(profile_image || "");
 
   const fileInputRef = useRef(null);
 
   const handleImageClick = () => {
-    // Trigger click on the hidden file input
     fileInputRef.current.click();
+  };
+  const handleLinkClick = () => {
+    onLinkClick();
   };
 
   const handleFileInputChange = (event) => {
-    // Handle the selected file here
     const selectedFile = event.target.files[0];
 
-    // Update the profile image with the selected file
     if (selectedFile) {
-      const imageURL = URL.createObjectURL(selectedFile);
-      // setProfileImage(imageURL);
-
       const reader = new FileReader();
 
       reader.onload = (e) => {
-        const base64String = e.target.result.split(",")[1];
-        dispatch(updateProfileImage(base64String));
+        const base64String = e.target.result;
+
+        if (base64String !== profileImage) {
+          setProfileImage(base64String);
+          dispatch(updateProfileImage(base64String));
+        }
       };
 
       reader.readAsDataURL(selectedFile);
     }
-
-    // Close the file input after handling the file
-    setIsFileInputOpen(false);
   };
 
+  const handleDeleteImage = () => {
+    setProfileImage(null);
+    dispatch(resetProfileImage());
+  };
+
+  const defaultImageUrl =
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/768px-Default_pfp.svg.png";
+
+  const imageUrl =
+    profileImage && profileImage.startsWith("data:")
+      ? profileImage
+      : profileImage
+      ? baseUrl + "/storage" + profileImage
+      : defaultImageUrl;
+
   return (
-    <aside
-      className="h-screen flex flex-col items-center fixed"
-      style={{ width: "inherit" }}
-    >
-      <div
-        className="relative w-48 h-48 rounded-full cursor-pointer"
-        style={{
-          backgroundImage: `url('${
-            profile_image ||
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/768px-Default_pfp.svg.png"
-          }')`,
-          backgroundSize: "cover",
-        }}
-        onClick={handleImageClick}
+    <>
+      <aside
+        className="h-screen flex flex-col items-center fixed"
+        style={{ width: "inherit" }}
       >
-        <FaRegEdit className="absolute right-5 bottom-3" size="1.5rem" />
-        <input
-          name="image_url"
-          type="file"
-          accept="image/*"
-          className="hidden"
-          onChange={handleFileInputChange}
-          ref={fileInputRef}
+        <ProfileSide
+          imageUrl={imageUrl}
+          handleImageClick={handleImageClick}
+          handleFileInputChange={handleFileInputChange}
+          fileInputRef={fileInputRef}
         />
-      </div>
-      <b className="text-2xl mt-8">Moemen Saadeh</b>
-      <div className="flex flex-col w-full px-8 text-xl mt-16">
-        <Link className="pb-4" to="/auth/profile">
-          Profile
-        </Link>
-        <Link className="pb-4" to="/auth/Settings">
-          Settings
-        </Link>
-        <div className="form-control pb-4">
-          <label className="label cursor-pointer p-0">
-            <span className="label-text text-xl">Dark Mode</span>
-            <input
-              type="checkbox"
-              className="toggle bg-white [--tglbg:#DDDDDD] border-transparent h-8"
-              checked
-            />
-          </label>
+        <button
+          className="text-sm mt-2 text-blue-500 cursor-pointer hidden sm:block relative top-16"
+          onClick={handleDeleteImage}
+        >
+          Delete Profile Image
+        </button>
+        <div className="flex flex-col w-full px-8 text-xl mt-28 gap-6 sm:gap-0">
+          <Link
+            className="pb-4 flex items-center justify-between"
+            to="/auth/profile"
+            onClick={handleLinkClick}
+          >
+            <div className="flex items-center justify-between gap-4">
+              <FaUser className="sm:hidden" />
+              Profile
+            </div>
+            <IoIosArrowForward className="sm:hidden" />
+          </Link>
+          <Link
+            className="pb-4 flex items-center justify-between"
+            to="/auth/Settings"
+            onClick={handleLinkClick}
+          >
+            <div className="flex items-center gap-4">
+              <IoMdSettings className="sm:hidden" />
+              Settings
+            </div>
+            <IoIosArrowForward className="sm:hidden" />
+          </Link>
+          <div className="form-control pb-4">
+            <label className="label cursor-pointer p-0">
+              <div className="flex items-center gap-4">
+                <FaMoon className="sm:hidden" />
+                <span className="label-text text-xl">Dark Mode</span>
+              </div>
+              <input
+                readOnly
+                type="checkbox"
+                className="toggle bg-white [--tglbg:#DDDDDD] border-transparent h-8"
+                checked
+              />
+            </label>
+          </div>
+          <Link className="pb-4 flex items-center gap-4">
+            <BiLogOut className="sm:hidden" />
+            Logout
+          </Link>
         </div>
-        <Link className="pb-4">Logout</Link>
-      </div>
-    </aside>
+      </aside>
+      <MobileNavbar />
+    </>
   );
 };
 
+SideBar.propTypes = {
+  profile_image: PropTypes.string,
+  onLinkClick: PropTypes.func,
+};
 export default SideBar;

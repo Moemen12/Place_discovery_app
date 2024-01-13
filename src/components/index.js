@@ -17,6 +17,9 @@ import Footer from "./Footer";
 import Reviews from "./Reviews";
 import Sidebar from "./SideBar";
 import Info from "./Info";
+import Profile from "./Profile";
+import MobileNavbar from "./MobileNavbar";
+
 export {
   Info,
   LandingNavbar,
@@ -24,8 +27,10 @@ export {
   Reviews,
   Header,
   Slider,
+  MobileNavbar,
   Statistic,
   ClientSays,
+  Profile as ProfileSide,
   Letters,
   SubmitBtn,
   TripHeader,

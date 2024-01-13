@@ -76,8 +76,6 @@ export const updateProfileAction = async ({ request }, store) => {
 
   const newData = new FormData(document.getElementById("update_form"));
 
-  const data = Object.fromEntries(newData);
-
   const user = store.getState().userState.user;
 
   try {
@@ -88,7 +86,7 @@ export const updateProfileAction = async ({ request }, store) => {
       return redirect("/auth/login");
     }
 
-    const response = await customFetch.put(`/auth/user/profile`, data, {
+    const response = await customFetch.put(`/auth/user/profile`, newData, {
       headers: {
         Authorization: `Bearer ${user.token}`,
       },
