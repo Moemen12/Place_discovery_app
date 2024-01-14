@@ -27,7 +27,7 @@ const InputForm = ({
         value={newValue}
         onChange={changeValue}
         disabled={disabled}
-        className={`input input-bordered w-full max-w-xs${
+        className={`input input-bordered w-full${
           className ? ` ${className}` : ""
         }`}
         placeholder={placeholder}

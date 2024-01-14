@@ -23,6 +23,17 @@ body {
   box-shadow: rgb(221, 221, 221) 1px 1px 8px 0px;
   height: -webkit-fill-available;
 }
+.mobile-footer a.active {
+  background: white;
+  border-radius: 45%;
+  transform: translateY(-0.5rem);
+}
+
+.mobile-footer a.active svg {
+  background: linear-gradient(#000719, #002e87);
+  border-radius: 50%;
+  width: 2rem;
+}
 
 /* Start media query */
 

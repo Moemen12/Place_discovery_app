@@ -7,6 +7,7 @@ const Profile = ({
   handleFileInputChange,
   fileInputRef,
   className,
+  showIcon,
 }) => {
   return (
     <div
@@ -20,7 +21,7 @@ const Profile = ({
       }}
     >
       <div
-        className="absolute w-48 h-48 rounded-full cursor-pointer left-2/4 top-36"
+        className="absolute w-48 h-48 rounded-full cursor-pointer left-2/4 top-36 profile-circle"
         style={{
           backgroundImage: `url('${imageUrl}')`,
           backgroundSize: "cover",
@@ -28,7 +29,9 @@ const Profile = ({
         }}
         onClick={handleImageClick}
       >
-        <FaRegEdit className="absolute right-5 bottom-3" size="1.5rem" />
+        {showIcon && (
+          <FaRegEdit className="absolute right-5 bottom-3" size="1.5rem" />
+        )}
         <input
           name="image_url"
           type="file"
@@ -48,6 +51,7 @@ Profile.propTypes = {
   className: PropTypes.string,
   handleFileInputChange: PropTypes.func,
   fileInputRef: PropTypes.object,
+  showIcon: PropTypes.bool,
 };
 
 export default Profile;

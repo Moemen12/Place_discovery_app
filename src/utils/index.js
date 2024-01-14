@@ -1,5 +1,6 @@
 import axios from "axios";
 import { image10, image7, image8, image9 } from "../assets/images";
+import { redirect } from "react-router-dom";
 
 const Travel_api = "http://127.0.0.1:8000/api";
 
@@ -21,7 +22,7 @@ export const getUserFromLocalStorage = () => {
     console.error("Error parsing JSON:", error);
     // Remove invalid data from localStorage
     localStorage.removeItem("user");
-    window.location.href = "/auth/login";
+    return redirect("/auth/login");
   }
 
   return null;
