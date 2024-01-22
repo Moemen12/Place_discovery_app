@@ -9,9 +9,12 @@ const Slider = ({ id, perView = 0, speed = 500, loop = false, children }) => {
       loop={loop}
       id={id}
       lazy={true}
+      space-between="0"
     >
       {React.Children.map(children, (child, index) => (
-        <swiper-slide key={index}>{child}</swiper-slide>
+        <swiper-slide class="sm" key={index}>
+          {child}
+        </swiper-slide>
       ))}
     </swiper-container>
   );
@@ -19,10 +22,11 @@ const Slider = ({ id, perView = 0, speed = 500, loop = false, children }) => {
 
 Slider.propTypes = {
   id: PropTypes.string,
-  perView: PropTypes.number,
+  perView: PropTypes.string,
   speed: PropTypes.number,
   loop: PropTypes.bool,
   children: PropTypes.node,
+  space-between:PropTypes.string
 };
 
 export default Slider;

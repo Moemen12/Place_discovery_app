@@ -34,3 +34,15 @@ export const userProfileLoader = async (store) => {
     return null;
   }
 };
+
+/* Trips Loader */
+
+export const tripsLoader = async ({ params }) => {
+  try {
+    const response = await customFetch.get(`/trips/${params.category || ""}`);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};

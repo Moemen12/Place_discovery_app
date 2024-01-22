@@ -1,6 +1,5 @@
 // SettingLayout.js
 import { Outlet, useLoaderData, useNavigate } from "react-router-dom";
-import { Sidebar } from "../../components";
 import { useState, useEffect } from "react";
 
 const SettingLayout = () => {

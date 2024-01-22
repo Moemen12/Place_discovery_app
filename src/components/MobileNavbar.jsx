@@ -4,7 +4,7 @@ import { MdOutlineHome } from "react-icons/md";
 import { FaRegHeart } from "react-icons/fa6";
 import { IoMdAdd } from "react-icons/io";
 import { FaRegUser } from "react-icons/fa6";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const MobileNavbar = () => {
   return (

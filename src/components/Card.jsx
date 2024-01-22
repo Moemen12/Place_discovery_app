@@ -1,14 +1,20 @@
 import { image1 } from "../assets/images";
 import { IoStar } from "react-icons/io5";
 
-const Card = () => {
+const Card = ({ trip }) => {
+  const { address, images, slug, title, user_name } = trip;
   return (
-    <div className="flex h-40 w-80">
-      <img src={image1} alt="" />
+    <div className="flex h-64">
+      <img
+        loading="lazy"
+        className="w-[45%] rounded-l-md object-cover"
+        src={images.image_url}
+        alt=""
+      />
 
-      <article className="bg-slate-700 flex-1">
+      <article className="bg-slate-700 flex-1 rounded-r-md">
         <div className="flex items-center justify-between">
-          <b>Paris</b>
+          <b>{address}</b>
           <div className="flex">
             <IoStar />
             <IoStar />

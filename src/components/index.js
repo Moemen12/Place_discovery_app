@@ -12,15 +12,34 @@ import SliderHelper from "./SliderHelper";
 import TripCategory from "./TripCategory";
 import Accordion from "./Accordion";
 import Card from "./Card";
+import AppAutocomplete from "./AppAutocomplete";
+import Modal from "./Modal";
 import SharedNavbar from "./SharedNavbar";
 import Footer from "./Footer";
 import Reviews from "./Reviews";
-import Sidebar from "./SideBar";
 import Info from "./Info";
+import Rating from "./Rating";
+import Autocomplete from "./Autocomplete";
 import Profile from "./Profile";
 import MobileNavbar from "./MobileNavbar";
+import Countries from "./Countries";
+import CategorySlider from "./CategorySlider";
+import SinglePageCard from "./SinglePageCard";
+import ProductItem from "./ProductItem";
+import ImageCard from "./ImageCard";
+import ReviewMobile from "./ReviewMobile";
 
 export {
+  Autocomplete,
+  ProductItem,
+  Modal,
+  AppAutocomplete,
+  Rating,
+  CategorySlider,
+  Countries,
+  ReviewMobile,
+  SinglePageCard,
+  ImageCard,
   Info,
   LandingNavbar,
   Footer,
@@ -40,6 +59,5 @@ export {
   TripsNavbar,
   TripCategory,
   Card,
-  Sidebar,
   SharedNavbar,
 };

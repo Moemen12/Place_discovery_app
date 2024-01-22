@@ -116,7 +116,7 @@ const SideBar = ({ profile_image, onLinkClick }) => {
                 readOnly
                 type="checkbox"
                 className="toggle bg-white [--tglbg:#DDDDDD] border-transparent h-8"
-                checked
+                name="mode"
               />
             </label>
           </div>

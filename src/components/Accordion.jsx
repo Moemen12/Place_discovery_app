@@ -2,8 +2,9 @@ import { useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import { da } from "date-fns/locale";
 
-const Accordion = ({ name, type = "list", isOpen = false }) => {
+const Accordion = ({ name, type = "list", isOpen = false, data }) => {
   // Use state to track whether the list is visible or not
   const [isListVisible, setIsListVisible] = useState(isOpen);
 
@@ -33,12 +34,18 @@ const Accordion = ({ name, type = "list", isOpen = false }) => {
           className="h-32 flex-col bg-slate-400 overflow-y-scroll mt-2 custom-scrollbar flex"
           style={{ direction: "rtl" }}
         >
-          <Link
-            className="capitalize px-2 py-1 mt-2 text-black mx-2 rounded-sm bg-slate-500"
-            style={{ direction: "ltr" }}
-          >
-            Hotel
-          </Link>
+          {data.map((link, index) => {
+            return (
+              <Link
+                key={index}
+                className="capitalize px-2 py-1 mt-2 text-black mx-2 rounded-sm bg-slate-500"
+                style={{ direction: "ltr" }}
+                to={`/trips/${link}`}
+              >
+                {link}
+              </Link>
+            );
+          })}
         </div>
       )}
 

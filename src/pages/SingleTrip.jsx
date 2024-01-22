@@ -4,24 +4,40 @@ import { MdOutlineCalendarMonth } from "react-icons/md";
 import { IoSend } from "react-icons/io5";
 import { format } from "date-fns";
 import { GoPeople } from "react-icons/go";
+import { FaStar } from "react-icons/fa";
 import { FaRegComment } from "react-icons/fa";
 import Skeleton from "react-loading-skeleton";
-import { IoStar } from "react-icons/io5";
 
 import "react-loading-skeleton/dist/skeleton.css";
 import {
   Footer,
+  ImageCard,
   InputForm,
+  MobileNavbar,
+  Modal,
+  ReviewMobile,
   Reviews,
+  SinglePageCard,
   Slider,
   SliderHelper,
 } from "../components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 const SingleTrip = () => {
   const { trip } = useLoaderData();
-  const store = useSelector((store) => store.userState);
+
+  const {
+    address,
+    created_at,
+    description,
+    rating,
+    profile_image,
+    reviews,
+    username,
+    average_rating,
+    images,
+  } = trip.trip;
 
   const [seeReviews, setSeeReviews] = useState(false);
 
@@ -33,33 +49,52 @@ const SingleTrip = () => {
     setSeeReviews(!seeReviews);
   };
 
-  const {
-    address,
-    created_at,
-    description,
-    rating,
-    profile_image,
-    reviews,
-    username,
-    images,
-  } = trip.trip;
+  const openReviewBarOnMobile = () => {
+    document.querySelector(".review-mobile").style.display = "flex";
+  };
+
+  const [perView, setPerView] = useState(window.innerWidth > 640 ? 4 : 3);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setPerView(window.innerWidth > 640 ? 4 : 3);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const baseUrl = useSelector((store) => store.baseUrl);
 
   return (
     <>
-      <section className="px-4 md:px-12">
-        <Reviews reviews={reviews} />
+      <Modal username={username} />
+      <section className="px-4 md:px-12 pb-16 md:pb-0" id="single-mobile">
+        <Reviews reviews={reviews} baseUrl={baseUrl} />
+        <ReviewMobile reviews={reviews} baseUrl={baseUrl} />
         <div className="flex gap-12 py-8">
-          <div className="w-full md:w-1/2">
-            <img className="rounded-2xl" src={images[0].image_url} alt="" />
-          </div>
-          <div className="flex-col gap-8 hidden md:flex" id="single-info">
+          <ImageCard
+            singleImg={images[0]?.image_url}
+            profile_image={profile_image}
+            baseUrl={baseUrl}
+            username={username}
+            country={address}
+          />
+          <div
+            className="flex-col justify-center gap-6 hidden md:flex"
+            id="single-info"
+          >
             <div className="flex items-center gap-4">
               <img
                 src={
-                  profile_image ||
-                  "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/768px-Default_pfp.svg.png"
+                  profile_image
+                    ? `${baseUrl}/storage${profile_image}`
+                    : "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/768px-Default_pfp.svg.png"
                 }
-                className="rounded-full w-14"
+                className="rounded-full h-14 w-14 object-cover"
                 alt=""
               />
               <p className="font-bold text-base capitalize">
@@ -84,8 +119,9 @@ const SingleTrip = () => {
                     <div className="w-12">
                       <img
                         src={
-                          person.image_url ||
-                          "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/768px-Default_pfp.svg.png"
+                          person.image_url
+                            ? `${baseUrl}/storage${person.image_url}`
+                            : "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/768px-Default_pfp.svg.png"
                         }
                         alt={`Person ${index + 1}`}
                       />
@@ -100,19 +136,30 @@ const SingleTrip = () => {
                 </div>
               </div>
             </div>
-            <div className="flex items-center gap-4">
-              <FaRegComment size={"1.75rem"} onClick={openReviewBar} />
-              <p>+{reviews.length || <Skeleton />} reviews</p>
+            <div
+              className="flex items-center gap-4 cursor-pointer"
+              onClick={() => document.getElementById("my_modal_2").showModal()}
+            >
+              <FaStar size={"1.75rem"} />
+              <b>{average_rating} out of 5</b>
+            </div>
+
+            <div
+              className="flex items-center gap-4 cursor-pointer"
+              onClick={openReviewBar}
+            >
+              <FaRegComment size={"1.75rem"} />
+              <p>+{reviews.length} reviews</p>
             </div>
           </div>
         </div>
-        <Slider id="single-slider" perView={4}>
+        <Slider id="single-slider" perView={perView}>
           {images.map((image) => {
             return (
               <SliderHelper key={image.id} className="mx-2">
                 <img
                   src={image.image_url}
-                  className="w-72 h-48 rounded-xl object-cover"
+                  className="h-28 w-48 sm:w-72 sm:h-48 rounded-xl object-cover"
                   alt=""
                 />
               </SliderHelper>
@@ -120,69 +167,24 @@ const SingleTrip = () => {
           })}
         </Slider>
 
-        <div className="md:hidden">
-          <div className="flex items-center justify-around my-4">
-            <div className="flex">
-              <div className="flex flex-col items-center gap-4">
-                <IoStar size={"2rem"} />
-                <b>9.04/10</b>
-              </div>
-            </div>
-            <div className="flex">
-              <div className="flex flex-col items-center gap-4">
-                <GoPeople size={"2rem"} />
-                <b>+30</b>
-              </div>
-            </div>
-            <div className="flex">
-              <div className="flex flex-col items-center gap-4">
-                <GrLocation size={"2rem"} />
-                <b>Paris</b>
-              </div>
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-6">
-            <div className="flex items-center gap-4">
-              <img
-                src={
-                  profile_image ||
-                  "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/768px-Default_pfp.svg.png"
-                }
-                className="rounded-full w-10"
-                alt=""
-              />
-              <p className="font-bold text-base capitalize">
-                {username || <Skeleton />}
-              </p>
-            </div>
-
-            {created_at && (
-              <div className="flex items-center text-lg capitalize gap-4">
-                <MdOutlineCalendarMonth size={"1.75rem"} />
-                <p>{format(new Date(created_at), "dd/MM/yyyy")}</p>
-              </div>
-            )}
-          </div>
-        </div>
+        <SinglePageCard trip={trip} baseUrl={baseUrl} />
 
         <div className="mt-6">
           <b className="text-xl">Description</b>
-          <p className="font-sans mt-4 mb-12">{description}</p>
+          <p className="font-sans mt-4 mb-8">{description}</p>
 
-          {store.message && (
-            <p
-              style={{ width: "calc(100% - 50px)" }}
-              role="alert"
-              className={`alert rounded-lg mb-4 ${
-                store.message ? "alert-button" : "alert-success"
-              }`}
-            >
-              {store.message}
-            </p>
-          )}
+          <div
+            className="w-full h-12 sm:hidden rounded-md flex items-center pl-4 text-sm sm:text-md"
+            style={{
+              background: "rgb(221 221 221 / 41%)",
+              maxWidth: "none",
+            }}
+            onClick={openReviewBarOnMobile}
+          >
+            Share your thoughts in a review...
+          </div>
 
-          <Form method="POST" className="flex items-center gap-4">
+          <Form method="POST" className="items-center gap-4 hidden sm:flex">
             <InputForm
               className="w-full"
               name="review"
@@ -192,13 +194,14 @@ const SingleTrip = () => {
               }}
               placeholder="Share your thoughts in a review..."
             />
-            <button type="submit">
+            <button type="submit" name="reviewSubmit" value="review">
               <IoSend className="cursor-pointer" size={"2rem"} />
             </button>
           </Form>
         </div>
       </section>
       <Footer />
+      <MobileNavbar />
     </>
   );
 };

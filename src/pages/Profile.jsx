@@ -1,55 +1,73 @@
-import React, { useState, useRef, useEffect } from "react";
+// React
+
+import { useState, useRef } from "react";
+
+// Redux
+
 import { useDispatch, useSelector } from "react-redux";
+
 import {
   updateProfileImage,
   resetProfileImage,
   logoutUser,
 } from "../features/user/userSlice";
-import { Link, useNavigate } from "react-router-dom";
+
+// React router
+
+import {
+  Form,
+  useLoaderData,
+  useNavigation,
+  Link,
+  useNavigate,
+} from "react-router-dom";
+
+// Components
+
+import { Info, InputForm, MobileNavbar, ProfileSide } from "../components";
+
+// Icons
 
 import { GrUpdate } from "react-icons/gr";
 import { FaUser, FaMoon } from "react-icons/fa";
 import { IoMdSettings, IoIosArrowForward } from "react-icons/io";
 import { BiLogOut } from "react-icons/bi";
-import { Form, useLoaderData, useNavigation } from "react-router-dom";
-import { Info, InputForm, MobileNavbar, ProfileSide } from "../components";
 
 const Profile = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
+  const user = useSelector((state) => state.userState);
+  const baseUrl = useSelector((store) => store.baseUrl);
+  const isSubmitting = navigation.state === "submitting";
+  const fileInputRef = useRef(null);
   const responseData = useLoaderData();
   const {
     data: { name, email, published_trip_num, bio, profile_image },
   } = responseData;
-  const navigate = useNavigate();
-
-  const user = useSelector((state) => state.userState);
-  const navigation = useNavigation();
-  const isSubmitting = navigation.state === "submitting";
-
-  // const profileImage = useSelector((state) => state.userState.profile_image);
+  const defaultImageUrl =
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/768px-Default_pfp.svg.png";
 
   const [bioValue, setBioValue] = useState(bio);
+  const [showSidebar, setShowSidebar] = useState(true);
+  const [profileImage, setProfileImage] = useState(profile_image || "");
+  const imageUrl =
+    profileImage && profileImage.startsWith("data:")
+      ? profileImage
+      : profileImage
+      ? baseUrl + "/storage" + profileImage
+      : defaultImageUrl;
 
   const handleBioChange = (e) => {
     setBioValue(e.target.value);
   };
 
-  const [showSidebar, setShowSidebar] = useState(true);
-
   const handleLinkClick = () => {
     if (window.innerWidth < 640) {
       setShowSidebar(false);
+      document.getElementById("aside-bar").classList.add("hidden");
     }
-
-    const asideBar = document
-      .getElementById("aside-bar")
-      .classList.add("hidden");
   };
-
-  const baseUrl = useSelector((store) => store.baseUrl);
-  const dispatch = useDispatch();
-  const [profileImage, setProfileImage] = useState(profile_image || "");
-
-  const fileInputRef = useRef(null);
 
   const handleImageClick = (event) => {
     if (window.innerWidth < 640) {
@@ -60,7 +78,6 @@ const Profile = () => {
       if (index === 0) {
         return null;
       } else if (index === 1) {
-        // Clicked the second element, trigger file input click
         fileInputRef.current.click();
       }
     } else {
@@ -96,16 +113,6 @@ const Profile = () => {
     dispatch(logoutUser());
     navigate("/auth/login");
   };
-
-  const defaultImageUrl =
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/768px-Default_pfp.svg.png";
-
-  const imageUrl =
-    profileImage && profileImage.startsWith("data:")
-      ? profileImage
-      : profileImage
-      ? baseUrl + "/storage" + profileImage
-      : defaultImageUrl;
 
   return (
     <>
@@ -160,6 +167,7 @@ const Profile = () => {
                   <input
                     readOnly
                     type="checkbox"
+                    id="mode"
                     className="toggle bg-white [--tglbg:#DDDDDD] border-transparent h-8"
                     checked
                   />
@@ -226,7 +234,7 @@ const Profile = () => {
                   onChange={handleBioChange}
                   placeholder="Bio"
                   name="bio"
-                  value={bioValue}
+                  value={bioValue || ""}
                 ></textarea>
               </div>
             </div>
@@ -244,7 +252,7 @@ const Profile = () => {
             >
               {isSubmitting ? (
                 <>
-                  <span className="loading loading-spinner"></span>sending...
+                  <span className="loading loading-spinner"></span>updating...
                 </>
               ) : (
                 <>

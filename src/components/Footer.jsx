@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <>
+    <section className="hidden md:block">
       <footer className="footer p-10 bg-base-200 text-base-content mt-8">
         <nav>
           <header className="footer-title">Services</header>
@@ -79,7 +79,7 @@ const Footer = () => {
           </div>
         </nav>
       </footer>
-    </>
+    </section>
   );
 };
 

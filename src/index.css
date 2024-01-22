@@ -6,6 +6,7 @@
 
 body {
   font-family: "Poppins", sans-serif;
+  height: 5000px;
 }
 
 .alert-button {
@@ -69,4 +70,37 @@ body {
 
 .custom-scrollbar::-webkit-scrollbar-track {
   background-color: transparent;
+}
+
+/* Rating Style */
+.rain-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.raindrop {
+  position: absolute;
+  width: 7px;
+  height: 3px;
+  background: #fff;
+  animation: rainAnimation 1s linear infinite;
+}
+
+@keyframes rainAnimation {
+  to {
+    transform: translateY(100vh);
+  }
+}
+
+/* Search bar */
+.aa-Panel {
+  z-index: 20;
+}
+
+.sm {
+  width: 27rem;
 }
