@@ -4,16 +4,32 @@ import Slider from "./Slider";
 import { FaLocationDot } from "react-icons/fa6";
 import SliderHelper from "./SliderHelper";
 
-import { AppAutocomplete } from "./index.js";
-import { useSelector } from "react-redux";
+import { Accordion, AppAutocomplete } from "./index.js";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import {
+  clearFilterValues,
+  toggleSideBar,
+} from "../features/filter/filterSlice.js";
+import { Form, Link } from "react-router-dom";
 
-const TripHeader = () => {
-  const store = useSelector((state) => state.algoliaState);
+const TripHeader = ({ data }) => {
+  const store = useSelector((store) => store.algoliaState);
+
+  const filterValue = useSelector(
+    (store) => store.filterState.isFilterSideBarOpened
+  );
+
+  const dispatch = useDispatch();
+
   const [perView, setPerView] = useState(
     window.innerWidth < 640 ? true : false
   );
 
+  const handleResetAll = () => {
+    dispatch(clearFilterValues());
+    dispatch(toggleSideBar());
+  };
   useEffect(() => {
     const handleResize = () => {
       setPerView(window.innerWidth < 640 ? true : false);
@@ -28,11 +44,53 @@ const TripHeader = () => {
   return (
     <Wrapper>
       {/* <TripsNavbar /> */}
+      {filterValue && window.innerWidth < 640 && (
+        <div className="bg-white p-4 shadow-xl fixed top-0 left-0 w-full h-screen z-10">
+          <div className="flex items-center justify-between border-b border-b-slate-800 pb-4">
+            <h2 className="text-xl font-bold">Filters</h2>
+            <Link
+              to="/trips"
+              className="btn text-white min-h-0 h-10"
+              onClick={handleResetAll}
+              style={{ background: "rgb(0, 14, 48)" }}
+            >
+              Reset All
+            </Link>
+          </div>
 
-      <div className="mx-4 sm:mx-0">
+          <Form onSubmit={() => dispatch(toggleSideBar(false))}>
+            <Accordion
+              name="category type"
+              type="list"
+              input_name="category"
+              isOpen={true}
+              data={data.trips.trip_types}
+            />
+            <Accordion
+              name="rating"
+              input_name="stars"
+              type="btn"
+              isOpen={true}
+            />
+            <button
+              className="capitalize mt-8 btn w-full text-white tracking-widest"
+              style={{ background: "rgb(0, 14, 48)" }}
+              type="submit"
+            >
+              filter
+            </button>
+          </Form>
+        </div>
+      )}
+
+      <div className="mx-2 sm:mx-0">
         <div className="flex items-center justify-between mb-2 sm:hidden">
           <label className="btn btn-circle swap swap-rotate">
-            <input type="checkbox" />
+            <input
+              type="checkbox"
+              defaultChecked={false}
+              onChange={() => dispatch(toggleSideBar(true))}
+            />
 
             <svg
               className="swap-off fill-current"
@@ -96,7 +154,11 @@ const TripHeader = () => {
           />
         )}
 
-        <Slider perView={1}>
+        <Slider
+          perView={"1"}
+          delayTime={window.innerWidth > 640 ? 10000 : 3000}
+          loop={true}
+        >
           {TripSliders.map((slider) => {
             const { id, shortDesc, image, longDesc } = slider;
             return (

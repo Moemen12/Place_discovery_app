@@ -53,7 +53,7 @@ const SingleTrip = () => {
     document.querySelector(".review-mobile").style.display = "flex";
   };
 
-  const [perView, setPerView] = useState(window.innerWidth > 640 ? 4 : 3);
+  const [perView, setPerView] = useState(window.innerWidth > 640 ? "4" : "3");
 
   useEffect(() => {
     const handleResize = () => {

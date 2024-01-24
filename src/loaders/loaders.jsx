@@ -37,9 +37,17 @@ export const userProfileLoader = async (store) => {
 
 /* Trips Loader */
 
-export const tripsLoader = async ({ params }) => {
+export const tripsLoader = async ({ request }) => {
+  const params = Object.fromEntries([
+    ...new URL(request.url).searchParams.entries(),
+  ]);
+
   try {
-    const response = await customFetch.get(`/trips/${params.category || ""}`);
+    // Make the request with the constructed query string
+    const response = await customFetch.get(
+      `/trips?category=${params.category || ""}&stars=${params.stars || ""}`
+    );
+
     return response.data;
   } catch (error) {
     console.error(error);

@@ -43,7 +43,7 @@ export const router = createBrowserRouter([
     action: (request) => registerAction(request, store),
   },
   {
-    path: "/trips/:category?",
+    path: "/trips/:category?/:stars?",
     element: <Trips />,
     errorElement: <Error />,
     loader: tripsLoader,

@@ -101,6 +101,8 @@ body {
   z-index: 20;
 }
 
-.sm {
-  width: 27rem;
+/* Is Class Active ? Category Link Style */
+
+.category-link-style a.active {
+  border-bottom: 3px solid rgb(0, 14, 48);
 }

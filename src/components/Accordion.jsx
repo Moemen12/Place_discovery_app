@@ -1,10 +1,17 @@
 import { useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
-import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
-import { da } from "date-fns/locale";
 
-const Accordion = ({ name, type = "list", isOpen = false, data }) => {
+import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
+import { setSelectedValues } from "../features/filter/filterSlice";
+
+const Accordion = ({
+  name,
+  input_name,
+  type = "list",
+  isOpen = false,
+  data,
+}) => {
   // Use state to track whether the list is visible or not
   const [isListVisible, setIsListVisible] = useState(isOpen);
 
@@ -18,12 +25,18 @@ const Accordion = ({ name, type = "list", isOpen = false, data }) => {
   // Create an array of stars
   const stars = Array.from({ length: numberOfStars }, (_, index) => index + 1);
 
+  // const [selected, setSelected] = useState({
+  //   category: "",
+  //   stars: "",
+  // });
+
+  const store = useSelector((store) => store.filterState.isAccordionSelected);
+  const dispatch = useDispatch();
   return (
     <div className="flex flex-col">
       <div
         className="flex cursor-pointer items-center justify-between py-3 px-2 border-b border-b-slate-500"
         onClick={toggleListVisibility}
-        style={{ background: "#F1F1F1" }}
       >
         <b className="capitalize">{name}</b>
         <IoIosArrowDown size={20} />
@@ -36,30 +49,37 @@ const Accordion = ({ name, type = "list", isOpen = false, data }) => {
         >
           {data.map((link, index) => {
             return (
-              <Link
+              <div
                 key={index}
-                className="capitalize px-2 py-1 mt-2 text-black mx-2 rounded-sm bg-slate-500"
+                className="capitalize px-2 py-1 mt-2 text-black mx-2 rounded-sm bg-slate-500 cursor-pointer"
                 style={{ direction: "ltr" }}
-                to={`/trips/${link}`}
+                onClick={() => dispatch(setSelectedValues({ category: link }))}
               >
                 {link}
-              </Link>
+              </div>
             );
           })}
+          <input
+            type="hidden"
+            name={input_name}
+            defaultValue={store.category}
+          />
         </div>
       )}
 
       {type === "btn" && isListVisible && (
         <div className="flex flex-wrap items-center justify-start p-4">
           {stars.map((starBtn, index) => (
-            <button
+            <div
               key={index}
-              className="btn text-white min-h-0 h-fit px-6 py-2 rounded-full"
+              className="btn text-white min-h-0 h-fit py-2 px-3 rounded-full"
               style={{ background: "#000E30" }}
+              onClick={() => dispatch(setSelectedValues({ stars: starBtn }))}
             >
               {`${starBtn} star${starBtn > 1 ? "s" : ""}`}
-            </button>
+            </div>
           ))}
+          <input type="hidden" name={input_name} defaultValue={store.stars} />
         </div>
       )}
     </div>
@@ -67,6 +87,7 @@ const Accordion = ({ name, type = "list", isOpen = false, data }) => {
 };
 
 Accordion.propTypes = {
+  input_name: PropTypes.string,
   name: PropTypes.string,
   type: PropTypes.string,
   isOpen: PropTypes.bool,

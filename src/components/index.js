@@ -26,8 +26,10 @@ import Countries from "./Countries";
 import CategorySlider from "./CategorySlider";
 import SinglePageCard from "./SinglePageCard";
 import ProductItem from "./ProductItem";
+import Tours from "./Tours";
 import ImageCard from "./ImageCard";
 import ReviewMobile from "./ReviewMobile";
+import ShareComponent from "./ShareComponent";
 
 export {
   Autocomplete,
@@ -39,7 +41,9 @@ export {
   Countries,
   ReviewMobile,
   SinglePageCard,
+  Tours,
   ImageCard,
+  ShareComponent,
   Info,
   LandingNavbar,
   Footer,
