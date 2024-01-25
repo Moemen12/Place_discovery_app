@@ -1,4 +1,4 @@
-import { MobileNavbar, Tours, TripCategory } from "../components";
+import { Footer, MobileNavbar, Tours, TripCategory } from "../components";
 import TripHeader from "../components/TripHeader";
 import { useLoaderData } from "react-router-dom";
 const Trips = () => {
@@ -8,7 +8,8 @@ const Trips = () => {
     <section className="h-screen" style={{ background: "#F3F6FF" }}>
       <TripHeader data={loadedData} />
       <TripCategory data={loadedData} />
-      <Tours />
+      <Tours data={loadedData.trips.countries} />
+      <Footer />
       <MobileNavbar />
     </section>
   );

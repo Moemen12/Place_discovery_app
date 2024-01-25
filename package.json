@@ -12,6 +12,7 @@
   "dependencies": {
     "@algolia/autocomplete-js": "^1.15.0",
     "@reduxjs/toolkit": "^2.0.1",
+    "@splidejs/react-splide": "^0.7.12",
     "algoliasearch": "^4.22.1",
     "axios": "^1.6.2",
     "date-fns": "^3.0.6",
@@ -25,8 +26,7 @@
     "react-redux": "^9.0.4",
     "react-router-dom": "^6.21.0",
     "react-toastify": "^10.0.3",
-    "styled-components": "^6.1.1",
-    "swiper": "^11.0.5"
+    "styled-components": "^6.1.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",
