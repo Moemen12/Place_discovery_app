@@ -1,12 +1,11 @@
 import PropTypes from "prop-types";
-import { FaRegBookmark } from "react-icons/fa";
+import { FaBookmark } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { MdOutlineCalendarMonth } from "react-icons/md";
 import { format } from "date-fns";
 import { HiOutlineShare } from "react-icons/hi";
 import ShareComponent from "./ShareComponent";
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
 
 const Card = ({ trip }) => {
   const baseUrl = useSelector((store) => store.baseUrl);
@@ -33,6 +32,39 @@ const Card = ({ trip }) => {
     }
   };
 
+  const [isBookmarked, setIsBookmarked] = useState(
+    JSON.parse(localStorage.getItem("bookmarkedItems"))?.some(
+      (item) => item.id === id
+    ) || false
+  );
+
+  const handleBookmarkClick = () => {
+    const bookmarkedItems =
+      JSON.parse(localStorage.getItem("bookmarkedItems")) || [];
+
+    const existingItemIndex = bookmarkedItems.findIndex(
+      (item) => item.id === id
+    );
+
+    if (existingItemIndex !== -1) {
+      bookmarkedItems.splice(existingItemIndex, 1);
+    } else {
+      const newItem = {
+        id,
+        slug: slug,
+        location: address,
+        title: title,
+        date: created_at,
+        user_name: user_name,
+        imageUrl: images.image_url,
+      };
+      bookmarkedItems.push(newItem);
+    }
+
+    localStorage.setItem("bookmarkedItems", JSON.stringify(bookmarkedItems));
+    setIsBookmarked(!isBookmarked);
+  };
+
   useEffect(() => {
     document.addEventListener("click", handleClickOutside);
 
@@ -51,7 +83,7 @@ const Card = ({ trip }) => {
       />
 
       {/* Mobile */}
-      <Link className="h-full w-full absolute" to={`/trip/${id}/${slug}`}>
+      <div className="h-full w-full block sm:hidden">
         <article
           className="absolute py-2 left-0 bottom-0 w-full px-4 flex flex-col gap-2 sm:hidden"
           style={{ background: "rgb(0,0,0,0.7)" }}
@@ -76,20 +108,25 @@ const Card = ({ trip }) => {
               />
               <p className="text-white font-sans text-sm">{user_name}</p>
             </div>
-            <FaRegBookmark
+            <FaBookmark
               className="cursor-pointer"
               color="white"
               size={"1rem"}
             />
           </div>
         </article>
-      </Link>
+      </div>
 
       {/* Desktop */}
       <article className="sm:flex flex-1 flex-col p-4 shadow-2xl justify-between hidden">
         <div className="flex justify-between">
           <b className="text-base">{title}</b>
-          <FaRegBookmark className="cursor-pointer" size={"1.75rem"} />
+          <FaBookmark
+            color={isBookmarked ? "#FFFF00" : "black"}
+            className="cursor-pointer"
+            size={"1.75rem"}
+            onClick={handleBookmarkClick}
+          />
         </div>
         <div className="flex items-center gap-2 text-sm text-black flex-col justify-between">
           <div className="flex items-center gap-4">

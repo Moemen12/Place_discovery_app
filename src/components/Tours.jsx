@@ -101,7 +101,7 @@ const Tours = ({ data }) => {
                 return (
                   <SplideSlide key={id}>
                     <img
-                      className="h-full object-cover"
+                      className="h-full w-full object-cover"
                       src={image_url}
                       alt="Image 1"
                     />

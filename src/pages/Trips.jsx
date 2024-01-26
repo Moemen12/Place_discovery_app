@@ -9,6 +9,7 @@ const Trips = () => {
       <TripHeader data={loadedData} />
       <TripCategory data={loadedData} />
       <Tours data={loadedData.trips.countries} />
+
       <Footer />
       <MobileNavbar />
     </section>

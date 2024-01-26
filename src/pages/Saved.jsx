@@ -1,76 +1,122 @@
-import { GoPeople, GoShareAndroid } from "react-icons/go";
-import { image2 } from "../assets/images";
-import { MdOutlineCalendarMonth } from "react-icons/md";
-import { IoRemove } from "react-icons/io5";
+import { Link } from "react-router-dom";
+import { Footer, MobileNavbar } from "../components";
+import { FaMapLocationDot } from "react-icons/fa6";
+import { format } from "date-fns";
+import { image1 } from "../assets/images";
+import { FaExclamationCircle } from "react-icons/fa";
+import { useState } from "react";
+import { BsBookmarkPlus } from "react-icons/bs";
 const Saved = () => {
+  const [rerender, setRerender] = useState(false);
+
+  const savedItems = JSON.parse(localStorage.getItem("bookmarkedItems")) || [];
+
+  const closeModal = () => {
+    localStorage.removeItem("bookmarkedItems");
+    var dialog = document.getElementById("my_modal_3");
+
+    if (dialog) {
+      dialog.close();
+      // Trigger re-render by toggling the state
+      setRerender((prev) => !prev);
+    }
+  };
+
   return (
-    <section>
-      <div className="px-12 bg-slate-500">
-        <div className="flex items-center justify-between py-4">
-          <p>Moemen saadeh/Saved</p>
+    <>
+      <div className="px-2 sm:px-10 flex items-center justify-between sm:bg-slate-200 py-2 mb-4 mt-4 sm:mt-0">
+        <p className="font-bold sm:font-normal">Saved</p>
+        <img className="w-8 h-8 rounded-full hidden sm:block" src={image1} />
+      </div>
+
+      {savedItems.length > 0 && (
+        <button
+          type="button"
+          onClick={() => document.getElementById("my_modal_3").showModal()}
+          className="bg-red-600 text-white mb-2 px-4 py-2 rounded block ml-auto"
+        >
+          Clear Saved Trips
+        </button>
+      )}
+
+      <dialog id="my_modal_3" className="modal">
+        <div className="modal-box relative">
+          <div className="flex items-center gap-4">
+            <FaExclamationCircle color="red" size={"2rem"} />
+            <p className="py-4">
+              Are you sure you want to clear all saved trips?
+            </p>
+          </div>
+          <button
+            onClick={closeModal}
+            className="ml-auto block px-4 py-2 bg-red-500 text-white rounded-md"
+          >
+            Clear All
+          </button>
+        </div>
+        <form method="dialog" className="modal-backdrop">
+          <button>close</button>
+        </form>
+      </dialog>
+
+      {savedItems.length > 0 ? (
+        savedItems.map((item) => (
           <div
-            className="w-10 h-10 rounded-full"
-            style={{ background: `url(${image2})`, backgroundSize: "cover" }}
-          ></div>
-        </div>
-      </div>
-      <div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 px-8 md:px-16 xl:px-32 md:gap-x-16 xl:gap-x-24 text-center py-16 gap-y-16">
-          {[1, 2, 3, 4, 5, 6].map((li, index) => {
-            return (
-              <div className="card shadow-2xl" key={index}>
-                <div
-                  className="rounded-lg relative h-56"
-                  style={{
-                    background: `url(${image2})`,
-                    backgroundSize: "cover",
-                  }}
-                >
-                  <div className="absolute right-2 top-2 w-7 h-7 md:h-10 md:w-10 bg-white rounded-full grid place-items-center cursor-pointer">
-                    <IoRemove size={"1rem"} color="red" />
-                  </div>
-                </div>
-                <div className="px-4 py-4 text-black">
-                  <b className="text-2xl flex">Paris</b>
-                  <div className="flex items-center gap-6 py-1">
-                    <MdOutlineCalendarMonth color="black" size={"2rem"} />
-                    <b className="text-xl">27/12/23</b>
-                  </div>
-                  <div className="flex items-center gap-6 pt-2">
-                    <div className="flex items-center flex-1 gap-6">
-                      <GoPeople color="black" size={"2rem"} />
-                      <div className="avatar-group -space-x-6 rtl:space-x-reverse">
-                        {/* {rating.lastFive_People_image.map((person, index) => ( */}
-                        <div className="avatar border-transparent">
-                          <div className="w-10">
-                            <img
-                              src={
-                                null ||
-                                "https://cdn-icons-png.flaticon.com/512/1144/1144760.png?ga=GA1.1.1229095363.1703014299&"
-                              }
-
-                              // alt={`Person ${index + 1}`}
-                            />
-                          </div>
-                        </div>
-                        {/* ))} */}
-
-                        <div className="avatar placeholder border-transparent">
-                          <div className="w-10 bg-slate-600 text-white">
-                            <span>+{null || 3}</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <GoShareAndroid color="black" size={"2rem"} />
-                  </div>
-                </div>
+            className="grid saved gap-4 mx-2 grid-cols-12 lg:gap-8 sm:gap-4 sm:mx-10 mb-8"
+            key={item.id}
+          >
+            <Link
+              to={`/trip/${item.id}/${item.slug}`}
+              key={item.id}
+              className="col-span-12 sm:col-span-6 lg:col-span-4 flex sm:flex-col shadow-lg cursor-pointer"
+            >
+              <div className="sm:flex-grow max-w-[155px] min-w-[155px] sm:max-w-none sm:h-56">
+                <img
+                  className="object-cover h-full rounded-md  sm:w-full"
+                  src={item.imageUrl}
+                  alt=""
+                />
               </div>
-            );
-          })}
+              <div className="min-h-[7rem] px-4 py-2 flex-col flex">
+                <div className="flex items-center justify-between flex-wrap flex-col sm:flex-row">
+                  <b className="text-lg font-bold text-gray-800">
+                    {item.title}
+                  </b>
+                  <div className="flex items-center gap-2">
+                    <FaMapLocationDot className="text-blue-500" />
+                    <p className="text-gray-600">{item.location}</p>
+                  </div>
+                </div>
+                <p className="font-sans text-base text-blue-500 font-medium mt-8">
+                  Published by: {item.user_name}
+                </p>
+                <p className="font-sans gap-2 flex-1 items-end italic text-sm text-gray-600 self-end flex flex-wrap">
+                  Posted on:{" "}
+                  <span className="not-italic">
+                    {format(new Date(item.date), "MMM d, yyyy")}
+                  </span>
+                </p>
+              </div>
+            </Link>
+          </div>
+        ))
+      ) : (
+        <div className="h-80">
+          <div className="flex flex-col items-center mt-24">
+            <BsBookmarkPlus size={"5rem"} />
+            <p className="text-lg mt-4 text-center">
+              You have no saved trips.{" "}
+              <Link to="/trips" className="text-blue-500">
+                Click here to explore and add trips!
+              </Link>
+            </p>
+          </div>
         </div>
-      </div>
-    </section>
+      )}
+
+      <MobileNavbar />
+      <Footer />
+    </>
   );
 };
 

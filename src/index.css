@@ -55,6 +55,18 @@ body {
   }
 }
 
+@media screen and (min-width: 450px) {
+  .saved div {
+    grid-column: span 6 / span 6;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .saved div {
+    grid-column: span 4 / span 4;
+  }
+}
+
 /* End media query */
 
 /* Custom scrollbar styles */
