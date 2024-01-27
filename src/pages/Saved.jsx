@@ -58,13 +58,13 @@ const Saved = () => {
           <button>close</button>
         </form>
       </dialog>
-
-      {savedItems.length > 0 ? (
-        savedItems.map((item) => (
-          <div
-            className="grid saved gap-4 mx-2 grid-cols-12 lg:gap-8 sm:gap-4 sm:mx-10 mb-8"
-            key={item.id}
-          >
+      <div
+        className={`saved ${
+          savedItems.length > 0 ? "grid " : ""
+        }gap-4 mx-2 grid-cols-12 lg:gap-8 sm:gap-4 sm:mx-10 mb-8`}
+      >
+        {savedItems.length > 0 ? (
+          savedItems.map((item) => (
             <Link
               to={`/trip/${item.id}/${item.slug}`}
               key={item.id}
@@ -98,21 +98,21 @@ const Saved = () => {
                 </p>
               </div>
             </Link>
+          ))
+        ) : (
+          <div className="h-80">
+            <div className="flex flex-col items-center mt-24">
+              <BsBookmarkPlus size={"5rem"} />
+              <p className="text-lg mt-4 text-center">
+                You have no saved trips.{" "}
+                <Link to="/trips" className="text-blue-500">
+                  Click here to explore and add trips!
+                </Link>
+              </p>
+            </div>
           </div>
-        ))
-      ) : (
-        <div className="h-80">
-          <div className="flex flex-col items-center mt-24">
-            <BsBookmarkPlus size={"5rem"} />
-            <p className="text-lg mt-4 text-center">
-              You have no saved trips.{" "}
-              <Link to="/trips" className="text-blue-500">
-                Click here to explore and add trips!
-              </Link>
-            </p>
-          </div>
-        </div>
-      )}
+        )}
+      </div>
 
       <MobileNavbar />
       <Footer />

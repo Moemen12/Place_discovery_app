@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import {
+  CreateTrip,
   Error,
   Landing,
   Login,
@@ -58,6 +59,10 @@ export const router = createBrowserRouter([
   {
     path: "/trips/saved/",
     element: <Saved />,
+  },
+  {
+    path: "/trips/add/",
+    element: <CreateTrip />,
   },
   {
     path: "auth/profile/",

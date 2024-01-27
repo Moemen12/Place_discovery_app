@@ -8,3 +8,4 @@ export { default as Saved } from "./Saved";
 export { default as Settings } from "./Settings";
 export { default as SettingLayout } from "./layout/SettingLayout";
 export { default as Profile } from "./Profile";
+export { default as CreateTrip } from "./CreateTrip";
