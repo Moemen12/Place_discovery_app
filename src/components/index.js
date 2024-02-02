@@ -30,10 +30,8 @@ import Tours from "./Tours";
 import ImageCard from "./ImageCard";
 import ReviewMobile from "./ReviewMobile";
 import ShareComponent from "./ShareComponent";
-import TextArea from "./TextArea";
 
 export {
-  TextArea,
   Autocomplete,
   ProductItem,
   Modal,

@@ -54,3 +54,26 @@ export const tripsLoader = async ({ request }) => {
     return null;
   }
 };
+
+/* Create Trip Loader */
+
+export const createTripLoader = async (store) => {
+  const user = store.getState().userState.user;
+
+  if (!user) {
+    return redirect("/auth/login");
+  }
+
+  try {
+    const response = await customFetch.get(`/trips/types`, {
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};

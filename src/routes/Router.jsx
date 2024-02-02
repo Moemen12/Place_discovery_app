@@ -19,6 +19,7 @@ import {
 } from "../actions/actions";
 import { store } from "../store";
 import {
+  createTripLoader,
   singleProductLoader,
   tripsLoader,
   userProfileLoader,
@@ -63,6 +64,8 @@ export const router = createBrowserRouter([
   {
     path: "/trips/add/",
     element: <CreateTrip />,
+    errorElement: <Error />,
+    loader: () => createTripLoader(store),
   },
   {
     path: "auth/profile/",
