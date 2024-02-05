@@ -1,71 +1,67 @@
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, redirect, useNavigate } from "react-router-dom";
 import Wrapper from "../assets/wrappers/LandingNavbar";
-import { useState } from "react";
+import { navbarLink } from "../utils";
+import { useSelector } from "react-redux";
 
-const LandingNavbar = () => {
-  const [checked, setChecked] = useState(false);
+const LandingNavbar = ({ style }) => {
+  const defaultStyle = { background: "#000E30", ...style };
+  const [loggedIn, setLoggedIn] = useState(false); // Manage login state locally
 
-  const displaySideBar = () => {
-    setChecked(!checked);
-    document.body.classList.toggle("overflow-hidden");
+  const user = useSelector((store) => store.userState.user);
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    // Update local state based on user presence
+    setLoggedIn(!!user);
+  }, [user]);
+
+  const logout = () => {
+    // Perform logout actions, e.g., remove user from local storage
+    localStorage.removeItem("user");
+    // Update local state to trigger re-render
+    setLoggedIn(false);
+    // redirect("/auth/login");
+    navigate("/auth/login");
   };
 
   return (
     <Wrapper>
-      <nav className="flex items-center justify-between container px-8 mx-auto pt-6 text-xl">
-        <b className="top-7 text-2xl md:top-0 relative">Wanderwise</b>
-        <div className="space-x-8">
-          <div className="hidden md:block">
-            <Link className="text-white btn px-12 mr-4" to="/auth/login">
-              Log in
+      <nav
+        className="sm:flex hidden items-center justify-between px-8 py-4"
+        style={defaultStyle}
+      >
+        <b className="text-2xl hidden md:block">Wanderwise</b>
+
+        <div className="hidden sm:flex items-center justify-between sm:gap-4 sm:w-full md:w-auto lg:gap-8">
+          {navbarLink.map((navlink) => {
+            const { id, url, text } = navlink;
+
+            // Skip rendering "Sign In" and "Register" links when the user is logged in
+            if (loggedIn && (text === "Sign In" || text === "Register")) {
+              return null;
+            }
+
+            // Skip rendering "Profile" and "New Adventure" links when the user is not logged in
+            if (!loggedIn && (text === "Profile" || text === "New Adventure")) {
+              return null;
+            }
+
+            return (
+              <Link className="text-white" to={url} key={id}>
+                {text}
+              </Link>
+            );
+          })}
+
+          {loggedIn ? (
+            // User is logged in, display logout link
+            <Link className="text-white" onClick={logout}>
+              Logout
             </Link>
-            <Link className="border-black btn px-12" to="/auth/register">
-              Sign up
-            </Link>
-          </div>
-
-          <label className="swap swap-rotate md:hidden z-20 top-8 -right-4 text-slate-700">
-            <input
-              type="checkbox"
-              checked={checked}
-              onChange={() => displaySideBar()}
-            />
-
-            <svg
-              className="swap-off fill-current"
-              xmlns="http://www.w3.org/2000/svg"
-              width="25"
-              height="25"
-              viewBox="0 0 512 512"
-            >
-              <path d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z" />
-            </svg>
-
-            <svg
-              className="swap-on fill-current"
-              xmlns="http://www.w3.org/2000/svg"
-              width="25"
-              height="25"
-              viewBox="0 0 512 512"
-            >
-              <polygon points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49" />
-            </svg>
-          </label>
+          ) : null}
         </div>
       </nav>
-      <div
-        className={`fixed right-0 top-10 z-10 h-full flex flex-col w-3/4 sidebar pt-12 p-6 md:hidden transition-transform rounded-l-2xl ${
-          checked ? "transform translate-x-0" : "transform translate-x-full"
-        }`}
-      >
-        <p className="capitalize text-white text-lg pb-8">wanderwise</p>
-        <Link className="pb-2" to="/auth/register">
-          Sign up
-        </Link>
-        <Link className="pb-2" to="/auth/login">
-          Log in
-        </Link>
-      </div>
     </Wrapper>
   );
 };

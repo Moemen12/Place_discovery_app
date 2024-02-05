@@ -64,26 +64,31 @@ export const navbarLink = [
   {
     id: 1,
     url: "/trips",
-    text: "Trips",
+    text: "Journey",
   },
   {
     id: 2,
-    url: "/new-trip",
-    text: "Create-trip",
+    url: "/trips/add",
+    text: "New Adventure",
   },
-  // {
-  //   id: 3,
-  //   url: "/",
-  //   text: "Create-trip",
-  // },
+  {
+    id: 3,
+    url: "/trips/saved",
+    text: "Bookmarked",
+  },
   {
     id: 4,
-    url: "/auth/login",
-    text: "Login",
+    url: "/auth/profile",
+    text: "Profile",
   },
   {
     id: 5,
+    url: "/auth/login",
+    text: "Sign In",
+  },
+  {
+    id: 6,
     url: "/auth/register",
-    text: "Signup",
+    text: "Register",
   },
 ];

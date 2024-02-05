@@ -13,6 +13,7 @@ import line_1 from "./Line_1.svg";
 import butterfly from "./butterfly.svg";
 import ErrorPage from "./Error.svg";
 import LoginImage from "./login.svg";
+import selected_images from "./selected_images.svg";
 export {
   image1,
   image2,
@@ -26,6 +27,7 @@ export {
   image10,
   landingImage,
   butterfly,
+  selected_images,
   line_1,
   ErrorPage,
   LoginImage,

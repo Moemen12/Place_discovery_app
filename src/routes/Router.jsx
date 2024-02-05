@@ -12,6 +12,7 @@ import {
   Trips,
 } from "../pages";
 import {
+  // createTripAction,
   loginAction,
   registerAction,
   updateProfileAction,
@@ -64,6 +65,7 @@ export const router = createBrowserRouter([
   {
     path: "/trips/add/",
     element: <CreateTrip />,
+    // action: (request) => createTripAction(request, store),
     errorElement: <Error />,
     loader: () => createTripLoader(store),
   },

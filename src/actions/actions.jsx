@@ -74,6 +74,8 @@ export const reviewAction = async (params, data, store) => {
   }
 };
 
+/* Rating Action */
+
 export const ratingAction = async (params, data, store) => {
   const starsRating = data.stars_rating;
   const tripId = params.id;
@@ -137,6 +139,13 @@ export const updateProfileAction = async ({ request }, store) => {
         Authorization: `Bearer ${user.token}`,
       },
     });
+    if (response.data.new_image) {
+      const updatedUser = {
+        ...user,
+        image: `/images/profile/${response.data.new_image}`,
+      };
+      localStorage.setItem("user", JSON.stringify(updatedUser));
+    }
 
     return response;
   } catch (error) {

@@ -1,15 +1,23 @@
-import { Link } from "react-router-dom";
-import { Footer, MobileNavbar } from "../components";
+import { Link, useLoaderData } from "react-router-dom";
+import {
+  BreadCrumbs,
+  Footer,
+  LandingNavbar,
+  MobileNavbar,
+} from "../components";
 import { FaMapLocationDot } from "react-icons/fa6";
 import { format } from "date-fns";
 import { image1 } from "../assets/images";
 import { FaExclamationCircle } from "react-icons/fa";
 import { useState } from "react";
 import { BsBookmarkPlus } from "react-icons/bs";
+import { useSelector } from "react-redux";
 const Saved = () => {
   const [rerender, setRerender] = useState(false);
-
+  // const dataCollection = useLoaderData();
   const savedItems = JSON.parse(localStorage.getItem("bookmarkedItems")) || [];
+  const baseUrl = useSelector((store) => store.baseUrl);
+  const user_profile = JSON.parse(localStorage.getItem("user"))?.image;
 
   const closeModal = () => {
     localStorage.removeItem("bookmarkedItems");
@@ -24,11 +32,8 @@ const Saved = () => {
 
   return (
     <>
-      <div className="px-2 sm:px-10 flex items-center justify-between sm:bg-slate-200 py-2 mb-4 mt-4 sm:mt-0">
-        <p className="font-bold sm:font-normal">Saved</p>
-        <img className="w-8 h-8 rounded-full hidden sm:block" src={image1} />
-      </div>
-
+      <LandingNavbar />
+      <BreadCrumbs title={"saved"} image={user_profile} />
       {savedItems.length > 0 && (
         <button
           type="button"
@@ -73,7 +78,7 @@ const Saved = () => {
               <div className="sm:flex-grow max-w-[155px] min-w-[155px] sm:max-w-none sm:h-56">
                 <img
                   className="object-cover h-full rounded-md  sm:w-full"
-                  src={item.imageUrl}
+                  src={`${baseUrl}/storage${item.imageUrl}`}
                   alt=""
                 />
               </div>

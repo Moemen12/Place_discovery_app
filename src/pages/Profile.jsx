@@ -24,7 +24,14 @@ import {
 
 // Components
 
-import { Info, InputForm, MobileNavbar, ProfileSide } from "../components";
+import {
+  Footer,
+  Info,
+  InputForm,
+  LandingNavbar,
+  MobileNavbar,
+  ProfileSide,
+} from "../components";
 
 // Icons
 
@@ -32,6 +39,7 @@ import { GrUpdate } from "react-icons/gr";
 import { FaUser, FaMoon } from "react-icons/fa";
 import { IoMdSettings, IoIosArrowForward } from "react-icons/io";
 import { BiLogOut } from "react-icons/bi";
+import { changeMode } from "../features/config/modeSlice";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -114,10 +122,25 @@ const Profile = () => {
     navigate("/auth/login");
   };
 
+  const HandleMode = () => {
+    dispatch(changeMode());
+  };
   return (
     <>
+      <LandingNavbar
+        style={{
+          width: "100%",
+          left: "0",
+          top: "0",
+          position: "fixed",
+          zIndex: "3",
+        }}
+      />
       <section className="flex min-h-screen">
-        <div className="w-screen sm:w-1/3 xl:w-1/4 shadow-2xl" id="aside-bar">
+        <div
+          className="w-screen sm:w-1/3 xl:w-1/4 shadow-2xl bg-white"
+          id="aside-bar"
+        >
           <aside
             className="h-screen flex flex-col items-center fixed"
             style={{ width: "inherit" }}
@@ -165,11 +188,10 @@ const Profile = () => {
                     <span className="label-text text-xl">Dark Mode</span>
                   </div>
                   <input
-                    readOnly
                     type="checkbox"
                     id="mode"
+                    onChange={HandleMode}
                     className="toggle bg-white [--tglbg:#DDDDDD] border-transparent h-8"
-                    checked
                   />
                 </label>
               </div>
@@ -184,7 +206,7 @@ const Profile = () => {
           </aside>
         </div>
         <div
-          className={`flex-auto sm:p-10 bg-slate-100 ${
+          className={`flex-auto sm:p-10 ${
             showSidebar ? "hidden sm:block" : "block"
           }`}
         >
@@ -205,7 +227,7 @@ const Profile = () => {
           <Form
             method="post"
             id="update_form"
-            className="px-6 mt-20 sm:mt-0 pb-20 sm:pb-0"
+            className="px-6 mt-28 sm:mt-8 pb-20 sm:pb-0"
           >
             <div className="flex flex-col">
               <b className="text-2xl capitalize tracking-wider py-4 sm:py-8 hidden sm:block">
@@ -264,6 +286,7 @@ const Profile = () => {
           </Form>
         </div>
       </section>
+
       <MobileNavbar />
     </>
   );

@@ -78,49 +78,51 @@ const Card = ({ trip }) => {
       <img
         loading="lazy"
         className="sm:w-[45%] w-full rounded cursor-pointer sm:cursor-auto sm:rounded-l-lg object-cover"
-        src={images.image_url}
+        src={`${baseUrl}/storage${images.image_url}`}
         alt=""
       />
 
       {/* Mobile */}
-      <div className="h-full w-full block sm:hidden">
-        <article
-          className="absolute py-2 left-0 bottom-0 w-full px-4 flex flex-col gap-2 sm:hidden"
-          style={{ background: "rgb(0,0,0,0.7)" }}
-        >
-          <b className="text-white text-sm">{address}</b>
-          <div className="flex items-center gap-4 text-white">
-            <MdOutlineCalendarMonth size={"1rem"} />
-            <p className="text-sm">
-              {format(new Date(created_at), "dd/MM/yyyy")}
-            </p>
-          </div>
-          <div className="flex justify-between items-center">
-            <div className="flex items-center gap-2">
-              <img
-                src={
-                  user_profile
-                    ? `${baseUrl}/storage${user_profile}`
-                    : "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/768px-Default_pfp.svg.png"
-                }
-                className="rounded-full h-7 w-7 cursor-pointer object-cover"
-                alt=""
-              />
-              <p className="text-white font-sans text-sm">{user_name}</p>
-            </div>
-            <FaBookmark
-              className="cursor-pointer"
-              color="white"
-              size={"1rem"}
+
+      <article
+        className="absolute py-2 left-0 bottom-0 w-full px-4 flex flex-col gap-2 sm:hidden"
+        style={{ background: "rgb(0,0,0,0.7)" }}
+      >
+        <b className="text-white text-sm">{address}</b>
+        <div className="flex items-center gap-4 text-white">
+          <MdOutlineCalendarMonth size={"1rem"} />
+          <p className="text-sm">
+            {format(new Date(created_at), "dd/MM/yyyy")}
+          </p>
+        </div>
+        <div className="flex justify-between items-center">
+          <div className="flex items-center gap-2">
+            <img
+              src={
+                user_profile
+                  ? `${baseUrl}/storage${user_profile}`
+                  : "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/768px-Default_pfp.svg.png"
+              }
+              className="rounded-full h-7 w-7 cursor-pointer object-cover"
+              alt=""
             />
+            <p className="text-white font-sans text-sm">{user_name}</p>
           </div>
-        </article>
-      </div>
+          <FaBookmark
+            className="cursor-pointer"
+            color={isBookmarked ? "#FFFF00" : "black"}
+            size={"1rem"}
+            onClick={handleBookmarkClick}
+          />
+        </div>
+      </article>
 
       {/* Desktop */}
       <article className="sm:flex flex-1 flex-col p-4 shadow-2xl justify-between hidden">
-        <div className="flex justify-between">
-          <b className="text-base">{title}</b>
+        <div className="flex justify-between truncate">
+          <b className="text-base overflow-ellipsis overflow-hidden max-w-[11rem]">
+            {title}
+          </b>
           <FaBookmark
             color={isBookmarked ? "#FFFF00" : "black"}
             className="cursor-pointer"
@@ -132,9 +134,14 @@ const Card = ({ trip }) => {
           <div className="flex items-center gap-4">
             <img
               className="w-10 h-10 rounded-full object-cover"
-              src={`${baseUrl}/storage` + user_profile}
+              src={
+                user_profile
+                  ? `${baseUrl}/storage${user_profile}`
+                  : "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/768px-Default_pfp.svg.png"
+              }
               alt=""
             />
+
             <p className="text-base">{user_name}</p>
           </div>
           <p className="text-lg">{address}</p>

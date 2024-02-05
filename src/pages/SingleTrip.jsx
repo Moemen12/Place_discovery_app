@@ -29,6 +29,7 @@ const SingleTrip = () => {
 
   const {
     address,
+    title,
     created_at,
     description,
     rating,
@@ -121,7 +122,7 @@ const SingleTrip = () => {
                         src={
                           person.image_url
                             ? `${baseUrl}/storage${person.image_url}`
-                            : "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/768px-Default_pfp.svg.png"
+                            : "-"
                         }
                         alt={`Person ${index + 1}`}
                       />
@@ -131,7 +132,7 @@ const SingleTrip = () => {
 
                 <div className="avatar placeholder">
                   <div className="w-12 bg-slate-600 text-white">
-                    <span>+{rating.rating_people_count || <Skeleton />}</span>
+                    <span>+{rating.rating_people_count}</span>
                   </div>
                 </div>
               </div>
@@ -158,7 +159,7 @@ const SingleTrip = () => {
             return (
               <SliderHelper key={image.id} className="mx-2">
                 <img
-                  src={image.image_url}
+                  src={`${baseUrl}/storage${image.image_url}`}
                   className="h-28 w-48 sm:w-72 sm:h-48 rounded-xl object-cover"
                   alt=""
                 />
@@ -168,6 +169,11 @@ const SingleTrip = () => {
         </Slider>
 
         <SinglePageCard trip={trip} baseUrl={baseUrl} />
+
+        <div className="mt-6">
+          <b className="text-xl">Title</b>
+          <p className="font-sans mt-4 mb-8">{title}</p>
+        </div>
 
         <div className="mt-6">
           <b className="text-xl">Description</b>

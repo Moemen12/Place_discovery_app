@@ -11,7 +11,7 @@ const Profile = ({
 }) => {
   return (
     <div
-      className={`w-full h-44 relative profile-sidebar${
+      className={`w-full h-44 relative mt-8 profile-sidebar${
         className ? ` ${className}` : ""
       }`}
       style={{
@@ -35,7 +35,6 @@ const Profile = ({
         <input
           name="image_url"
           type="file"
-          accept="image/*"
           className="hidden"
           onChange={handleFileInputChange}
           ref={fileInputRef}

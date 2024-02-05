@@ -15,13 +15,13 @@ import { Form, Link } from "react-router-dom";
 
 const TripHeader = ({ data }) => {
   const store = useSelector((store) => store.algoliaState);
-
+  const image = useSelector((store) => store.userState.user?.image);
   const filterValue = useSelector(
     (store) => store.filterState.isFilterSideBarOpened
   );
 
   const dispatch = useDispatch();
-
+  const baseUrl = useSelector((store) => store.baseUrl);
   const [perView, setPerView] = useState(
     window.innerWidth < 640 ? true : false
   );
@@ -43,7 +43,6 @@ const TripHeader = ({ data }) => {
   }, []);
   return (
     <Wrapper>
-      {/* <TripsNavbar /> */}
       {filterValue && window.innerWidth < 640 && (
         <div className="bg-white p-4 shadow-xl fixed top-0 left-0 w-full h-screen z-10">
           <div className="flex items-center justify-between border-b border-b-slate-800 pb-4">
@@ -139,7 +138,11 @@ const TripHeader = ({ data }) => {
             <div
               className="w-8 h-8 rounded-full"
               style={{
-                background: `url(http://localhost:8000/storage/images/profile/65a6d43be6a9d.png)`,
+                background: `url(${
+                  image
+                    ? baseUrl + "/storage" + image
+                    : "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/768px-Default_pfp.svg.png"
+                })`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
               }}
@@ -154,11 +157,7 @@ const TripHeader = ({ data }) => {
           />
         )}
 
-        <Slider
-          perView={"1"}
-          delayTime={window.innerWidth > 640 ? 10000 : 3000}
-          loop={true}
-        >
+        <Slider perView={"1"} delayTime={3000} loop={true}>
           {TripSliders.map((slider) => {
             const { id, shortDesc, image, longDesc } = slider;
             return (
@@ -183,13 +182,6 @@ const TripHeader = ({ data }) => {
                       }}
                     >
                       <div className="mx-auto mt-8" style={{ width: "90%" }}>
-                        {id === 1 && !perView && (
-                          <AppAutocomplete
-                            algoliaAppId={store.ALGOLIA_ID}
-                            algoliaAppKey={store.ALGOLIA_KEY}
-                          />
-                        )}
-
                         <p className="capitalize text-5xl mt-24">{shortDesc}</p>
                         <p className="mt-8">{longDesc}</p>
                       </div>

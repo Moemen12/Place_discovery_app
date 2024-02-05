@@ -30,12 +30,14 @@ import Tours from "./Tours";
 import ImageCard from "./ImageCard";
 import ReviewMobile from "./ReviewMobile";
 import ShareComponent from "./ShareComponent";
+import BreadCrumbs from "./BreadCrumbs";
 
 export {
   Autocomplete,
   ProductItem,
   Modal,
   AppAutocomplete,
+  BreadCrumbs,
   Rating,
   CategorySlider,
   Countries,

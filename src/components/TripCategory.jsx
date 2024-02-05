@@ -8,13 +8,29 @@ import CategorySlider from "./CategorySlider";
 import { TbSearchOff } from "react-icons/tb";
 import { useDispatch, useSelector } from "react-redux";
 import { clearFilterValues } from "../features/filter/filterSlice";
+import AppAutocomplete from "./AppAutocomplete";
+import { useEffect, useState } from "react";
 
 const TripCategory = ({ data }) => {
   const {
     trips: { trips },
   } = data;
+  const [perView, setPerView] = useState(
+    window.innerWidth < 640 ? true : false
+  );
+  useEffect(() => {
+    const handleResize = () => {
+      setPerView(window.innerWidth < 640 ? true : false);
+    };
 
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   const store = useSelector((state) => state.filterState);
+  const algolia = useSelector((store) => store.algoliaState);
   const dispatch = useDispatch();
   return (
     <section style={{ background: "#F3F6FF" }}>
@@ -69,6 +85,15 @@ const TripCategory = ({ data }) => {
           <p className="capitalize text-center font-black sm:font-bold text-xl sm:text-4xl tracking-wide sm:tracking-widest py-2 sm:p-0">
             latest trip
           </p>
+
+          {!perView && (
+            <div className="mt-8 w-1/2 mx-auto">
+              <AppAutocomplete
+                algoliaAppId={algolia.ALGOLIA_ID}
+                algoliaAppKey={algolia.ALGOLIA_KEY}
+              />
+            </div>
+          )}
 
           <CategorySlider
             count={data.trips.trips.length}

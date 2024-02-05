@@ -65,6 +65,9 @@ const SideBar = ({ profile_image, onLinkClick }) => {
       ? baseUrl + "/storage" + profileImage
       : defaultImageUrl;
 
+  const changeMode = () => {
+    dispatch(changeMode());
+  };
   return (
     <>
       <aside
@@ -117,6 +120,7 @@ const SideBar = ({ profile_image, onLinkClick }) => {
                 type="checkbox"
                 className="toggle bg-white [--tglbg:#DDDDDD] border-transparent h-8"
                 name="mode"
+                onChange={changeMode}
               />
             </label>
           </div>

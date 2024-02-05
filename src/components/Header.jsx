@@ -1,13 +1,12 @@
 import { Link } from "react-router-dom";
 import landingImage from "../assets/images/landing.svg";
 import Wrapper from "../assets/wrappers/Header";
-import LandingNavbar from "./LandingNavbar";
+
 import { PiStarFourFill } from "react-icons/pi";
 
 const Header = () => {
   return (
     <>
-      <LandingNavbar />
       <Wrapper className="grid grid-cols-1 md:grid-cols-2 p-12 place-items-center flex-auto">
         <div className="flex flex-col">
           <h2 className="text-black">

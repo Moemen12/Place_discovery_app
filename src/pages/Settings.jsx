@@ -8,7 +8,13 @@ import { FaUser, FaMoon } from "react-icons/fa";
 import { IoMdSettings, IoIosArrowForward } from "react-icons/io";
 import { BiLogOut } from "react-icons/bi";
 import { Form, useLoaderData, useNavigation } from "react-router-dom";
-import { Countries, InputForm, MobileNavbar, ProfileSide } from "../components";
+import {
+  Countries,
+  InputForm,
+  LandingNavbar,
+  MobileNavbar,
+  ProfileSide,
+} from "../components";
 import { FaLocationDot } from "react-icons/fa6";
 
 const Settings = () => {
@@ -88,10 +94,19 @@ const Settings = () => {
 
   return (
     <>
+      <LandingNavbar
+        style={{
+          width: "100%",
+          left: "0",
+          top: "0",
+          position: "fixed",
+          zIndex: "3",
+        }}
+      />
       <section className="flex min-h-screen">
         <div className="w-screen sm:w-1/3 xl:w-1/4 shadow-2xl" id="aside-bar">
           <aside
-            className="h-screen flex flex-col items-center fixed"
+            className="h-screen flex flex-col items-center fixed bg-white"
             style={{ width: "inherit" }}
           >
             <ProfileSide imageUrl={imageUrl} />
@@ -160,7 +175,7 @@ const Settings = () => {
           <Form
             method="post"
             id="update_form"
-            className="px-6 mt-20 sm:mt-0 pb-20 sm:pb-0"
+            className="px-6 mt-20 sm:mt-8 pb-20 sm:pb-0"
           >
             <div className="flex flex-col">
               <b className="text-2xl capitalize tracking-wider py-4 sm:py-8 hidden sm:block">

@@ -6,6 +6,7 @@ import SliderHelper from "./SliderHelper";
 import { BsArrowLeftCircle } from "react-icons/bs";
 import { BsArrowRightCircle } from "react-icons/bs";
 import { Form } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { customFetch } from "../utils";
 import { IoSadOutline } from "react-icons/io5";
 
@@ -26,6 +27,7 @@ const Tours = ({ data }) => {
     return country ? country.flag : null;
   };
 
+  const baseUrl = useSelector((store) => store.baseUrl);
   const [selectedCountry, setSelectedCountry] = useState("");
   const [newImages, setNewImages] = useState([]);
 
@@ -102,7 +104,7 @@ const Tours = ({ data }) => {
                   <SplideSlide key={id}>
                     <img
                       className="h-full w-full object-cover"
-                      src={image_url}
+                      src={`${baseUrl}/storage${image_url}`}
                       alt="Image 1"
                     />
                   </SplideSlide>

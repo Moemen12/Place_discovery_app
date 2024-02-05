@@ -7,8 +7,12 @@ const ImageCard = ({
   country,
 }) => {
   return (
-    <div className="w-full md:w-1/2 relative min-h-[200px]">
-      <img className="rounded-2xl h-full" src={singleImg} alt="" />
+    <div className="w-full md:w-1/2 relative max-h-[345px]">
+      <img
+        className="rounded-2xl h-full w-full object-cover"
+        src={`${baseUrl}/storage${singleImg}`}
+        alt=""
+      />
       <article
         className="absolute left-0 bottom-0 w-full pt-2 px-4 flex flex-col gap-2 sm:hidden"
         style={{ background: "rgb(0,0,0,0.7)" }}
