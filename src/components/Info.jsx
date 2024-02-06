@@ -5,7 +5,7 @@ const Info = ({ label, style, className, data }) => {
       <div className="font-bold text-lg">{label}</div>
       <div
         style={style}
-        className={`shadow-lg bg-white h-12 text-slate-400 rounded-lg mt-4 flex items-center p-4 ${className}`}
+        className={`shadow-lg h-12 text-slate-400 input rounded-lg mt-4 flex items-center p-4 ${className}`}
         id={label}
       >
         {data}

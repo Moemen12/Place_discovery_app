@@ -38,7 +38,7 @@ const Saved = () => {
         <button
           type="button"
           onClick={() => document.getElementById("my_modal_3").showModal()}
-          className="bg-red-600 text-white mb-2 px-4 py-2 rounded block ml-auto"
+          className="bg-red-600 text-white mb-2 mt-4 px-4 py-2 rounded block ml-auto sm:mr-10"
         >
           Clear Saved Trips
         </button>
@@ -73,26 +73,26 @@ const Saved = () => {
             <Link
               to={`/trip/${item.id}/${item.slug}`}
               key={item.id}
-              className="col-span-12 sm:col-span-6 lg:col-span-4 flex sm:flex-col shadow-lg cursor-pointer"
+              className="col-span-12 sm:col-span-6 lg:col-span-4 flex sm:flex-col cursor-pointer shadow-2xl"
             >
               <div className="sm:flex-grow max-w-[155px] min-w-[155px] sm:max-w-none sm:h-56">
                 <img
-                  className="object-cover h-full rounded-md  sm:w-full"
+                  className="object-cover h-full rounded-md sm:w-full"
                   src={`${baseUrl}/storage${item.imageUrl}`}
                   alt=""
                 />
               </div>
-              <div className="min-h-[7rem] px-4 py-2 flex-col flex">
-                <div className="flex items-center justify-between flex-wrap flex-col sm:flex-row">
-                  <b className="text-lg font-bold text-gray-800">
+              <div className="min-h-[7rem] px-4 py-2 flex-col flex truncate">
+                <div className="flex justify-between flex-col sm:flex-row">
+                  <b className="text-lg font-bold mb-4 sm:mb-0 overflow-hidden overflow-ellipsis whitespace-nowrap">
                     {item.title}
                   </b>
                   <div className="flex items-center gap-2">
                     <FaMapLocationDot className="text-blue-500" />
-                    <p className="text-gray-600">{item.location}</p>
+                    <p>{item.location}</p>
                   </div>
                 </div>
-                <p className="font-sans text-base text-blue-500 font-medium mt-8">
+                <p className="font-sans text-base text-blue-500 font-medium mt-8 whitespace-break-spaces">
                   Published by: {item.user_name}
                 </p>
                 <p className="font-sans gap-2 flex-1 items-end italic text-sm text-gray-600 self-end flex flex-wrap">

@@ -5,7 +5,7 @@ const BreadCrumbs = ({ image, title }) => {
   const baseUrl = useSelector((store) => store.baseUrl);
   return (
     <div className="px-2 sm:px-10 flex items-center justify-between sm:bg-slate-200 py-2 mt-4 sm:mt-0">
-      <div className="flex items-center justify-center text-black">
+      <div className="flex items-center justify-center text-white sm:text-black">
         <p>page</p>
         <IoIosArrowForward />
         <p className="font-bold sm:font-normal">{title}</p>

@@ -45,10 +45,7 @@ const Tours = ({ data }) => {
   };
 
   return (
-    <section
-      className="pt-8 px-8 pb-8 hidden sm:block"
-      style={{ background: "#F3F6FF" }}
-    >
+    <section className="pt-8 px-8 pb-8 hidden sm:block">
       <p className="text-center font-black sm:text-4xl sm:tracking-widest">
         Popular Tours
       </p>

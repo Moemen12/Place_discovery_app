@@ -12,6 +12,7 @@ import {
   toggleSideBar,
 } from "../features/filter/filterSlice.js";
 import { Form, Link } from "react-router-dom";
+import { changeMode } from "../features/config/modeSlice.js";
 
 const TripHeader = ({ data }) => {
   const store = useSelector((store) => store.algoliaState);
@@ -25,7 +26,7 @@ const TripHeader = ({ data }) => {
   const [perView, setPerView] = useState(
     window.innerWidth < 640 ? true : false
   );
-
+  const theme = localStorage.getItem("theme");
   const handleResetAll = () => {
     dispatch(clearFilterValues());
     dispatch(toggleSideBar());
@@ -46,7 +47,7 @@ const TripHeader = ({ data }) => {
       {filterValue && window.innerWidth < 640 && (
         <div className="bg-white p-4 shadow-xl fixed top-0 left-0 w-full h-screen z-10">
           <div className="flex items-center justify-between border-b border-b-slate-800 pb-4">
-            <h2 className="text-xl font-bold">Filters</h2>
+            <h2 className="text-xl font-bold text-black">Filters</h2>
             <Link
               to="/trips"
               className="btn text-white min-h-0 h-10"
@@ -84,7 +85,8 @@ const TripHeader = ({ data }) => {
 
       <div className="mx-2 sm:mx-0">
         <div className="flex items-center justify-between mb-2 sm:hidden">
-          <label className="btn btn-circle swap swap-rotate">
+          {/* For Filters !! */}
+          <label className="btn bg-transparent border-none btn-circle swap swap-rotate">
             <input
               type="checkbox"
               defaultChecked={false}
@@ -116,8 +118,16 @@ const TripHeader = ({ data }) => {
             <p>Lebanon</p>
           </div>
           <div className="flex items-center gap-4">
-            <label className="swap swap-rotate">
-              <input type="checkbox" />
+            {/* For Mobile Navbar */}
+            <label
+              className="swap swap-rotate"
+              onClick={() => dispatch(changeMode())}
+            >
+              <input
+                type="checkbox"
+                defaultChecked={theme === "night" ? true : false}
+                onChange={() => dispatch(changeMode())}
+              />
 
               <svg
                 className="swap-on fill-current w-6 h-6"

@@ -122,7 +122,7 @@ const SingleTrip = () => {
                         src={
                           person.image_url
                             ? `${baseUrl}/storage${person.image_url}`
-                            : "-"
+                            : "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/768px-Default_pfp.svg.png"
                         }
                         alt={`Person ${index + 1}`}
                       />
@@ -182,7 +182,6 @@ const SingleTrip = () => {
           <div
             className="w-full h-12 sm:hidden rounded-md flex items-center pl-4 text-sm sm:text-md"
             style={{
-              background: "rgb(221 221 221 / 41%)",
               maxWidth: "none",
             }}
             onClick={openReviewBarOnMobile}
@@ -195,7 +194,6 @@ const SingleTrip = () => {
               className="w-full"
               name="review"
               style={{
-                background: "rgb(221 221 221 / 41%)",
                 maxWidth: "none",
               }}
               placeholder="Share your thoughts in a review..."

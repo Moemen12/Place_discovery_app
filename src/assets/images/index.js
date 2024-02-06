@@ -12,6 +12,7 @@ import landingImage from "./landing.svg";
 import line_1 from "./Line_1.svg";
 import butterfly from "./butterfly.svg";
 import ErrorPage from "./Error.svg";
+import newVideo from "../video.gif";
 import LoginImage from "./login.svg";
 import selected_images from "./selected_images.svg";
 export {
@@ -20,6 +21,7 @@ export {
   image3,
   image4,
   image5,
+  newVideo,
   image6,
   image7,
   image8,

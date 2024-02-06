@@ -97,7 +97,7 @@ const CreateTrip = () => {
         <BreadCrumbs title={"add"} image={dataCollection.profile_image} />
         <section className="px-2 sm:px-10 flex sm:gap-16 gap-4">
           <div className="flex flex-col w-1/2 mt-4 gap-4 sm:gap-8">
-            <article className="flex flex-col bg-white">
+            <article className="flex flex-col">
               <b>Add Photo</b>
               <div className="sm:h-60 h-32 flex flex-col shadow-xl justify-center items-center">
                 <label htmlFor="imageUpload" className="cursor-pointer">

@@ -35,7 +35,7 @@ const SettingLayout = () => {
         </div>
       )}
       <div
-        className={`flex-auto sm:p-10 bg-slate-100 ${
+        className={`flex-auto sm:p-10 ${
           showSidebar ? "hidden sm:block" : "block"
         }`}
       >

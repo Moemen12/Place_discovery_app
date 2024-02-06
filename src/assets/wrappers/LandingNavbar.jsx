@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Wrapper = styled.header`
-  background-color: #e4eafc;
+  /* background-color: #e4eafc; */
   nav {
     b {
       /* color: #4e8aff; */

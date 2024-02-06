@@ -4,9 +4,12 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
 body {
   font-family: "Poppins", sans-serif;
-  background-color: #f3f6ff !important;
+  /* background-color: #f3f6ff !important; */
 }
 
 .alert-button {
@@ -51,9 +54,9 @@ body {
 }
 
 @media screen and (min-width: 640px) {
-  .profile-sidebar {
+  /* .profile-sidebar {
     background: #fff !important;
-  }
+  } */
 }
 
 @media screen and (min-width: 450px) {

@@ -74,7 +74,7 @@ const Card = ({ trip }) => {
   }, []);
 
   return (
-    <div className="flex h-72 sm:h-64 bg-white relative sm:rounded-r-lg">
+    <div className="flex h-72 sm:h-64 bg-white relative rounded-lg">
       <img
         loading="lazy"
         className="sm:w-[45%] w-full rounded cursor-pointer sm:cursor-auto sm:rounded-l-lg object-cover"
@@ -120,7 +120,7 @@ const Card = ({ trip }) => {
       {/* Desktop */}
       <article className="sm:flex flex-1 flex-col p-4 shadow-2xl justify-between hidden">
         <div className="flex justify-between truncate">
-          <b className="text-base overflow-ellipsis overflow-hidden max-w-[11rem]">
+          <b className="text-base text-black overflow-ellipsis overflow-hidden max-w-[11rem]">
             {title}
           </b>
           <FaBookmark
@@ -158,7 +158,11 @@ const Card = ({ trip }) => {
           ref={shareComponentRef}
           onClick={() => setButtonClicked(true)}
         >
-          <HiOutlineShare className="cursor-pointer" size={"1.75rem"} />
+          <HiOutlineShare
+            className="cursor-pointer"
+            color="black"
+            size={"1.75rem"}
+          />
           {isButtonClicked && <ShareComponent url={slug} id={id} />}
         </div>
       </article>
@@ -173,7 +177,7 @@ Card.propTypes = {
       image_url: PropTypes.string.isRequired,
     }).isRequired,
     id: PropTypes.number.isRequired,
-    user_profile: PropTypes.string.isRequired,
+    user_profile: PropTypes.string,
     slug: PropTypes.string.isRequired,
     created_at: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,

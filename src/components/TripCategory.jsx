@@ -33,12 +33,12 @@ const TripCategory = ({ data }) => {
   const algolia = useSelector((store) => store.algoliaState);
   const dispatch = useDispatch();
   return (
-    <section style={{ background: "#F3F6FF" }}>
+    <section>
       <div className="grid grid-cols-12 sm:p-4 p-2">
         {store.isFilterSideBarOpened && (
           <div className="col-span-3 bg-white p-4 shadow-xl">
-            <div className="flex items-center justify-between border-b border-b-slate-800 pb-4">
-              <h2 className="text-2xl font-bold">Filters</h2>
+            <div className="flex items-center flex-wrap justify-between border-b border-b-slate-800 pb-4">
+              <h2 className="text-2xl font-bold text-black">Filters</h2>
               <Link
                 to="/trips"
                 className="btn text-white min-h-0 h-10"

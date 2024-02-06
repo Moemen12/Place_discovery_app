@@ -70,6 +70,8 @@ const Profile = () => {
     setBioValue(e.target.value);
   };
 
+  const theme = localStorage.getItem("theme");
+
   const handleLinkClick = () => {
     if (window.innerWidth < 640) {
       setShowSidebar(false);
@@ -137,10 +139,7 @@ const Profile = () => {
         }}
       />
       <section className="flex min-h-screen">
-        <div
-          className="w-screen sm:w-1/3 xl:w-1/4 shadow-2xl bg-white"
-          id="aside-bar"
-        >
+        <div className="w-screen sm:w-1/3 xl:w-1/4 shadow-2xl" id="aside-bar">
           <aside
             className="h-screen flex flex-col items-center fixed"
             style={{ width: "inherit" }}
@@ -189,9 +188,10 @@ const Profile = () => {
                   </div>
                   <input
                     type="checkbox"
+                    defaultChecked={theme === "light" ? false : true}
                     id="mode"
                     onChange={HandleMode}
-                    className="toggle bg-white [--tglbg:#DDDDDD] border-transparent h-8"
+                    className="toggle [--tglbg:rgb(0, 14, 48)] border-transparent h-8"
                   />
                 </label>
               </div>
@@ -252,7 +252,7 @@ const Profile = () => {
                 />
                 <div className="font-bold text-lg capitalize">bio</div>
                 <textarea
-                  className="textarea-lg text-sm md:text-lg sm:max-w-[30rem]"
+                  className="textarea-lg text-sm md:text-lg sm:max-w-[30rem] bg-transparent shadow-2xl"
                   onChange={handleBioChange}
                   placeholder="Bio"
                   name="bio"

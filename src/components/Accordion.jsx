@@ -35,7 +35,7 @@ const Accordion = ({
   return (
     <div className="flex flex-col">
       <div
-        className="flex cursor-pointer items-center justify-between py-3 px-2 border-b border-b-slate-500"
+        className="flex cursor-pointer text-black items-center justify-between py-3 px-2 border-b border-b-slate-500"
         onClick={toggleListVisibility}
       >
         <b className="capitalize">{name}</b>
@@ -44,15 +44,18 @@ const Accordion = ({
 
       {type === "list" && isListVisible && (
         <div
-          className="h-32 flex-col bg-slate-400 overflow-y-scroll mt-2 custom-scrollbar flex"
-          style={{ direction: "rtl" }}
+          className="h-32 flex-col overflow-y-scroll mt-2 custom-scrollbar flex"
+          style={{ direction: "rtl", background: "#F1F1F1" }}
         >
           {data.map((link, index) => {
             return (
               <div
                 key={index}
-                className="capitalize px-2 py-1 mt-2 text-black mx-2 rounded-sm bg-slate-500 cursor-pointer"
-                style={{ direction: "ltr" }}
+                className="capitalize px-2 py-1 mt-2 text-black mx-2 rounded-sm cursor-pointer"
+                style={{
+                  direction: "ltr",
+                  background: "rgba(169, 173, 183, 0.3)",
+                }}
                 onClick={() => dispatch(setSelectedValues({ category: link }))}
               >
                 {link}
@@ -68,7 +71,7 @@ const Accordion = ({
       )}
 
       {type === "btn" && isListVisible && (
-        <div className="flex flex-wrap items-center justify-start p-4">
+        <div className="flex flex-wrap items-center gap-1 justify-start p-4">
           {stars.map((starBtn, index) => (
             <div
               key={index}

@@ -16,6 +16,7 @@ import {
   ProfileSide,
 } from "../components";
 import { FaLocationDot } from "react-icons/fa6";
+import { changeMode } from "../features/config/modeSlice";
 
 const Settings = () => {
   const responseData = useLoaderData();
@@ -77,6 +78,12 @@ const Settings = () => {
     }
   };
 
+  const theme = localStorage.getItem("theme");
+
+  const HandleMode = () => {
+    dispatch(changeMode());
+  };
+
   const handleLogout = () => {
     dispatch(logoutUser());
     navigate("/auth/login");
@@ -106,7 +113,7 @@ const Settings = () => {
       <section className="flex min-h-screen">
         <div className="w-screen sm:w-1/3 xl:w-1/4 shadow-2xl" id="aside-bar">
           <aside
-            className="h-screen flex flex-col items-center fixed bg-white"
+            className="h-screen flex flex-col items-center fixed"
             style={{ width: "inherit" }}
           >
             <ProfileSide imageUrl={imageUrl} />
@@ -140,11 +147,11 @@ const Settings = () => {
                     <span className="label-text text-xl">Dark Mode</span>
                   </div>
                   <input
-                    readOnly
-                    id="mode"
                     type="checkbox"
+                    defaultChecked={theme === "light" ? false : true}
+                    id="mode"
+                    onChange={HandleMode}
                     className="toggle bg-white [--tglbg:#DDDDDD] border-transparent h-8"
-                    checked
                   />
                 </label>
               </div>
@@ -159,7 +166,7 @@ const Settings = () => {
           </aside>
         </div>
         <div
-          className={`flex-auto sm:p-10 bg-slate-100 ${
+          className={`flex-auto sm:p-10 ${
             showSidebar ? "hidden sm:block" : "block"
           }`}
         >

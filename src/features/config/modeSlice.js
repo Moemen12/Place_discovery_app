@@ -1,12 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const getInitialMode = () => {
-  // Check if mode is stored in local storage, otherwise default to "light"
-  return localStorage.getItem("mode") || "light";
+const themes = {
+  light: "light",
+  night: "night",
+};
+
+const getThemeFromLocalStorage = () => {
+  const theme = localStorage.getItem("theme") || themes.light;
+  document.documentElement.setAttribute("data-theme", theme);
+  return theme;
 };
 
 const initialState = {
-  screen_mode: getInitialMode(),
+  theme: getThemeFromLocalStorage(),
 };
 
 const userSlice = createSlice({
@@ -14,13 +20,10 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     changeMode: (state) => {
-      // Toggle between "light" and "night"
-      const newMode = state.screen_mode === "light" ? "night" : "light";
-      document.querySelector("html").setAttribute("data-theme", newMode);
-      state.screen_mode = newMode;
-
-      // Save mode in local storage
-      localStorage.setItem("mode", newMode);
+      const { night, light } = themes;
+      state.theme = state.theme === night ? light : night;
+      document.documentElement.setAttribute("data-theme", state.theme);
+      localStorage.setItem("theme", state.theme);
     },
   },
 });
