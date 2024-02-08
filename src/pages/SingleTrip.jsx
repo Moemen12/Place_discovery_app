@@ -185,7 +185,7 @@ const SingleTrip = () => {
 
             <div className="mt-6">
               <b className="text-xl">Description</b>
-              <p className="font-sans mt-4 mb-8">{description}</p>
+              <p className="font-sans mt-4 mb-8 break-words">{description}</p>
 
               <div
                 className="w-full h-12 sm:hidden rounded-md flex items-center pl-4 text-sm sm:text-md"
