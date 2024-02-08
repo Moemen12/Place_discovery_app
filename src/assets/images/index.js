@@ -1,28 +1,18 @@
-import image1 from "./image1.jpeg";
-import image2 from "./image2.jpeg";
-import image3 from "./image3.jpeg";
-import image4 from "./image4.jpeg";
-import image5 from "./image5.jpeg";
-import image6 from "./image6.jpg";
-import image7 from "./image7.jpg";
-import image8 from "./image8.jpg";
-import image9 from "./image9.jpg";
-import image10 from "./image10.jpg";
+import image7 from "./image7.webp";
+import image8 from "./image8.webp";
+import image9 from "./image9.webp";
+import image10 from "./image10.webp";
 import landingImage from "./landing.svg";
 import line_1 from "./Line_1.svg";
 import butterfly from "./butterfly.svg";
 import ErrorPage from "./Error.svg";
-import newVideo from "../video.gif";
+import logoLight from "../logo-light.gif";
+import logoDark from "../logo-dark.gif";
 import LoginImage from "./login.svg";
 import selected_images from "./selected_images.svg";
 export {
-  image1,
-  image2,
-  image3,
-  image4,
-  image5,
-  newVideo,
-  image6,
+  logoLight,
+  logoDark,
   image7,
   image8,
   image9,

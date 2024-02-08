@@ -154,8 +154,8 @@ const TripCategory = ({ data }) => {
 TripCategory.propTypes = {
   data: PropTypes.shape({
     trips: PropTypes.shape({
-      trips: PropTypes.array.isRequired,
-      trip_types: PropTypes.array.isRequired,
+      trips: PropTypes.array,
+      trip_types: PropTypes.array,
     }).isRequired,
   }).isRequired,
 };

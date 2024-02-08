@@ -25,7 +25,7 @@ const ShareComponent = ({ url, id, message = "Check out this link: " }) => {
         className="flex items-center gap-2 p-1 border-b hover:bg-slate-300"
       >
         <IoLogoWhatsapp size={"1.5rem"} color="green" />
-        <p className="capitalize text-sm">whatsapp</p>
+        <p className="capitalize text-sm text-black">whatsapp</p>
       </a>
       <a
         href={telegramShareUrl}
@@ -34,7 +34,7 @@ const ShareComponent = ({ url, id, message = "Check out this link: " }) => {
         className="flex items-center gap-2 p-1 border-b hover:bg-slate-300"
       >
         <BsTelegram size={"1.5rem"} color="#4299e1" />
-        <p className="capitalize text-sm">telegram</p>
+        <p className="capitalize text-sm text-black">telegram</p>
       </a>
       <a
         href={emailShareUrl}
@@ -43,7 +43,7 @@ const ShareComponent = ({ url, id, message = "Check out this link: " }) => {
         className="flex items-center gap-2 p-1 border-b hover:bg-slate-300"
       >
         <MdOutlineMailOutline size={"1.5rem"} color="#e74c3c" />
-        <p className="capitalize text-sm">email</p>
+        <p className="capitalize text-sm text-black">email</p>
       </a>
     </div>
   );

@@ -8,6 +8,7 @@ import { BsArrowRightCircle } from "react-icons/bs";
 import { Form } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { customFetch } from "../utils";
+import PropTypes from "prop-types";
 import { IoSadOutline } from "react-icons/io5";
 
 const Tours = ({ data }) => {
@@ -58,7 +59,7 @@ const Tours = ({ data }) => {
         delayTime={3000}
         loop={true}
         spaceBetween={"20"}
-        className="mt-10"
+        className="mt-10 h-[120px]"
       >
         {data.map((country) => (
           <SliderHelper key={country}>
@@ -130,5 +131,7 @@ const Tours = ({ data }) => {
     </section>
   );
 };
-
+Tours.propTypes = {
+  data: PropTypes.array.isRequired, // Assuming data is an array and is required
+};
 export default Tours;

@@ -14,11 +14,6 @@ const Profile = ({
       className={`w-full h-44 relative mt-8 profile-sidebar${
         className ? ` ${className}` : ""
       }`}
-      // style={{
-      //   borderBottomLeftRadius: "75%",
-      //   borderBottomRightRadius: "75%",
-      //   background: "linear-gradient(#000719, #002e87)",
-      // }}
     >
       <div
         className="absolute w-48 bg-center h-48 rounded-full cursor-pointer left-2/4 top-36 profile-circle"

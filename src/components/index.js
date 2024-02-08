@@ -28,6 +28,8 @@ import SinglePageCard from "./SinglePageCard";
 import ProductItem from "./ProductItem";
 import Tours from "./Tours";
 import ImageCard from "./ImageCard";
+import Loading from "./Loading";
+
 import ReviewMobile from "./ReviewMobile";
 import ShareComponent from "./ShareComponent";
 import BreadCrumbs from "./BreadCrumbs";
@@ -37,6 +39,7 @@ export {
   ProductItem,
   Modal,
   AppAutocomplete,
+  Loading,
   BreadCrumbs,
   Rating,
   CategorySlider,

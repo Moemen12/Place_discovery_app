@@ -25,11 +25,6 @@ const Accordion = ({
   // Create an array of stars
   const stars = Array.from({ length: numberOfStars }, (_, index) => index + 1);
 
-  // const [selected, setSelected] = useState({
-  //   category: "",
-  //   stars: "",
-  // });
-
   const store = useSelector((store) => store.filterState.isAccordionSelected);
   const dispatch = useDispatch();
   return (
@@ -63,6 +58,7 @@ const Accordion = ({
             );
           })}
           <input
+            id={input_name}
             type="hidden"
             name={input_name}
             defaultValue={store.category}
@@ -82,7 +78,12 @@ const Accordion = ({
               {`${starBtn} star${starBtn > 1 ? "s" : ""}`}
             </div>
           ))}
-          <input type="hidden" name={input_name} defaultValue={store.stars} />
+          <input
+            type="hidden"
+            id={input_name}
+            name={input_name}
+            defaultValue={store.stars}
+          />
         </div>
       )}
     </div>
@@ -94,6 +95,6 @@ Accordion.propTypes = {
   name: PropTypes.string,
   type: PropTypes.string,
   isOpen: PropTypes.bool,
+  data: PropTypes.array, // Add this line
 };
-
 export default Accordion;

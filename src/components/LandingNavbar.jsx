@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Link, redirect, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Wrapper from "../assets/wrappers/LandingNavbar";
 import { navbarLink } from "../utils";
 import { useSelector } from "react-redux";
-
+import PropTypes from "prop-types";
 const LandingNavbar = ({ style }) => {
   const defaultStyle = { background: "#000E30", ...style };
   const [loggedIn, setLoggedIn] = useState(false); // Manage login state locally
@@ -31,7 +31,9 @@ const LandingNavbar = ({ style }) => {
         className="sm:flex hidden items-center justify-between px-8 py-4"
         style={defaultStyle}
       >
-        <b className="text-2xl hidden md:block">Wanderwise</b>
+        <Link to="/" className="text-2xl text-white hidden md:block">
+          Wanderwise
+        </Link>
 
         <div className="hidden sm:flex items-center justify-between sm:gap-4 sm:w-full md:w-auto lg:gap-8">
           {navbarLink.map((navlink) => {
@@ -64,6 +66,9 @@ const LandingNavbar = ({ style }) => {
       </nav>
     </Wrapper>
   );
+};
+LandingNavbar.propTypes = {
+  style: PropTypes.object,
 };
 
 export default LandingNavbar;

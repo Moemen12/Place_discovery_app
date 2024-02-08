@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 const ProductItem = ({ hit, components }) => {
   const { id, slug } = hit;
   return (
@@ -11,4 +13,8 @@ const ProductItem = ({ hit, components }) => {
   );
 };
 
+ProductItem.propTypes = {
+  hit: PropTypes.object.isRequired,
+  components: PropTypes.object.isRequired,
+};
 export default ProductItem;

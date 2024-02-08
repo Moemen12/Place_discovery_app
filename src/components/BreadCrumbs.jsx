@@ -1,5 +1,6 @@
 import { IoIosArrowForward } from "react-icons/io";
 import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
 
 const BreadCrumbs = ({ image, title }) => {
   const baseUrl = useSelector((store) => store.baseUrl);
@@ -21,6 +22,10 @@ const BreadCrumbs = ({ image, title }) => {
       />
     </div>
   );
+};
+BreadCrumbs.propTypes = {
+  image: PropTypes.string,
+  title: PropTypes.string,
 };
 
 export default BreadCrumbs;

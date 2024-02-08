@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Form } from "react-router-dom";
-
+import PropTypes from "prop-types";
 const Modal = ({ username }) => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [rating, setRating] = useState("");
@@ -65,6 +65,9 @@ const Modal = ({ username }) => {
       </form>
     </dialog>
   );
+};
+Modal.propTypes = {
+  username: PropTypes.string,
 };
 
 export default Modal;

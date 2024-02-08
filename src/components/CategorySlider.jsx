@@ -1,7 +1,7 @@
 import { LuFilter } from "react-icons/lu";
 import { useDispatch } from "react-redux";
 import { toggleSideBar } from "../features/filter/filterSlice";
-
+import PropTypes from "prop-types";
 const CategorySlider = ({ count }) => {
   const dispatch = useDispatch();
   const toggleFilterSideBar = () => {
@@ -17,6 +17,10 @@ const CategorySlider = ({ count }) => {
       />
     </div>
   );
+};
+
+CategorySlider.propTypes = {
+  count: PropTypes.number, // count prop should be a string
 };
 
 export default CategorySlider;

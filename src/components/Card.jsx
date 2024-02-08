@@ -110,7 +110,7 @@ const Card = ({ trip }) => {
           </div>
           <FaBookmark
             className="cursor-pointer"
-            color={isBookmarked ? "#FFFF00" : "black"}
+            color={isBookmarked ? "black" : undefined}
             size={"1rem"}
             onClick={handleBookmarkClick}
           />
@@ -124,13 +124,14 @@ const Card = ({ trip }) => {
             {title}
           </b>
           <FaBookmark
-            color={isBookmarked ? "#FFFF00" : "black"}
+            color={isBookmarked ? "black" : "silver"}
             className="cursor-pointer"
             size={"1.75rem"}
             onClick={handleBookmarkClick}
           />
         </div>
-        <div className="flex items-center gap-2 text-sm text-black flex-col justify-between">
+        <div className="flex gap-2 text-sm text-black flex-col justify-between">
+          <p className="text-lg">{address}</p>
           <div className="flex items-center gap-4">
             <img
               className="w-10 h-10 rounded-full object-cover"
@@ -144,7 +145,7 @@ const Card = ({ trip }) => {
 
             <p className="text-base">{user_name}</p>
           </div>
-          <p className="text-lg">{address}</p>
+
           <div className="flex items-center gap-4">
             <MdOutlineCalendarMonth size={"1.75rem"} />
             <p className="text-lg">

@@ -3,7 +3,7 @@ import { TripSliders } from "../utils/index.js";
 import Slider from "./Slider";
 import { FaLocationDot } from "react-icons/fa6";
 import SliderHelper from "./SliderHelper";
-
+import PropTypes from "prop-types";
 import { Accordion, AppAutocomplete } from "./index.js";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -64,7 +64,7 @@ const TripHeader = ({ data }) => {
               type="list"
               input_name="category"
               isOpen={true}
-              data={data.trips.trip_types}
+              data={data?.trips.trip_types}
             />
             <Accordion
               name="rating"
@@ -90,6 +90,7 @@ const TripHeader = ({ data }) => {
             <input
               type="checkbox"
               defaultChecked={false}
+              id="Filter"
               onChange={() => dispatch(toggleSideBar(true))}
             />
 
@@ -124,6 +125,7 @@ const TripHeader = ({ data }) => {
               onClick={() => dispatch(changeMode())}
             >
               <input
+                id="mode"
                 type="checkbox"
                 defaultChecked={theme === "night" ? true : false}
                 onChange={() => dispatch(changeMode())}
@@ -175,8 +177,9 @@ const TripHeader = ({ data }) => {
                 <div
                   className="sm:h-screen h-[200px] text-center rounded-md sm:rounded-none flex items-center justify-center"
                   style={{
-                    background: `url(${image})`,
+                    backgroundImage: `url(${image})`,
                     backgroundSize: "cover",
+                    backgroundPosition: "center",
                   }}
                 >
                   <b className="text-white text-lg">{shortDesc}</b>
@@ -205,6 +208,9 @@ const TripHeader = ({ data }) => {
       </div>
     </Wrapper>
   );
+};
+TripHeader.propTypes = {
+  data: PropTypes.object,
 };
 
 export default TripHeader;

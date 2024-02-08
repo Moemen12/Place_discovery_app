@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Form } from "react-router-dom";
-
+import PropTypes from "prop-types";
 const Rating = ({ isRated, setIsRated }) => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [rating, setRating] = useState("");
@@ -106,5 +106,8 @@ const Rating = ({ isRated, setIsRated }) => {
     </div>
   );
 };
-
+Rating.propTypes = {
+  isRated: PropTypes.bool.isRequired,
+  setIsRated: PropTypes.func.isRequired,
+};
 export default Rating;

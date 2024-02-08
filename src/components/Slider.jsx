@@ -13,7 +13,6 @@ const Slider = ({
 }) => {
   return (
     <swiper-container
-      // class={`z-0${className ? ` ${className}` : ""}`}
       class="z-0"
       slides-per-view={perView}
       speed={speed}
