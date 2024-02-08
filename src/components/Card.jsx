@@ -6,6 +6,7 @@ import { format } from "date-fns";
 import { HiOutlineShare } from "react-icons/hi";
 import ShareComponent from "./ShareComponent";
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Card = ({ trip }) => {
   const baseUrl = useSelector((store) => store.baseUrl);
@@ -73,17 +74,36 @@ const Card = ({ trip }) => {
     };
   }, []);
 
+  // Determine if the screen size is less than 640px
+  const isMobile = window.innerWidth < 640;
+
   return (
     <div className="flex h-72 sm:h-64 bg-white relative rounded-lg">
-      <img
-        loading="lazy"
-        className="sm:w-[45%] w-full rounded cursor-pointer sm:cursor-auto sm:rounded-l-lg object-cover"
-        src={`${baseUrl}/storage${images.image_url}`}
-        alt=""
-      />
+      {/* Render Link component if screen size is less than 640px, otherwise render a div */}
+      {isMobile ? (
+        <Link className="flex w-full" to={`/trip/${trip.id}/${trip.slug}`}>
+          <img
+            loading="lazy"
+            className="sm:w-[45%] w-full rounded cursor-pointer sm:cursor-auto sm:rounded-l-lg object-cover"
+            src={`${baseUrl}/storage${images.image_url}`}
+            alt=""
+          />
+        </Link>
+      ) : (
+        <div className="flex w-full">
+          <div className="w-full rounded cursor-auto sm:rounded-l-lg object-cover">
+            <img
+              className="h-full"
+              loading="lazy"
+              src={`${baseUrl}/storage${images.image_url}`}
+              alt=""
+            />
+          </div>
+        </div>
+      )}
 
+      {/* Render content */}
       {/* Mobile */}
-
       <article
         className="absolute py-2 left-0 bottom-0 w-full px-4 flex flex-col gap-2 sm:hidden"
         style={{ background: "rgb(0,0,0,0.7)" }}
