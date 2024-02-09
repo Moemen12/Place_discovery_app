@@ -32,13 +32,13 @@ const Footer = () => {
           <header className="footer-title">
             Information about the developers
           </header>
-          <div className="flex flex-col gap-1">
+          <div className="flex gap-1">
             Full-Stack developer{" "}
             <div className="flex items-center self-end">
               <IoIosArrowForward /> Moemen Saade
             </div>
           </div>
-          <div className="flex flex-col w-28">
+          <div className="flex">
             UI/UX{" "}
             <div className="flex items-center self-end">
               <IoIosArrowForward />{" "}

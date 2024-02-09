@@ -100,15 +100,18 @@ const CreateTrip = () => {
       ) : (
         <>
           <LandingNavbar />
-          <section>
+          <section className="mb-16">
             <BreadCrumbs title={"add"} image={dataCollection.profile_image} />
-            <section className="px-2 sm:px-10 flex sm:gap-16 gap-4">
-              <div className="flex flex-col w-1/2 mt-4 gap-4 sm:gap-8">
+            <section className="px-2 sm:px-10 flex-col-reverse sm:gap-16 gap-4 flex items-center sm:items-start sm:flex-row">
+              <div className="flex flex-col w-full sm:w-1/2 sm:mt-4 gap-4 sm:gap-8">
                 <article className="flex flex-col">
-                  <b>Add Photo</b>
-                  <div className="sm:h-60 h-32 flex flex-col shadow-xl justify-center items-center">
+                  <b className="mb-2">Add Photo</b>
+                  <div className="sm:h-60 h-32 flex flex-col shadow-xl justify-center items-center border border-solid border-slate-600">
                     <label htmlFor="imageUpload" className="cursor-pointer">
-                      <IoIosAddCircleOutline size={"4rem"} color="silver" />
+                      <IoIosAddCircleOutline
+                        size={"4rem"}
+                        className="mx-auto border-slate-600"
+                      />
                       <p>Add Photos</p>
                       <input
                         id="imageUpload"
@@ -123,7 +126,7 @@ const CreateTrip = () => {
                   </div>
                 </article>
                 <article className="flex flex-col">
-                  <b>Add title</b>
+                  <b className="mb-2">Add title</b>
                   <input
                     type="hidden"
                     id="titleHidden"
@@ -132,14 +135,14 @@ const CreateTrip = () => {
                   />
                   <textarea
                     id="title"
-                    className="textarea h-20 border-none outline-0 shadow-xl"
+                    className="textarea h-20 border-solid border-slate-600 outline-0 shadow-xl"
                     placeholder="Add title"
                     onChange={(e) => setTitleTrip(e.target.value)}
                   ></textarea>
                 </article>
 
                 <article className="flex flex-col">
-                  <b>Add Description</b>
+                  <b className="mb-2">Add Description</b>
                   <input
                     type="hidden"
                     id="descriptionHidden"
@@ -148,14 +151,14 @@ const CreateTrip = () => {
                   />
                   <textarea
                     id="description"
-                    className="textarea h-20 border-none outline-0 shadow-xl"
+                    className="textarea h-20 border border-solid border-slate-600 outline-0 shadow-xl"
                     placeholder="Add Description"
                     onChange={(e) => setDescription(e.target.value)}
                   ></textarea>
                 </article>
 
                 <article className="flex flex-col">
-                  <b>Select Location</b>
+                  <b className="mb-2">Select Location</b>
                   <select
                     className="select select-bordered w-full"
                     id="select_location"
@@ -181,7 +184,7 @@ const CreateTrip = () => {
                 </article>
 
                 <article className="flex flex-col">
-                  <b>Add Trip</b>
+                  <b className="mb-2">Add Trip</b>
                   <select
                     className="select select-bordered w-full"
                     value={selectedTrip}
@@ -207,9 +210,9 @@ const CreateTrip = () => {
                 </article>
               </div>
               <div
-                className={`w-1/2 mt-4 gap-2 ${
-                  selectedImages.length > 0 && "grid"
-                } sm:grid-cols-2 h-max`}
+                className={`sm:mt-10 mt-0 gap-2 grid-cols-2 h-max${
+                  selectedImages.length > 0 ? " grid" : " flex-1"
+                }`}
               >
                 {selectedImages.length > 0 ? (
                   selectedImages.map((image, index) => (
@@ -231,7 +234,7 @@ const CreateTrip = () => {
                     </div>
                   ))
                 ) : (
-                  <img src={selected_images} />
+                  <img src={selected_images} className="w-full" />
                 )}
               </div>
             </section>

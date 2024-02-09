@@ -1,8 +1,7 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateProfileImage, logoutUser } from "../features/user/userSlice";
 import { Link, useNavigate } from "react-router-dom";
-
 import { GrUpdate } from "react-icons/gr";
 import { FaUser, FaMoon } from "react-icons/fa";
 import { IoMdSettings, IoIosArrowForward } from "react-icons/io";
@@ -34,9 +33,19 @@ const Settings = () => {
   const handleLinkClick = () => {
     if (window.innerWidth < 640) {
       setShowSidebar(false);
-      document.getElementById("aside-bar").classList.add("hidden");
     }
   };
+
+  const handleResize = () => {
+    if (window.innerWidth >= 640) {
+      setShowSidebar(true);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const baseUrl = useSelector((store) => store.baseUrl);
   const dispatch = useDispatch();
@@ -117,7 +126,9 @@ const Settings = () => {
           />
           <section className="flex min-h-screen">
             <div
-              className="w-screen sm:w-1/3 xl:w-1/4 shadow-2xl"
+              className={`w-screen sm:w-1/3 xl:w-1/4 shadow-2xl${
+                showSidebar ? " block" : " hidden"
+              }`}
               id="aside-bar"
             >
               <aside

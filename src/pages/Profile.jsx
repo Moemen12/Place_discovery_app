@@ -25,7 +25,6 @@ import {
 // Components
 
 import {
-  Footer,
   Info,
   InputForm,
   LandingNavbar,
