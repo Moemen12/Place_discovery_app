@@ -9,7 +9,7 @@ const ReviewMobile = ({ reviews, baseUrl }) => {
     document.querySelector(".review-mobile").style.display = "none";
   };
   return (
-    <div className="bg-white w-full absolute hidden top-0 left-0 h-screen z-20 review-mobile">
+    <div className="bg-white w-full fixed bottom-0 left-0 h-full hidden z-20 review-mobile">
       <div
         className="flex-col gap-8 h-[70%] overflow-y-scroll right-0 absolute top-12 px-6 flex"
         id="review"

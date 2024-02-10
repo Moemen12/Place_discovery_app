@@ -78,7 +78,7 @@ const Card = ({ trip }) => {
   const isMobile = window.innerWidth < 640;
 
   return (
-    <div className="flex h-72 sm:h-64 bg-white relative rounded-lg">
+    <div className="flex h-72 sm:h-64 bg-white relative rounded-lg border-gray-400 border">
       {/* Render Link component if screen size is less than 640px, otherwise render a div */}
       {isMobile ? (
         <Link className="flex w-full" to={`/trip/${trip.id}/${trip.slug}`}>
