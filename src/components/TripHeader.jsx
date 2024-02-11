@@ -196,7 +196,9 @@ const TripHeader = ({ data }) => {
                     backgroundPosition: "center",
                   }}
                 >
-                  <b className="text-white text-lg z-10">{shortDesc}</b>
+                  <b className="text-white sm:text-lg z-10 text-sm">
+                    {shortDesc}
+                  </b>
                 </div>
 
                 <div className="trip-slider hidden sm:block">

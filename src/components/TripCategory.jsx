@@ -108,10 +108,7 @@ const TripCategory = ({ data }) => {
             {data.trips.trip_types.map((tripType, index) => {
               return (
                 <SliderHelper key={index}>
-                  <Link
-                    className="cursor-pointer text-white"
-                    to={`?category=${tripType}`}
-                  >
+                  <Link className="cursor-pointer" to={`?category=${tripType}`}>
                     {tripType}
                   </Link>
                 </SliderHelper>

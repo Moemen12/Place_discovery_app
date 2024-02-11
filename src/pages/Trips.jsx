@@ -17,12 +17,14 @@ const Trips = () => {
       {isPageLoading ? (
         <Loading />
       ) : (
-        <section className="h-screen mb-32 sm:mb-0">
-          <LandingNavbar style={{ background: "black" }} />
-          <TripHeader data={loadedData} />
-          <TripCategory data={loadedData} />
-          <Tours data={loadedData.trips.countries} />
-          <Footer />
+        <section className="h-screen sm:mb-0">
+          <div className="mb-[56px]">
+            <LandingNavbar style={{ background: "black" }} />
+            <TripHeader data={loadedData} />
+            <TripCategory data={loadedData} />
+            <Tours data={loadedData.trips.countries} />
+            <Footer />
+          </div>
           <MobileNavbar />
         </section>
       )}
