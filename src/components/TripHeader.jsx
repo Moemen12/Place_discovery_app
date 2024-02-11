@@ -187,6 +187,7 @@ const TripHeader = ({ data }) => {
             const { id, shortDesc, image, longDesc } = slider;
             return (
               <SliderHelper key={id}>
+                <div className="trip-slider sm:hidden"></div>
                 <div
                   className="sm:h-screen h-[200px] text-center rounded-md sm:rounded-none flex items-center justify-center"
                   style={{
@@ -195,7 +196,7 @@ const TripHeader = ({ data }) => {
                     backgroundPosition: "center",
                   }}
                 >
-                  <b className="text-white text-lg">{shortDesc}</b>
+                  <b className="text-white text-lg z-10">{shortDesc}</b>
                 </div>
 
                 <div className="trip-slider hidden sm:block">
