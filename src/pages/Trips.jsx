@@ -18,7 +18,7 @@ const Trips = () => {
         <Loading />
       ) : (
         <section className="h-screen sm:mb-0">
-          <div className="mb-[56px]">
+          <div className="mb-[68px]">
             <LandingNavbar style={{ background: "black" }} />
             <TripHeader data={loadedData} />
             <TripCategory data={loadedData} />
