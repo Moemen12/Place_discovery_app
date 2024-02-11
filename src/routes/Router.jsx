@@ -30,6 +30,7 @@ import { multiFormAction } from "../actions/multiformActions";
 export const router = createBrowserRouter([
   {
     path: "/",
+
     element: <Landing />,
     errorElement: <Error />,
   },
@@ -50,6 +51,7 @@ export const router = createBrowserRouter([
     element: <Trips />,
     errorElement: <Error />,
     loader: tripsLoader,
+    // /trips with parameters here
   },
   {
     path: "/trip/:id/:slug",

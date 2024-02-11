@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Form } from "react-router-dom";
 import PropTypes from "prop-types";
+
 const Rating = ({ isRated, setIsRated }) => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [rating, setRating] = useState("");
@@ -19,7 +20,8 @@ const Rating = ({ isRated, setIsRated }) => {
     setHoveredIndex(index);
   };
 
-  const handleStarClick = (index) => {
+  const handleStarClick = (index, event) => {
+    event.stopPropagation(); // Prevent event propagation to the backdrop
     setRating((index + 1).toString());
     setHoveredIndex(null);
     setShowRain(true);
@@ -55,12 +57,17 @@ const Rating = ({ isRated, setIsRated }) => {
     return raindrops;
   };
 
+  const handleBackdropClick = () => {
+    setIsRated(false); // Hide the backdrop
+  };
+
   return (
     <div
-      className={`w-screen h-screen absolute z-40 top-0 left-0 place-items-center overflow-hidden ${
+      className={`w-screen h-screen fixed z-40 bottom-0 left-0 place-items-center overflow-hidden ${
         isRated ? "grid" : "hidden"
       }`}
       style={{ background: "rgba(0, 0, 0, 0.9)", color: "#fff" }}
+      onClick={handleBackdropClick} // Add click handler to hide the backdrop
     >
       {showRain && <div className="rain-container">{renderRain()}</div>}
       <Form method="POST" onSubmit={() => setIsRated(false)}>
@@ -87,7 +94,7 @@ const Rating = ({ isRated, setIsRated }) => {
                 style={{ width: "4rem", height: "4rem" }}
                 onMouseEnter={() => handleStarHover(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
-                onClick={() => handleStarClick(index)}
+                onClick={(event) => handleStarClick(index, event)} // Pass the event
               />
             ))}
           </div>
@@ -106,8 +113,10 @@ const Rating = ({ isRated, setIsRated }) => {
     </div>
   );
 };
+
 Rating.propTypes = {
   isRated: PropTypes.bool.isRequired,
   setIsRated: PropTypes.func.isRequired,
 };
+
 export default Rating;

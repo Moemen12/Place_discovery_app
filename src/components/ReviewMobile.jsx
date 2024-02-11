@@ -11,11 +11,11 @@ const ReviewMobile = ({ reviews, baseUrl }) => {
   return (
     <div className="bg-white w-full fixed bottom-0 left-0 h-full hidden z-20 review-mobile">
       <div
-        className="flex-col gap-8 h-[70%] overflow-y-scroll right-0 absolute top-12 px-6 flex"
+        className="flex-col gap-8 h-[70%] overflow-y-scroll right-0 absolute top-12 px-6 flex w-full"
         id="review"
       >
-        <div className="flex items-center gap-4" onClick={goBack}>
-          <FaArrowLeft size={"1.5rem"} />
+        <div className="flex items-center gap-4 text-black" onClick={goBack}>
+          <FaArrowLeft color="black" size={"1.5rem"} />
           <p>back</p>
         </div>
         {reviews.map((singleReview) => {
@@ -33,8 +33,8 @@ const ReviewMobile = ({ reviews, baseUrl }) => {
                 alt=""
               />
               <div className="flex flex-col flex-grow">
-                <p>{review}</p>
-                <p className="self-end text-xs font-bold pt-3">
+                <p className="text-black">{review}</p>
+                <p className="self-end text-xs font-bold pt-3 text-black">
                   {formatDistanceToNow(utcDate, {
                     addSuffix: true,
                     locale: enUS,

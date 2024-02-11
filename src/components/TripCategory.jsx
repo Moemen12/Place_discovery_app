@@ -82,7 +82,7 @@ const TripCategory = ({ data }) => {
               : "col-span-12 sm:p-4"
           }
         >
-          <p className="capitalize text-center font-black sm:font-bold text-xl sm:text-4xl tracking-wide sm:tracking-widest py-2 sm:p-0">
+          <p className="capitalize text-center font-black sm:font-bold text-base sm:text-4xl tracking-wide sm:tracking-widest py-2 sm:p-0">
             latest trip
           </p>
 
@@ -101,14 +101,17 @@ const TripCategory = ({ data }) => {
           />
 
           <Slider
-            className="sm:hidden w-fit pt-2 pb-4"
+            className="sm:hidden w-fit pt-2 pb-4 flex"
             perView={"auto"}
             spaceBetween={"20"}
           >
             {data.trips.trip_types.map((tripType, index) => {
               return (
                 <SliderHelper key={index}>
-                  <Link className="cursor-pointer" to={`?category=${tripType}`}>
+                  <Link
+                    className="cursor-pointer text-white"
+                    to={`?category=${tripType}`}
+                  >
                     {tripType}
                   </Link>
                 </SliderHelper>

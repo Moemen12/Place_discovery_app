@@ -60,7 +60,7 @@ const SingleTrip = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      setPerView(window.innerWidth > 640 ? 4 : 3);
+      setPerView(window.innerWidth > 640 ? "4" : "3");
     };
 
     window.addEventListener("resize", handleResize);

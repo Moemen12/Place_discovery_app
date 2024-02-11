@@ -84,16 +84,16 @@ const Card = ({ trip }) => {
         <Link className="flex w-full" to={`/trip/${trip.id}/${trip.slug}`}>
           <img
             loading="lazy"
-            className="sm:w-[45%] w-full rounded cursor-pointer sm:cursor-auto sm:rounded-l-lg object-cover"
+            className="sm:w-[45%] w-full rounded-lg cursor-pointer sm:cursor-auto sm:rounded-l-lg object-cover"
             src={`${baseUrl}/storage${images.image_url}`}
             alt=""
           />
         </Link>
       ) : (
-        <div className="flex w-full">
+        <div className="flex w-full sm:w-[200px]">
           <div className="w-full rounded cursor-auto sm:rounded-l-lg object-cover">
             <img
-              className="h-full"
+              className="h-full sm:rounded-l-lg object-cover"
               loading="lazy"
               src={`${baseUrl}/storage${images.image_url}`}
               alt=""
@@ -105,7 +105,7 @@ const Card = ({ trip }) => {
       {/* Render content */}
       {/* Mobile */}
       <article
-        className="absolute py-2 left-0 bottom-0 w-full px-4 flex flex-col gap-2 sm:hidden"
+        className="absolute py-2 left-0 bottom-0 w-full px-4 flex flex-col gap-2 sm:hidden rounded-b-lg sm:rounded-l-lg"
         style={{ background: "rgb(0,0,0,0.7)" }}
       >
         <b className="text-white text-sm">{address}</b>

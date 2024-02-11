@@ -48,10 +48,8 @@ export const reviewAction = async (params, data, store) => {
     review: data.review,
   };
 
-  console.log(ReviewData);
-
   try {
-    const response = await customFetch.post(`trip/create/review/`, ReviewData, {
+    const response = await customFetch.post(`trip/create/review`, ReviewData, {
       headers: {
         Authorization: `Bearer ${user?.token}`,
       },
@@ -90,7 +88,7 @@ export const ratingAction = async (params, data, store) => {
 
   try {
     const response = await customFetch.post(
-      `/trip/make/rating/`,
+      `/trip/make/rating`,
 
       ratingData,
       {
