@@ -47,6 +47,7 @@ const TripHeader = ({ data }) => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
   return (
     <Wrapper>
       {filterValue && window.innerWidth < 640 && (
@@ -126,9 +127,9 @@ const TripHeader = ({ data }) => {
               </g>
             </svg>
           </label>
-          <div className="flex items-center">
+          <div className="flex items-center gap-2">
             <FaLocationDot color="red" />
-            <p>Lebanon</p>
+            <p>{data.trips.user_preferred_country || "No Selected Country"}</p>
           </div>
           <div className="flex items-center gap-4">
             {/* For Mobile Navbar */}
@@ -196,7 +197,7 @@ const TripHeader = ({ data }) => {
                     backgroundPosition: "center",
                   }}
                 >
-                  <b className="text-white sm:text-lg z-10 text-sm">
+                  <b className="text-white sm:hidden sm:text-lg z-10 text-sm">
                     {shortDesc}
                   </b>
                 </div>

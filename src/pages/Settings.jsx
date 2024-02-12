@@ -210,9 +210,9 @@ const Settings = () => {
                   <div className="flex flex-col gap-3 sm:gap-8">
                     <div className="font-bold text-lg capitalize flex items-center justify-between sm:max-w-[30rem] w-full">
                       <p>Location</p>
-                      <div className="flex items-center">
+                      <div className="flex items-center gap-2">
                         <FaLocationDot color="red" />
-                        <span>{country_name}</span>
+                        <span>{country_name || "No selected Country"}</span>
                       </div>
                     </div>
 
@@ -222,14 +222,14 @@ const Settings = () => {
                       Current Password
                     </div>
                     <InputForm
-                      className="max-w-none w-full sm:max-w-[30rem]"
+                      className="max-w-none w-full border-slate-600 border sm:max-w-[30rem]"
                       name="current_password"
                     />
                     <div className="font-bold text-lg capitalize">
                       New Password
                     </div>
                     <InputForm
-                      className="max-w-none w-full sm:max-w-[30rem]"
+                      className="max-w-none border-slate-600 border w-full sm:max-w-[30rem]"
                       name="new_password"
                     />
                   </div>

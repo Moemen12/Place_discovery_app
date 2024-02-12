@@ -21,6 +21,7 @@ const Header = () => {
             <br className="hidden md:block" />
             world&apos;s most captivating places.
           </div>
+
           <Link
             to="/trips"
             className="btn max-w-xs mr-auto mt-12 px-8 rounded-2xl tracking-widest"
@@ -28,6 +29,7 @@ const Header = () => {
             <PiStarFourFill size="1.1rem" />
             Discover
           </Link>
+          {/* <img className="max-h-96" src={landingImage} alt="" loading="lazy" /> */}
         </div>
         <div className="hidden md:block">
           <img className="max-h-96" src={landingImage} alt="" loading="lazy" />

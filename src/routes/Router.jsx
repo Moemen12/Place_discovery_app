@@ -21,6 +21,7 @@ import {
 import { store } from "../store";
 import {
   createTripLoader,
+  landingLoader,
   singleProductLoader,
   tripsLoader,
   userProfileLoader,
@@ -33,6 +34,7 @@ export const router = createBrowserRouter([
 
     element: <Landing />,
     errorElement: <Error />,
+    loader: landingLoader,
   },
   {
     path: "/auth/login",

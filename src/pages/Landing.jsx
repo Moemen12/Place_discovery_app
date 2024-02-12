@@ -1,4 +1,4 @@
-import { useNavigation } from "react-router-dom";
+import { Link, useLoaderData, useNavigation } from "react-router-dom";
 import {
   ClientSays,
   Header,
@@ -9,6 +9,7 @@ import {
 } from "../components";
 
 const Landing = () => {
+  const data = useLoaderData();
   const navigation = useNavigation();
   const isPageLoading = navigation.state === "loading";
   return (
@@ -17,12 +18,18 @@ const Landing = () => {
         <Loading />
       ) : (
         <>
+          <Link
+            to="/"
+            className="text-xl text-black sm:hidden absolute top-4 left-8"
+          >
+            Wanderwise
+          </Link>
           <div className="h-screen flex flex-col">
             <LandingNavbar />
             <Header />
           </div>
 
-          <Statistic />
+          <Statistic data={data.data} />
           <ClientSays />
           <Letters />
         </>

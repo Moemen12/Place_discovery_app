@@ -235,23 +235,23 @@ const Profile = () => {
               <div className="flex flex-col gap-3 sm:gap-8">
                 <div className="font-bold text-lg capitalize">name</div>
                 <InputForm
-                  className="max-w-none w-full sm:max-w-[30rem]"
+                  className="max-w-none border-slate-600 border w-full sm:max-w-[30rem]"
                   value={name}
                   name="name"
                 />
                 <Info
-                  className="w-full text-sm sm:text-base sm:max-w-[30rem]"
+                  className="w-full border-slate-600 border text-sm sm:text-base sm:max-w-[30rem]"
                   label="Email"
                   data={email}
                 />
                 <Info
                   label="Published Trip Number"
                   data={published_trip_num}
-                  className="w-full sm:w-1/6"
+                  className="w-full sm:w-1/6 border-slate-600 border"
                 />
                 <div className="font-bold text-lg capitalize">bio</div>
                 <textarea
-                  className="textarea-lg text-sm md:text-lg sm:max-w-[30rem] bg-transparent shadow-2xl"
+                  className="textarea-lg rounded-lg border-slate-600 border text-sm md:text-lg sm:max-w-[30rem] bg-transparent shadow-2xl"
                   onChange={handleBioChange}
                   placeholder="Bio"
                   name="bio"

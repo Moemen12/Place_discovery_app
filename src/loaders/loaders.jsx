@@ -43,10 +43,29 @@ export const tripsLoader = async ({ request }) => {
   ]);
 
   try {
-    // Make the request with the constructed query string
-    const response = await customFetch.get(
-      `/trips?category=${params.category || ""}&stars=${params.stars || ""}`
-    );
+    // Check if the user exists in local storage
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    // Construct the endpoint URL based on user existence
+    let endpoint = "";
+    if (user) {
+      endpoint = `/user/trips?category=${params.category || ""}&stars=${
+        params.stars || ""
+      }`;
+    } else {
+      endpoint = `/trips?category=${params.category || ""}&stars=${
+        params.stars || ""
+      }`;
+    }
+
+    // Construct request headers
+    const headers = {};
+    if (user) {
+      headers.Authorization = `Bearer ${user.token}`;
+    }
+
+    // Make the request with the constructed endpoint URL and headers
+    const response = await customFetch.get(endpoint, { headers });
 
     return response.data;
   } catch (error) {
@@ -74,6 +93,17 @@ export const createTripLoader = async (store) => {
     return response.data;
   } catch (error) {
     console.error(error);
+    return null;
+  }
+};
+
+/* landing loaders */
+
+export const landingLoader = async () => {
+  try {
+    const response = await customFetch(`/users/general/info`);
+    return response;
+  } catch (error) {
     return null;
   }
 };
