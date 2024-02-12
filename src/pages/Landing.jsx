@@ -1,6 +1,7 @@
 import { Link, useLoaderData, useNavigation } from "react-router-dom";
 import {
   ClientSays,
+  Footer,
   Header,
   LandingNavbar,
   Letters,
@@ -32,6 +33,7 @@ const Landing = () => {
           <Statistic data={data.data} />
           <ClientSays />
           <Letters />
+          <Footer />
         </>
       )}
     </>

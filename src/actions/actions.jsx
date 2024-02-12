@@ -57,7 +57,6 @@ export const reviewAction = async (params, data, store) => {
 
     return response;
   } catch (error) {
-    console.log(error);
     dispatch(setMessage(error.response.data.message));
     toast.error(error.response.data.message, {
       position: "top-center",

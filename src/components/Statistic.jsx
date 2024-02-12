@@ -25,6 +25,10 @@ const AnimatedNumber = ({ value }) => {
   );
 };
 
+AnimatedNumber.propTypes = {
+  value: PropTypes.number.isRequired,
+};
+
 const Statistic = ({ data }) => {
   return (
     <Wrapper>

@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import {
   CreateTrip,
   Error,
+  GlobalProfile,
   Landing,
   Login,
   Profile,
@@ -20,6 +21,7 @@ import {
 } from "../actions/actions";
 import { store } from "../store";
 import {
+  GlobalProfileLoader,
   createTripLoader,
   landingLoader,
   singleProductLoader,
@@ -79,6 +81,13 @@ export const router = createBrowserRouter([
     errorElement: <Error />,
     action: (request) => updateProfileAction(request, store),
     loader: () => userProfileLoader(store),
+  },
+  {
+    path: "user/profile/:id?/:username?",
+    element: <GlobalProfile />,
+    errorElement: <Error />,
+    // action: (request) => updateProfileAction(request, store),
+    loader: (params) => GlobalProfileLoader(params),
   },
   {
     element: <Settings />,

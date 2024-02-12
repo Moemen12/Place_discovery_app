@@ -13,6 +13,7 @@ import {
   Loading,
   MobileNavbar,
 } from "../components";
+import { toast } from "react-toastify";
 
 const CreateTrip = () => {
   const [countries, setCountries] = useState([]);
@@ -75,21 +76,34 @@ const CreateTrip = () => {
       formData.append("address", selectedLocation);
       formData.append("trip_type", selectedTrip);
 
-      const response = await customFetch.post(
-        "/trip/create/new_trip",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${user.token}`,
-          },
-        }
-      );
+      await customFetch.post("/trip/create/new_trip", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
 
-      console.log("Upload successful:", response.data);
-      // Add any additional logic or state updates after successful upload
+      toast.success("Trip created Successfully", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     } catch (error) {
-      console.error("Error uploading files:", error);
+      toast.error(error.response.data.message, {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
 

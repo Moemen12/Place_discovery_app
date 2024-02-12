@@ -7,7 +7,7 @@ import { PiStarFourFill } from "react-icons/pi";
 const Header = () => {
   return (
     <>
-      <Wrapper className="grid grid-cols-1 md:grid-cols-2 p-12 place-items-center flex-auto">
+      <Wrapper className="grid grid-cols-1 md:grid-cols-2 p-12 pb-0 place-items-center flex-auto">
         <div className="flex flex-col">
           <h2 className="text-black">
             Dicover All places with just <br className="hidden md:block" /> one

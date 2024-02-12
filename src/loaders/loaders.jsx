@@ -107,3 +107,17 @@ export const landingLoader = async () => {
     return null;
   }
 };
+
+/* GlobalProfileLoader loaders */
+
+export const GlobalProfileLoader = async ({ params }) => {
+  try {
+    const response = await customFetch(
+      `/profile/${params.id}/${params.username}`
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};

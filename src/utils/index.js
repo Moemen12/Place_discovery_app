@@ -92,3 +92,24 @@ export const navbarLink = [
     text: "Register",
   },
 ];
+
+export const testimonialsData = [
+  {
+    id: 1,
+    name: "Sarah Thompson",
+    text: "I discovered amazing places I never knew existed thanks to Place Discovery! Their curated selection of hidden gems made my travel experiences unforgettable.",
+    image: "https://i.pravatar.cc/150?img=1", // Avatar for Sarah Thompson
+  },
+  {
+    id: 2,
+    name: "Michael Johnson",
+    text: "As a photographer, I rely on Featured Photography to showcase my work. Their platform has helped me gain exposure and connect with clients from around the world.",
+    image: "https://i.pravatar.cc/150?img=2", // Avatar for Michael Johnson
+  },
+  {
+    id: 3,
+    name: "Emma Parker",
+    text: "Tribe Connections has allowed me to meet like-minded travelers and locals wherever I go. It's refreshing to connect with people who share my passion for exploration.",
+    image: "https://i.pravatar.cc/150?img=3", // Avatar for Emma Parker
+  },
+];
