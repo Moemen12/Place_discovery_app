@@ -1,6 +1,6 @@
 import { MdOutlineMail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
-import { Form, Link, useNavigate } from "react-router-dom";
+import { Form, Link } from "react-router-dom";
 import { LoginImage } from "../assets/images/";
 import { InputForm, SubmitBtn } from "../components";
 import { resetMessage } from "../features/user/userSlice";
@@ -58,7 +58,7 @@ const Register = () => {
             <div className="label">
               <span className="label-text text-white text-xs">Enter Name</span>
             </div>
-            <InputForm name="name" style={{ background: "#DDDDDD" }} />
+            <InputForm name="name" />
           </label>
           <label className="form-control w-full max-w-xs relative">
             <div className="label">
@@ -67,24 +67,14 @@ const Register = () => {
               </span>
             </div>
             <MdOutlineMail className="absolute left-4 top-12 text-gray-500 text-xl" />
-            <InputForm
-              name="email"
-              type="email"
-              className="pl-10"
-              style={{ background: "#DDDDDD" }}
-            />
+            <InputForm name="email" type="email" className="pl-10" />
           </label>
           <label className="form-control w-full max-w-xs relative">
             <div className="label">
               <span className="label-text text-white text-xs">Password</span>
             </div>
             <RiLockPasswordFill className="absolute left-4 top-12 text-gray-500 text-xl" />
-            <InputForm
-              name="password"
-              type="password"
-              className="pl-10"
-              style={{ background: "#DDDDDD" }}
-            />
+            <InputForm name="password" type="password" className="pl-10" />
           </label>
           <label className="form-control w-full max-w-xs relative">
             <div className="label">
@@ -97,7 +87,6 @@ const Register = () => {
               name="password_confirmation"
               type="password"
               className="pl-10"
-              style={{ background: "#DDDDDD" }}
             />
           </label>
 

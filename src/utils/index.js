@@ -79,7 +79,7 @@ export const navbarLink = [
   {
     id: 4,
     url: "/auth/profile",
-    text: "Profile",
+    text: "My Account",
   },
   {
     id: 5,

@@ -6,7 +6,7 @@ import { navbarLink } from "../utils";
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   return (
-    <section className="block mt-8 sm:mt-0">
+    <section>
       <footer className="footer p-10 bg-base-200 text-base-content">
         <nav>
           <header className="footer-title">Pages</header>

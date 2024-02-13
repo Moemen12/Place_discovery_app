@@ -1,4 +1,4 @@
-import { Form, Link, useNavigate } from "react-router-dom";
+import { Form, Link } from "react-router-dom";
 import { LoginImage } from "../assets/images/";
 import { MdOutlineMail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
@@ -65,24 +65,14 @@ const Login = () => {
               </span>
             </div>
             <MdOutlineMail className="absolute left-4 top-12 text-gray-500 text-xl" />
-            <InputForm
-              type="email"
-              name="email"
-              className="pl-10"
-              style={{ background: "#DDDDDD" }}
-            />
+            <InputForm type="email" name="email" className="pl-10" />
           </label>
           <label className="form-control w-full max-w-xs relative">
             <div className="label">
               <span className="label-text text-white text-xs">Password</span>
             </div>
             <RiLockPasswordFill className="absolute left-4 top-12 text-gray-500 text-xl" />
-            <InputForm
-              name="password"
-              type="password"
-              className="pl-10"
-              style={{ background: "#DDDDDD" }}
-            />
+            <InputForm name="password" type="password" className="pl-10" />
             <div className="label">
               <span className="label-text-alt"></span>
               <Link className="label-text-alt text-white text-xs">

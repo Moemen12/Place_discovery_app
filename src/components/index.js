@@ -7,14 +7,12 @@ import Letters from "./Letters";
 import SubmitBtn from "./SubmitBtn";
 import InputForm from "./InputForm";
 import TripHeader from "./TripHeader";
-import TripsNavbar from "./TripsNavbar";
 import SliderHelper from "./SliderHelper";
 import TripCategory from "./TripCategory";
 import Accordion from "./Accordion";
 import Card from "./Card";
 import AppAutocomplete from "./AppAutocomplete";
 import Modal from "./Modal";
-import SharedNavbar from "./SharedNavbar";
 import Footer from "./Footer";
 import Reviews from "./Reviews";
 import Info from "./Info";
@@ -65,8 +63,6 @@ export {
   Accordion,
   InputForm,
   SliderHelper,
-  TripsNavbar,
   TripCategory,
   Card,
-  SharedNavbar,
 };

@@ -25,6 +25,15 @@ const userSlice = createSlice({
     resetMessage: (state) => {
       state.message = null;
     },
+    updateProfileInfo: (state, action) => {
+      const updatedUser = {
+        ...state.user,
+        ...action.payload,
+      };
+      localStorage.setItem("user", JSON.stringify(updatedUser));
+      state.user = updatedUser;
+    },
+
     updateProfileImage: (state, action) => {
       state.profile_image = action.payload;
     },
@@ -39,6 +48,7 @@ export const {
   setMessage,
   logoutUser,
   resetMessage,
+  updateProfileInfo,
   updateProfileImage,
   resetProfileImage,
 } = userSlice.actions;

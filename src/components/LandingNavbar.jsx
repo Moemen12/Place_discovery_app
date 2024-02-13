@@ -1,29 +1,19 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Wrapper from "../assets/wrappers/LandingNavbar";
 import { navbarLink } from "../utils";
 import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
+
 const LandingNavbar = ({ style }) => {
   const defaultStyle = { background: "#000E30", ...style };
   const [loggedIn, setLoggedIn] = useState(false); // Manage login state locally
 
   const user = useSelector((store) => store.userState.user);
 
-  const navigate = useNavigate();
   useEffect(() => {
-    // Update local state based on user presence
     setLoggedIn(!!user);
   }, [user]);
-
-  const logout = () => {
-    // Perform logout actions, e.g., remove user from local storage
-    localStorage.removeItem("user");
-    // Update local state to trigger re-render
-    setLoggedIn(false);
-    // redirect("/auth/login");
-    navigate("/auth/login");
-  };
 
   return (
     <Wrapper>
@@ -35,7 +25,7 @@ const LandingNavbar = ({ style }) => {
           Wanderwise
         </Link>
 
-        <div className="hidden sm:flex items-center justify-between sm:gap-4 sm:w-full md:w-auto lg:gap-8">
+        <div className="hidden sm:flex items-center justify-between sm:gap-2 sm:w-full md:w-auto lg:gap-8">
           {navbarLink.map((navlink) => {
             const { id, url, text } = navlink;
 
@@ -45,7 +35,10 @@ const LandingNavbar = ({ style }) => {
             }
 
             // Skip rendering "Profile" and "New Adventure" links when the user is not logged in
-            if (!loggedIn && (text === "Profile" || text === "New Adventure")) {
+            if (
+              !loggedIn &&
+              (text === "My Account" || text === "New Adventure")
+            ) {
               return null;
             }
 
@@ -57,16 +50,22 @@ const LandingNavbar = ({ style }) => {
           })}
 
           {loggedIn ? (
-            // User is logged in, display logout link
-            <Link className="text-white" onClick={logout}>
-              Logout
-            </Link>
+            <>
+              {/* Display username when user is logged in */}
+              <Link
+                to={`/user/profile/${user.id}/${user.name}`}
+                style={{ color: "#47B5FF" }}
+              >
+                {user.name}
+              </Link>
+            </>
           ) : null}
         </div>
       </nav>
     </Wrapper>
   );
 };
+
 LandingNavbar.propTypes = {
   style: PropTypes.object,
 };

@@ -117,7 +117,6 @@ export const GlobalProfileLoader = async ({ params }) => {
     );
     return response.data;
   } catch (error) {
-    console.log(error);
     return null;
   }
 };

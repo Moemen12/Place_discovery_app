@@ -1,4 +1,4 @@
-import { Link, useLoaderData, useNavigation } from "react-router-dom";
+import { Link, useNavigation } from "react-router-dom";
 import {
   BreadCrumbs,
   Footer,
@@ -9,18 +9,26 @@ import {
 import { FaMapLocationDot } from "react-icons/fa6";
 import { format } from "date-fns";
 import { FaExclamationCircle } from "react-icons/fa";
+import { RiDeleteBin5Fill } from "react-icons/ri";
+import { AiOutlineClear } from "react-icons/ai";
 import { useState } from "react";
 import { BsBookmarkPlus } from "react-icons/bs";
 import { useSelector } from "react-redux";
 const Saved = () => {
   const [rerender, setRerender] = useState(false);
-  // const dataCollection = useLoaderData();
   const navigation = useNavigation();
   const isPageLoading = navigation.state === "loading";
   const savedItems = JSON.parse(localStorage.getItem("bookmarkedItems")) || [];
   const baseUrl = useSelector((store) => store.baseUrl);
   const user_profile = JSON.parse(localStorage.getItem("user"))?.image;
 
+  console.log(user_profile);
+  const handleRemoveTrip = (e, id) => {
+    e.preventDefault(); // Prevent the default link behavior
+    const updatedTrips = savedItems.filter((trip) => trip.id !== id);
+    localStorage.setItem("bookmarkedItems", JSON.stringify(updatedTrips));
+    setRerender(!rerender); // Trigger re-render
+  };
   const closeModal = () => {
     localStorage.removeItem("bookmarkedItems");
     var dialog = document.getElementById("my_modal_3");
@@ -44,8 +52,9 @@ const Saved = () => {
             <button
               type="button"
               onClick={() => document.getElementById("my_modal_3").showModal()}
-              className="bg-red-600 text-white mb-2 mt-4 px-4 py-2 rounded block ml-auto sm:mr-10"
+              className="bg-red-600 text-white mb-2 mt-4 px-4 py-2 rounded flex items-center gap-2 ml-auto sm:mr-10"
             >
+              <AiOutlineClear color="white" />
               Clear Saved Trips
             </button>
           )}
@@ -79,9 +88,15 @@ const Saved = () => {
                 <Link
                   to={`/trip/${item.id}/${item.slug}`}
                   key={item.id}
-                  className="col-span-12 sm:col-span-6 lg:col-span-4 flex sm:flex-col cursor-pointer shadow-2xl"
+                  className="col-span-12 relative sm:col-span-6 lg:col-span-4 flex sm:flex-col cursor-pointer shadow-2xl"
                 >
                   <div className="sm:flex-grow max-w-[155px] min-w-[155px] sm:max-w-none sm:h-56">
+                    <RiDeleteBin5Fill
+                      className="absolute right-0 cursor-pointer"
+                      color="red"
+                      size={"1.75rem"}
+                      onClick={(e) => handleRemoveTrip(e, item.id)}
+                    />
                     <img
                       className="object-cover h-full rounded-md sm:w-full"
                       src={`${baseUrl}/storage${item.imageUrl}`}

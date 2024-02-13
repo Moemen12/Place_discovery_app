@@ -21,7 +21,8 @@ const Landing = () => {
         <>
           <Link
             to="/"
-            className="text-xl text-black sm:hidden absolute top-4 left-8"
+            style={{ color: "#002e87" }}
+            className="text-xl font-bold sm:hidden absolute top-4 left-8"
           >
             Wanderwise
           </Link>

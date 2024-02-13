@@ -19,7 +19,7 @@ const Trips = () => {
       ) : (
         <section className="h-screen sm:mb-0">
           <div className="mb-[68px]">
-            <LandingNavbar style={{ background: "black" }} />
+            <LandingNavbar />
             <TripHeader data={loadedData} />
             <TripCategory data={loadedData} />
             <Tours data={loadedData.trips.countries} />

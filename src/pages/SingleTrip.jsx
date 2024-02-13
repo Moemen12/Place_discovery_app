@@ -1,4 +1,4 @@
-import { Form, useLoaderData, useNavigation } from "react-router-dom";
+import { Form, Link, useLoaderData, useNavigation } from "react-router-dom";
 import { GrLocation } from "react-icons/gr";
 import { MdOutlineCalendarMonth } from "react-icons/md";
 import { IoSend } from "react-icons/io5";
@@ -71,6 +71,7 @@ const SingleTrip = () => {
   }, []);
 
   const baseUrl = useSelector((store) => store.baseUrl);
+  const userInfo = useSelector((store) => store.userState.user);
 
   return (
     <>
@@ -94,7 +95,10 @@ const SingleTrip = () => {
                 className="flex-col justify-center gap-6 hidden md:flex"
                 id="single-info"
               >
-                <div className="flex items-center gap-4">
+                <Link
+                  className="flex items-center gap-4"
+                  to={`/user/profile/${userInfo.id}/${userInfo.name}`}
+                >
                   <img
                     src={
                       profile_image
@@ -107,7 +111,7 @@ const SingleTrip = () => {
                   <p className="font-bold text-base capitalize">
                     {username || <Skeleton />}
                   </p>
-                </div>
+                </Link>
                 <div className="flex items-center text-lg capitalize gap-4">
                   <GrLocation size={"1.75rem"} />
                   <p>{address || <Skeleton />}</p>

@@ -1,5 +1,9 @@
 import { redirect } from "react-router-dom";
-import { loginUser, setMessage } from "../features/user/userSlice";
+import {
+  loginUser,
+  setMessage,
+  updateProfileInfo,
+} from "../features/user/userSlice";
 import { customFetch } from "../utils";
 import { toast } from "react-toastify";
 
@@ -136,17 +140,38 @@ export const updateProfileAction = async ({ request }, store) => {
         Authorization: `Bearer ${user.token}`,
       },
     });
-    if (response.data.new_image) {
-      const updatedUser = {
-        ...user,
-        image: `/images/profile/${response.data.new_image}`,
-      };
-      localStorage.setItem("user", JSON.stringify(updatedUser));
-    }
+
+    dispatch(
+      updateProfileInfo({
+        name: response.data.name,
+        image: response.data.new_image,
+      })
+    );
+
+    toast.success(response.data.message, {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
 
     return response;
   } catch (error) {
     dispatch(setMessage(error.response.data.message));
+    toast.error(error.response.data.message, {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
     return error;
   }
 };
@@ -173,9 +198,29 @@ export const updateSettingsAction = async ({ request }, store) => {
       },
     });
 
+    toast.success(response.data.message, {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
     return response;
   } catch (error) {
     dispatch(setMessage(error.response.data.message));
+    toast.error(error.response.data.message, {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
     return error;
   }
 };
