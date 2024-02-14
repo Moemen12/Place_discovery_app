@@ -13,6 +13,7 @@ import {
   Trips,
 } from "../pages";
 import {
+  deleteTripAction,
   // createTripAction,
   loginAction,
   registerAction,
@@ -21,7 +22,7 @@ import {
 } from "../actions/actions";
 import { store } from "../store";
 import {
-  GlobalProfileLoader,
+  globalProfileLoader,
   createTripLoader,
   landingLoader,
   singleProductLoader,
@@ -29,7 +30,16 @@ import {
   userProfileLoader,
 } from "../loaders/loaders";
 import { multiFormAction } from "../actions/multiformActions";
+import { QueryClient } from "@tanstack/react-query";
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 5, // 5 minutes
+      cacheTime: 1000 * 60 * 60, // 1 hour
+    },
+  },
+});
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -54,14 +64,13 @@ export const router = createBrowserRouter([
     path: "/trips/:category?/:stars?:country?",
     element: <Trips />,
     errorElement: <Error />,
-    loader: tripsLoader,
-    // /trips with parameters here
+    loader: tripsLoader(queryClient),
   },
   {
     path: "/trip/:id/:slug",
     element: <SingleTrip />,
     errorElement: <Error />,
-    loader: singleProductLoader,
+    loader: singleProductLoader(queryClient),
     action: ({ params, request }) => multiFormAction(params, request, store),
   },
   {
@@ -71,7 +80,6 @@ export const router = createBrowserRouter([
   {
     path: "/trips/add/",
     element: <CreateTrip />,
-    // action: (request) => createTripAction(request, store),
     errorElement: <Error />,
     loader: () => createTripLoader(store),
   },
@@ -86,8 +94,8 @@ export const router = createBrowserRouter([
     path: "user/profile/:id?/:username?",
     element: <GlobalProfile />,
     errorElement: <Error />,
-    // action: (request) => updateProfileAction(request, store),
-    loader: (params) => GlobalProfileLoader(params),
+    action: (request) => deleteTripAction(request, store),
+    loader: globalProfileLoader(queryClient),
   },
   {
     element: <Settings />,

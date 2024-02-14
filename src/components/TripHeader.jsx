@@ -15,6 +15,7 @@ import { Form, Link } from "react-router-dom";
 import { changeMode } from "../features/config/modeSlice.js";
 
 const TripHeader = ({ data }) => {
+  const [cachedImages, setCachedImages] = useState({});
   const store = useSelector((store) => store.algoliaState);
   const image = useSelector((store) => store.userState.user?.image);
   const user = useSelector((store) => store.userState.user);
@@ -38,6 +39,23 @@ const TripHeader = ({ data }) => {
     setIsChanged(!isChanged);
   };
   useEffect(() => {
+    const cacheImage = (src) => {
+      const img = new Image();
+      img.src = src;
+      img.onload = () => {
+        setCachedImages((prevImages) => ({
+          ...prevImages,
+          [src]: img,
+        }));
+      };
+    };
+
+    // Cache images on component mount
+    TripSliders.forEach((slider) => {
+      const { image } = slider;
+      cacheImage(image);
+    });
+
     const handleResize = () => {
       setPerView(window.innerWidth < 640 ? true : false);
     };
@@ -163,7 +181,7 @@ const TripHeader = ({ data }) => {
               </svg>
             </label>
             <Link
-              to={`/user/profile/${user.id}/${user.name}`}
+              to={`/user/profile/${user?.id}/${user?.name}`}
               className="w-8 h-8 rounded-full"
               style={{
                 background: `url(${
@@ -203,7 +221,7 @@ const TripHeader = ({ data }) => {
                     {shortDesc}
                   </b>
                 </div>
-
+                {/* i wanna cache the image below how ?? */}
                 <div className="trip-slider hidden sm:block">
                   <div className="flex items-center justify-center h-screen">
                     <div

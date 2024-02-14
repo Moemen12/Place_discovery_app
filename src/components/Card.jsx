@@ -197,7 +197,7 @@ Card.propTypes = {
     images: PropTypes.shape({
       image_url: PropTypes.string.isRequired,
     }).isRequired,
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     user_profile: PropTypes.string,
     slug: PropTypes.string.isRequired,
     created_at: PropTypes.string.isRequired,

@@ -51,7 +51,7 @@ const ShareComponent = ({ url, id, message = "Check out this link: " }) => {
 
 ShareComponent.propTypes = {
   url: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   message: PropTypes.string,
 };
 

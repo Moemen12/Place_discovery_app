@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { Link, useLoaderData } from "react-router-dom";
+import { Form, Link, useLoaderData } from "react-router-dom";
 import { formatDistanceToNow } from "date-fns";
 import { enUS } from "date-fns/locale";
 import { FaCopy } from "react-icons/fa";
+import { RiDeleteBin5Fill } from "react-icons/ri";
 
 const GlobalProfile = () => {
   const data = useLoaderData();
@@ -32,7 +33,7 @@ const GlobalProfile = () => {
   return (
     <section className="relative bg-blueGray-200 mt-8 mb-8 text-black">
       <div className="container mx-auto px-4">
-        <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg">
+        <div className="relative flex flex-col break-words bg-white w-full mb-6 shadow-xl rounded-lg">
           <div className="px-3 sm:px-6 pt-4">
             <img
               className="sm:w-56 sm:h-56 w-36 h-36 rounded-full object-cover mx-auto"
@@ -46,7 +47,7 @@ const GlobalProfile = () => {
 
             <div className="flex items-center justify-center gap-4 sm:gap-16 mt-4">
               <div className="text-center">
-                <span className="text-xl block text-blueGray-600">
+                <span className="sm:text-xl text-base block text-blueGray-600">
                   {formatDistanceToNow(utcDate, {
                     addSuffix: true,
                     locale: enUS,
@@ -57,7 +58,7 @@ const GlobalProfile = () => {
                 </span>
               </div>
               <div className="text-center">
-                <span className="text-xl block text-blueGray-600">
+                <span className="sm:text-xl text-base block text-blueGray-600">
                   {trip_count} trips
                 </span>
                 <span className="text-md text-blueGray-400 font-bold">
@@ -65,7 +66,7 @@ const GlobalProfile = () => {
                 </span>
               </div>
               <div className="text-center">
-                <span className="text-xl block text-blueGray-600">
+                <span className="sm:text-xl text-base block text-blueGray-600">
                   {global_rating} out of 5
                 </span>
                 <span className="text-md text-blueGray-400 font-bold">
@@ -75,7 +76,7 @@ const GlobalProfile = () => {
             </div>
 
             <div className="text-center">
-              <div className="flex items-center justify-center mt-8 mb-4">
+              <div className="flex items-center justify-center gap-4 mt-8 mb-4">
                 <h3 className="text-md sm:text-4xl font-semibold leading-normal text-blueGray-700">
                   @{username}
                 </h3>
@@ -105,25 +106,37 @@ const GlobalProfile = () => {
                       first_image;
 
                     return (
-                      <Link
-                        className="col-span-12 relative sm:col-span-6 lg:col-span-4 flex sm:flex-col h-[250px] cursor-pointer shadow-2xl"
+                      <div
+                        className="col-span-12 relative sm:col-span-6 lg:col-span-4 flex flex-col cursor-pointer sm:rounded-lg shadow-2xl"
                         key={trip_id}
-                        to={`/trip/${trip_id}/${trip_slug}`}
                       >
-                        <div
-                          className="top-0 z-10 text-white absolute right-0 h-6 px-2"
-                          style={{ background: "rgb(0,0,0,0.6)" }}
-                        >
-                          {trip_address}
-                        </div>
-                        <div className="relative overflow-hidden w-full h-full">
-                          <img
-                            className={`w-full object-cover sm:rounded-lg transition-transform duration-300 transform hover:scale-110 h-full`}
-                            src={baseUrl + `/storage` + image_url}
-                            alt=""
-                          />
-                        </div>
-                      </Link>
+                        <Link to={`/trip/${trip_id}/${trip_slug}`}>
+                          <div
+                            className="top-0 z-10 text-white sm:rounded-lg absolute right-0 h-6 px-2"
+                            style={{ background: "rgb(0,0,0,0.6)" }}
+                          >
+                            {trip_address}
+                          </div>
+                          <div className="relative overflow-hidden w-full h-full sm:rounded-lg">
+                            <img
+                              className={`w-full object-cover sm:rounded-lg transition-transform duration-300 transform hover:scale-110 h-full`}
+                              src={baseUrl + `/storage` + image_url}
+                              alt=""
+                            />
+                          </div>
+                        </Link>
+                        <Form method="POST">
+                          <input type="hidden" name="trip_id" value={trip_id} />
+                          <button
+                            style={{ background: "rgb(0, 14, 48)" }}
+                            type="submit"
+                            className="flex gap-2 items-center justify-center sm:rounded-lg my-4 mx-auto py-2 px-4"
+                          >
+                            <RiDeleteBin5Fill color="red" />
+                            <span className="text-white font-mono">Delete</span>
+                          </button>
+                        </Form>
+                      </div>
                     );
                   })
                 )}
@@ -136,11 +149,11 @@ const GlobalProfile = () => {
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap items-center md:justify-between justify-center">
             <div className="w-full md:w-6/12 px-4 mx-auto text-center">
-              <div className="text-sm text-blueGray-500 font-semibold py-1">
+              <div className="text-sm text-slate-500 font-semibold py-1">
                 Made with{" "}
                 <a
                   href="https://github.com/Moemen12/"
-                  className="text-blueGray-500 hover:text-red-600"
+                  className="text-red-600"
                   target="_blank"
                   rel="noreferrer"
                 >

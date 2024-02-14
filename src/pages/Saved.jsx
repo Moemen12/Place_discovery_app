@@ -22,7 +22,6 @@ const Saved = () => {
   const baseUrl = useSelector((store) => store.baseUrl);
   const user_profile = JSON.parse(localStorage.getItem("user"))?.image;
 
-  console.log(user_profile);
   const handleRemoveTrip = (e, id) => {
     e.preventDefault(); // Prevent the default link behavior
     const updatedTrips = savedItems.filter((trip) => trip.id !== id);

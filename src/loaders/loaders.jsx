@@ -1,17 +1,38 @@
 import { redirect } from "react-router-dom";
 import { customFetch } from "../utils";
+import {
+  GlobalQuery,
+  SingleTripQuery,
+  TripQuery,
+} from "../components/queries/AllQuery";
 
-/* Single Trip Loader */
+/* landing loaders */
 
-export const singleProductLoader = async ({ params }) => {
+export const landingLoader = async () => {
   try {
-    const response = await customFetch(`/trip/${params.id}/${params.slug}`);
-    return { trip: response.data };
+    const response = await customFetch(`/users/general/info`);
+    return response;
   } catch (error) {
-    console.log(error);
     return null;
   }
 };
+
+/* Single Trip Loader */
+
+export const singleProductLoader =
+  (queryClient) =>
+  async ({ params }) => {
+    try {
+      const response = await queryClient.ensureQueryData(
+        SingleTripQuery({ id: params.id, slug: params.slug })
+      );
+
+      return { trip: response.data };
+    } catch (error) {
+      console.error("Error fetching single trip:", error);
+      return null;
+    }
+  };
 
 /* User Profile Loader */
 
@@ -35,18 +56,16 @@ export const userProfileLoader = async (store) => {
   }
 };
 
-/* Trips Loader */
+/* Start cached Trips Loader */
 
-export const tripsLoader = async ({ request }) => {
-  const params = Object.fromEntries([
-    ...new URL(request.url).searchParams.entries(),
-  ]);
-
-  try {
-    // Check if the user exists in local storage
+export const tripsLoader =
+  (queryClient) =>
+  async ({ request }) => {
+    const params = Object.fromEntries(
+      new URL(request.url).searchParams.entries()
+    );
     const user = JSON.parse(localStorage.getItem("user"));
 
-    // Construct the endpoint URL based on user existence
     let endpoint = "";
     if (user) {
       endpoint = `/user/trips?category=${params.category || ""}&stars=${
@@ -58,21 +77,23 @@ export const tripsLoader = async ({ request }) => {
       }`;
     }
 
-    // Construct request headers
     const headers = {};
     if (user) {
       headers.Authorization = `Bearer ${user.token}`;
     }
 
-    // Make the request with the constructed endpoint URL and headers
-    const response = await customFetch.get(endpoint, { headers });
+    try {
+      const response = await queryClient.fetchQuery(
+        TripQuery(endpoint, { headers })
+      );
+      return response;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  };
 
-    return response.data;
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
-};
+/* End cached Trips Loader */
 
 /* Create Trip Loader */
 
@@ -97,26 +118,20 @@ export const createTripLoader = async (store) => {
   }
 };
 
-/* landing loaders */
+/*  Start cached GlobalProfileLoader loaders */
 
-export const landingLoader = async () => {
-  try {
-    const response = await customFetch(`/users/general/info`);
-    return response;
-  } catch (error) {
-    return null;
-  }
-};
+export const globalProfileLoader =
+  (queryClient) =>
+  async ({ params }) => {
+    try {
+      const response = await queryClient.ensureQueryData(
+        GlobalQuery({ id: params.id, username: params.username })
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching global profile:", error);
+      return null;
+    }
+  };
 
-/* GlobalProfileLoader loaders */
-
-export const GlobalProfileLoader = async ({ params }) => {
-  try {
-    const response = await customFetch(
-      `/profile/${params.id}/${params.username}`
-    );
-    return response.data;
-  } catch (error) {
-    return null;
-  }
-};
+/*  End cached GlobalProfileLoader loaders */

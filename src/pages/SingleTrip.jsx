@@ -80,7 +80,7 @@ const SingleTrip = () => {
       ) : (
         <>
           <Modal username={username} />
-          <section className="px-4 md:px-12 pb-16 md:pb-0" id="single-mobile">
+          <section className="px-4 md:px-12 mb-4" id="single-mobile">
             <Reviews reviews={reviews} baseUrl={baseUrl} />
             <ReviewMobile reviews={reviews} baseUrl={baseUrl} />
             <div className="flex gap-12 py-8">
@@ -192,7 +192,7 @@ const SingleTrip = () => {
               <p className="font-sans mt-4 mb-8 break-words">{description}</p>
 
               <div
-                className="w-full h-12 sm:hidden rounded-md flex items-center pl-4 text-sm sm:text-md"
+                className="w-full h-12 sm:hidden border border-b-slate-700 rounded-md flex items-center pl-4 text-sm sm:text-md"
                 style={{
                   maxWidth: "none",
                 }}
@@ -201,19 +201,24 @@ const SingleTrip = () => {
                 Share your thoughts in a review...
               </div>
 
-              <Form method="POST" className="items-center gap-4 hidden sm:flex">
-                <InputForm
-                  className="w-full"
-                  name="review"
-                  style={{
-                    maxWidth: "none",
-                  }}
-                  placeholder="Share your thoughts in a review..."
-                />
-                <button type="submit" name="reviewSubmit" value="review">
-                  <IoSend className="cursor-pointer" size={"2rem"} />
-                </button>
-              </Form>
+              <div className="sm:mb-8">
+                <Form
+                  method="POST"
+                  className="items-center gap-4 hidden sm:flex"
+                >
+                  <InputForm
+                    className="w-full"
+                    name="review"
+                    style={{
+                      maxWidth: "none",
+                    }}
+                    placeholder="Share your thoughts in a review..."
+                  />
+                  <button type="submit" name="reviewSubmit" value="review">
+                    <IoSend className="cursor-pointer" size={"2rem"} />
+                  </button>
+                </Form>
+              </div>
             </div>
           </section>
           <Footer />

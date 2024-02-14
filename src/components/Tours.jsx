@@ -75,7 +75,7 @@ const Tours = ({ data }) => {
                   className="w-full h-full"
                 />
               </div>
-              <p className="">{country}</p>
+              <p className="text-black">{country}</p>
             </div>
           </SliderHelper>
         ))}

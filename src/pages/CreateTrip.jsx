@@ -120,11 +120,11 @@ const CreateTrip = () => {
               <div className="flex flex-col w-full sm:w-1/2 sm:mt-4 gap-4 sm:gap-8">
                 <article className="flex flex-col">
                   <b className="mb-2">Add Photo</b>
-                  <div className="sm:h-60 h-32 flex flex-col shadow-xl justify-center items-center border border-solid border-slate-600">
+                  <div className="sm:h-60 h-32 flex flex-col shadow-xl justify-center items-center border border-solid border-slate-300">
                     <label htmlFor="imageUpload" className="cursor-pointer">
                       <IoIosAddCircleOutline
                         size={"4rem"}
-                        className="mx-auto border-slate-600"
+                        className="mx-auto border-slate-300"
                       />
                       <p>Add Photos</p>
                       <input
@@ -149,7 +149,7 @@ const CreateTrip = () => {
                   />
                   <textarea
                     id="title"
-                    className="textarea h-20 border-solid border-slate-600 outline-0 shadow-xl"
+                    className="textarea h-20 border-solid border-slate-300 outline-0 shadow-xl"
                     placeholder="Add title"
                     onChange={(e) => setTitleTrip(e.target.value)}
                   ></textarea>
@@ -165,7 +165,7 @@ const CreateTrip = () => {
                   />
                   <textarea
                     id="description"
-                    className="textarea h-20 border border-solid border-slate-600 outline-0 shadow-xl"
+                    className="textarea h-20 border border-solid border-slate-300 outline-0 shadow-xl"
                     placeholder="Add Description"
                     onChange={(e) => setDescription(e.target.value)}
                   ></textarea>

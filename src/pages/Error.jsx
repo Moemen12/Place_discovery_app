@@ -1,8 +1,7 @@
-import { Link, useRouteError } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ErrorPage } from "../assets/images";
 const Error = () => {
-  const error = useRouteError();
-  console.log(error.status);
+  // const error = useRouteError();
 
   // if (error.status === 404) {
   return (

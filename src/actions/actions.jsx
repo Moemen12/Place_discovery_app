@@ -58,6 +58,16 @@ export const reviewAction = async (params, data, store) => {
         Authorization: `Bearer ${user?.token}`,
       },
     });
+    toast.success("Review Added Successfully", {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
 
     return response;
   } catch (error) {
@@ -193,6 +203,55 @@ export const updateSettingsAction = async ({ request }, store) => {
   }
   try {
     const response = await customFetch.put(`/auth/user/settings`, newData, {
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
+    });
+
+    toast.success(response.data.message, {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+    return response;
+  } catch (error) {
+    dispatch(setMessage(error.response.data.message));
+    toast.error(error.response.data.message, {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+    return error;
+  }
+};
+
+/* delete Trip Action */
+
+export const deleteTripAction = async ({ request }, store) => {
+  const { dispatch } = store;
+  const user = store.getState().userState.user;
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
+
+  if (!user || user.id === null) {
+    const errorMessage = "Unauthorized, Please Login";
+    dispatch(setMessage({ error: true, message: errorMessage }));
+
+    return redirect("/auth/login");
+  }
+
+  try {
+    const response = await customFetch.delete(`/trip/${data.trip_id}/delete`, {
       headers: {
         Authorization: `Bearer ${user.token}`,
       },
