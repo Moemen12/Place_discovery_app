@@ -84,7 +84,9 @@ const GlobalProfile = () => {
                   className="cursor-pointer"
                   size={"1.5rem"}
                   onClick={handleCopyClick}
+                  onTouchStart={handleCopyClick} // Add onTouchStart event
                 />
+
                 {copied && (
                   <span className="ml-2 text-sm text-green-600">Copied!</span>
                 )}

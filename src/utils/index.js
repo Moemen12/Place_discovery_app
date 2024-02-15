@@ -2,7 +2,7 @@ import axios from "axios";
 import { image10, image7, image8, image9 } from "../assets/images";
 import { redirect } from "react-router-dom";
 
-const Travel_api = "http://127.0.0.1:8000/api";
+const Travel_api = "http://wanderwise.backend.wanderwise.space/api";
 
 export const customFetch = axios.create({
   baseURL: Travel_api,

@@ -120,7 +120,7 @@ const CreateTrip = () => {
               <div className="flex flex-col w-full sm:w-1/2 sm:mt-4 gap-4 sm:gap-8">
                 <article className="flex flex-col">
                   <b className="mb-2">Add Photo</b>
-                  <div className="sm:h-60 h-32 flex flex-col shadow-xl justify-center items-center border border-solid border-slate-300">
+                  <div className="sm:h-60 h-32 flex flex-col shadow-xl justify-center items-center border border-solid border-slate-300 rounded-lg">
                     <label htmlFor="imageUpload" className="cursor-pointer">
                       <IoIosAddCircleOutline
                         size={"4rem"}
@@ -174,7 +174,7 @@ const CreateTrip = () => {
                 <article className="flex flex-col">
                   <b className="mb-2">Select Location</b>
                   <select
-                    className="select select-bordered w-full"
+                    className="select border-slate-300 border w-full"
                     id="select_location"
                     value={selectedLocation}
                     onChange={(e) => setSelectedLocation(e.target.value)}
@@ -200,7 +200,7 @@ const CreateTrip = () => {
                 <article className="flex flex-col">
                   <b className="mb-2">Add Trip</b>
                   <select
-                    className="select select-bordered w-full"
+                    className="select border-slate-300 border w-full"
                     value={selectedTrip}
                     id="select_type"
                     onChange={(e) => setSelectedTrip(e.target.value)}

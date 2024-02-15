@@ -1,5 +1,6 @@
 {
-  "name": "place2",
+  "name": "wanderwise",
+  "homepage": "http://wanderwise.wanderwise.space/",
   "private": true,
   "version": "0.0.0",
   "type": "module",

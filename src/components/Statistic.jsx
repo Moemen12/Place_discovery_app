@@ -32,7 +32,7 @@ AnimatedNumber.propTypes = {
 const Statistic = ({ data }) => {
   return (
     <Wrapper>
-      <div className="p-12 flex flex-col items-center justify-between md:flex-row gap-8 sm:gap-16 mx-auto text-black">
+      <div className="p-12 pt-0 flex flex-col items-center justify-between md:flex-row gap-8 sm:gap-16 mx-auto text-black">
         <div className="flex items-center justify-center flex-col">
           <BiMap className="text-5xl md:text-8xl text-gray-600" />
           <p className="text-center">Trips Published</p>
