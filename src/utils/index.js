@@ -20,9 +20,13 @@ export const getUserFromLocalStorage = () => {
     }
   } catch (error) {
     console.error("Error parsing JSON:", error);
-    // Remove invalid data from localStorage
-    localStorage.removeItem("user");
-    return redirect("/auth/login");
+
+    if (error.response.status === 401) {
+      localStorage.removeItem("user");
+      return redirect("/auth/login");
+    }
+
+    return {};
   }
 
   return null;

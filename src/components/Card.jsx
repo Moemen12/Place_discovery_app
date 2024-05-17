@@ -93,7 +93,7 @@ const Card = ({ trip }) => {
         <div className="flex w-full sm:w-[200px]">
           <div className="w-full rounded cursor-auto sm:rounded-l-lg object-cover">
             <img
-              className="h-full sm:rounded-l-lg object-cover"
+              className="h-full sm:rounded-l-lg object-cover w-full"
               loading="lazy"
               src={`${baseUrl}/storage${images.image_url}`}
               alt=""

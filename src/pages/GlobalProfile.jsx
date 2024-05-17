@@ -5,6 +5,7 @@ import { formatDistanceToNow } from "date-fns";
 import { enUS } from "date-fns/locale";
 import { FaCopy } from "react-icons/fa";
 import { RiDeleteBin5Fill } from "react-icons/ri";
+import CopyToClipboard from "react-copy-to-clipboard";
 
 const GlobalProfile = () => {
   const data = useLoaderData();
@@ -22,13 +23,7 @@ const GlobalProfile = () => {
   const baseUrl = useSelector((store) => store.baseUrl);
   const [copied, setCopied] = useState(false);
 
-  const handleCopyClick = () => {
-    navigator.clipboard.writeText(window.location.href);
-    setCopied(true);
-    setTimeout(() => {
-      setCopied(false);
-    }, 2000); // Reset copied text after 2 seconds
-  };
+  const user = useSelector((store) => store.userState.user);
 
   return (
     <section className="relative bg-blueGray-200 mt-8 mb-8 text-black">
@@ -80,12 +75,18 @@ const GlobalProfile = () => {
                 <h3 className="text-md sm:text-4xl font-semibold leading-normal text-blueGray-700">
                   @{username}
                 </h3>
-                <FaCopy
-                  className="cursor-pointer"
-                  size={"1.5rem"}
-                  onClick={handleCopyClick}
-                  onTouchStart={handleCopyClick} // Add onTouchStart event
-                />
+
+                <CopyToClipboard
+                  text={window.location.href}
+                  onCopy={() => setCopied(true)}
+                >
+                  <FaCopy
+                    className="cursor-pointer"
+                    size={"1.5rem"}
+                    // onClick={handleCopyClick}
+                    // onTouchStart={handleCopyClick} // Add onTouchStart event
+                  />
+                </CopyToClipboard>
 
                 {copied && (
                   <span className="ml-2 text-sm text-green-600">Copied!</span>
@@ -129,14 +130,18 @@ const GlobalProfile = () => {
                         </Link>
                         <Form method="POST">
                           <input type="hidden" name="trip_id" value={trip_id} />
-                          <button
-                            style={{ background: "rgb(0, 14, 48)" }}
-                            type="submit"
-                            className="flex gap-2 items-center justify-center sm:rounded-lg my-4 mx-auto py-2 px-4"
-                          >
-                            <RiDeleteBin5Fill color="red" />
-                            <span className="text-white font-mono">Delete</span>
-                          </button>
+                          {user ? (
+                            <button
+                              style={{ background: "rgb(0, 14, 48)" }}
+                              type="submit"
+                              className="flex gap-2 items-center justify-center sm:rounded-lg my-4 mx-auto py-2 px-4"
+                            >
+                              <RiDeleteBin5Fill color="red" />
+                              <span className="text-white font-mono">
+                                Delete
+                              </span>
+                            </button>
+                          ) : null}
                         </Form>
                       </div>
                     );

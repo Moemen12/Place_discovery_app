@@ -29,8 +29,11 @@ const SingleTrip = () => {
   const { trip } = useLoaderData();
   const navigation = useNavigation();
   const isPageLoading = navigation.state === "loading";
+
   const {
     address,
+    user_id,
+
     title,
     created_at,
     description,
@@ -71,16 +74,19 @@ const SingleTrip = () => {
   }, []);
 
   const baseUrl = useSelector((store) => store.baseUrl);
-  const userInfo = useSelector((store) => store.userState.user);
+  // const userInfo = useSelector((store) => store.userState.user);
 
   return (
     <>
       {isPageLoading ? (
         <Loading />
       ) : (
-        <>
+        <div className="lg:m-auto lg:max-w-[90rem]">
           <Modal username={username} />
-          <section className="px-4 md:px-12 mb-4" id="single-mobile">
+          <section
+            className="px-4 md:px-12 overflow-y-scroll mb-4 h-[calc(100dvh-65px)] sm:h-auto hide-scrollBar"
+            id="single-mobile"
+          >
             <Reviews reviews={reviews} baseUrl={baseUrl} />
             <ReviewMobile reviews={reviews} baseUrl={baseUrl} />
             <div className="flex gap-12 py-8">
@@ -88,6 +94,7 @@ const SingleTrip = () => {
                 singleImg={images[0]?.image_url}
                 profile_image={profile_image}
                 baseUrl={baseUrl}
+                user_id={user_id}
                 username={username}
                 country={address}
               />
@@ -97,7 +104,7 @@ const SingleTrip = () => {
               >
                 <Link
                   className="flex items-center gap-4"
-                  to={`/user/profile/${userInfo.id}/${userInfo.name}`}
+                  to={`/user/profile/${user_id}/${username}`}
                 >
                   <img
                     src={
@@ -223,7 +230,7 @@ const SingleTrip = () => {
           </section>
           <Footer />
           <MobileNavbar />
-        </>
+        </div>
       )}
     </>
   );

@@ -17,8 +17,8 @@ const Trips = () => {
       {isPageLoading ? (
         <Loading />
       ) : (
-        <section className="h-screen sm:mb-0">
-          <div className="mb-[68px]">
+        <section className="sm:mb-0 lg:m-auto lg:max-w-[90rem]">
+          <div className="sm:h-auto h-[calc(100dvh-65px)] hide-scrollBar overflow-y-scroll">
             <LandingNavbar />
             <TripHeader data={loadedData} />
             <TripCategory data={loadedData} />

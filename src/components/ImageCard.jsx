@@ -1,9 +1,11 @@
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 const ImageCard = ({
   singleImg,
   profile_image,
   baseUrl,
   username,
+  user_id,
   country,
 }) => {
   return (
@@ -19,15 +21,17 @@ const ImageCard = ({
       >
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-2">
-            <img
-              src={
-                profile_image
-                  ? `${baseUrl}/storage${profile_image}`
-                  : "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/768px-Default_pfp.svg.png"
-              }
-              className="rounded-full h-10 w-10 object-cover"
-              alt=""
-            />
+            <Link to={username ? `/user/profile/${user_id}/${username}` : ``}>
+              <img
+                src={
+                  profile_image
+                    ? `${baseUrl}/storage${profile_image}`
+                    : "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/768px-Default_pfp.svg.png"
+                }
+                className="rounded-full h-10 w-10 object-cover"
+                alt=""
+              />
+            </Link>
             <p className="text-white font-sans">{username}</p>
           </div>
           <p className="text-white">{country}</p>
@@ -40,6 +44,7 @@ const ImageCard = ({
 ImageCard.propTypes = {
   trip: PropTypes.object,
   baseUrl: PropTypes.string,
+  user_id: PropTypes.string,
   singleImg: PropTypes.string,
   profile_image: PropTypes.string,
   username: PropTypes.string,

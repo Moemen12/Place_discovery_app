@@ -2,6 +2,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import PropTypes from "prop-types";
 import { formatDistanceToNow } from "date-fns";
 import { enUS } from "date-fns/locale";
+import { useState } from "react";
 
 const Reviews = ({ reviews, baseUrl }) => {
   const goBack = () => {
@@ -9,6 +10,10 @@ const Reviews = ({ reviews, baseUrl }) => {
     document.getElementById("single-info").style.display = "flex";
     document.getElementById("single-slider").style.width = "100%";
   };
+
+  const [Allreviews, setAllReviews] = useState(reviews);
+
+  console.log(Allreviews);
   return (
     <>
       <div
@@ -22,7 +27,7 @@ const Reviews = ({ reviews, baseUrl }) => {
           <FaArrowLeft size={"1.5rem"} />
           <p>Comments</p>
         </div>
-        {reviews.map((singleReview) => {
+        {Allreviews.map((singleReview) => {
           const { id, review, profile_image, created_at } = singleReview;
           const utcDate = new Date(created_at);
           return (

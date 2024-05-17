@@ -44,7 +44,7 @@ const Saved = () => {
       {isPageLoading ? (
         <Loading />
       ) : (
-        <>
+        <div className="lg:m-auto lg:max-w-[90rem]">
           <LandingNavbar />
           <BreadCrumbs title={"saved"} image={user_profile} />
           {savedItems.length > 0 && (
@@ -125,8 +125,8 @@ const Saved = () => {
                 </Link>
               ))
             ) : (
-              <div className="h-80">
-                <div className="flex flex-col items-center mt-24">
+              <div className="h-80 mt-24">
+                <div className="flex flex-col items-center">
                   <BsBookmarkPlus size={"5rem"} />
                   <p className="text-lg mt-4 text-center">
                     You have no saved trips.{" "}
@@ -141,7 +141,7 @@ const Saved = () => {
 
           <MobileNavbar />
           <Footer />
-        </>
+        </div>
       )}
     </>
   );

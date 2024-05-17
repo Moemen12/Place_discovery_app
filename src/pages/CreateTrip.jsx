@@ -22,10 +22,13 @@ const CreateTrip = () => {
   const [selectedLocation, setSelectedLocation] = useState("");
   const [selectedTrip, setSelectedTrip] = useState("");
   const [title, setTitleTrip] = useState("");
-  const dataCollection = useLoaderData();
+  const [isFormSubmitting, setIsFormSubmitting] = useState(false);
 
   const navigation = useNavigation();
+
   const isPageLoading = navigation.state === "loading";
+  const dataCollection = useLoaderData();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -61,6 +64,8 @@ const CreateTrip = () => {
   };
 
   const handleUpload = async () => {
+    setIsFormSubmitting(true); // Set the state to indicate form submission
+
     const user = store.getState().userState.user;
     try {
       const formData = new FormData();
@@ -93,6 +98,8 @@ const CreateTrip = () => {
         progress: undefined,
         theme: "light",
       });
+
+      // Reset the form or redirect after success if necessary
     } catch (error) {
       toast.error(error.response.data.message, {
         position: "top-center",
@@ -104,6 +111,8 @@ const CreateTrip = () => {
         progress: undefined,
         theme: "light",
       });
+    } finally {
+      setIsFormSubmitting(false); // Reset the state after form submission
     }
   };
 
@@ -112,7 +121,15 @@ const CreateTrip = () => {
       {isPageLoading ? (
         <Loading />
       ) : (
-        <>
+        <div className="lg:m-auto lg:max-w-[90rem]">
+          {isFormSubmitting ? (
+            <div className="w-screen h-screen top-0 left-0 grid place-items-center fixed z-10 bg-slate-700 opacity-90">
+              <span className="flex items-center gap-3 text-white">
+                Images Uploading
+                <span className="loading loading-dots loading-lg bg-white"></span>
+              </span>
+            </div>
+          ) : null}
           <LandingNavbar />
           <section className="mb-16">
             <BreadCrumbs title={"add"} image={dataCollection.profile_image} />
@@ -252,14 +269,18 @@ const CreateTrip = () => {
                 )}
               </div>
             </section>
-            <button className="btn mt-4 mx-2 sm:mx-10" onClick={handleUpload}>
-              Submit
+            <button
+              disabled={isFormSubmitting}
+              className="btn mt-4 mx-2 sm:mx-10"
+              onClick={handleUpload}
+            >
+              {isFormSubmitting ? "Submitting..." : "Submit"}
             </button>
           </section>
 
           <Footer />
           <MobileNavbar />
-        </>
+        </div>
       )}
     </>
   );

@@ -10,7 +10,7 @@ const App = () => {
     <>
       <QueryClientProvider client={queryClient}>
         <RouterProvider router={router} />
-        <ToastContainer />
+        <ToastContainer position="top-center" />
       </QueryClientProvider>
     </>
   );

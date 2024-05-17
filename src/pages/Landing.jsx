@@ -26,7 +26,7 @@ const Landing = () => {
           >
             Wanderwise
           </Link>
-          <div className="h-screen flex flex-col">
+          <div className="new-height flex flex-col">
             <LandingNavbar />
             <Header />
           </div>

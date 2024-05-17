@@ -243,13 +243,6 @@ export const deleteTripAction = async ({ request }, store) => {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
 
-  if (!user || user.id === null) {
-    const errorMessage = "Unauthorized, Please Login";
-    dispatch(setMessage({ error: true, message: errorMessage }));
-
-    return redirect("/auth/login");
-  }
-
   try {
     const response = await customFetch.delete(`/trip/${data.trip_id}/delete`, {
       headers: {
@@ -267,19 +260,11 @@ export const deleteTripAction = async ({ request }, store) => {
       progress: undefined,
       theme: "light",
     });
+
+    window.location.reload();
     return response;
   } catch (error) {
-    dispatch(setMessage(error.response.data.message));
-    toast.error(error.response.data.message, {
-      position: "top-center",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
+    toast.error("You are not authorized to delete this trip");
     return error;
   }
 };

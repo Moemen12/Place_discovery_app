@@ -86,6 +86,14 @@ body {
 .custom-scrollbar::-webkit-scrollbar-track {
   background-color: transparent;
 }
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.hide-scrollBar::-webkit-scrollbar {
+  display: none;
+}
 
 /* Rating Style */
 .rain-container {
@@ -120,4 +128,15 @@ body {
 
 .category-link-style a.active {
   border-bottom: 3px solid rgb(0, 14, 48);
+}
+@media screen and (max-width: 1399px) {
+  .new-height {
+    height: 100vh;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .new-height {
+    height: auto;
+  }
 }

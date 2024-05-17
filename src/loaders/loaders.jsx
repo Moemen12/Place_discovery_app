@@ -29,8 +29,8 @@ export const singleProductLoader =
 
       return { trip: response.data };
     } catch (error) {
-      console.error("Error fetching single trip:", error);
-      return null;
+      // console.error("Error fetching single trip:", error.response.status);
+      return { trip: {} };
     }
   };
 
@@ -88,8 +88,7 @@ export const tripsLoader =
       );
       return response;
     } catch (error) {
-      console.error(error);
-      return null;
+      return error;
     }
   };
 
@@ -113,8 +112,11 @@ export const createTripLoader = async (store) => {
 
     return response.data;
   } catch (error) {
-    console.error(error);
-    return null;
+    if (error.response.status === 401) {
+      localStorage.removeItem("user");
+      return redirect("/auth/login");
+    }
+    return error;
   }
 };
 
@@ -127,10 +129,11 @@ export const globalProfileLoader =
       const response = await queryClient.ensureQueryData(
         GlobalQuery({ id: params.id, username: params.username })
       );
+
       return response.data;
     } catch (error) {
-      console.error("Error fetching global profile:", error);
-      return null;
+      // console.error("Error fetching global profile:", error);
+      return error;
     }
   };
 

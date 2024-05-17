@@ -16,13 +16,16 @@ export const SingleTripQuery = ({ id, slug }) => {
 
 export const TripQuery = (endpoint, { headers }) => {
   return {
-    queryKey: ["TripQuery", endpoint], // Changed from id to endpoint
+    queryKey: ["TripQuery", endpoint],
     queryFn: async () => {
       try {
-        const response = await customFetch(endpoint, { headers }); // Use endpoint and headers directly
+        const response = await customFetch(endpoint, { headers });
         return response.data;
       } catch (error) {
-        throw new Error("Failed to fetch trip data: " + error.message);
+        if (error.response.status === 401) {
+          localStorage.removeItem("user");
+          window.location.href = "/auth/login";
+        }
       }
     },
   };
