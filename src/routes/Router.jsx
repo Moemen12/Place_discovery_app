@@ -32,14 +32,7 @@ import {
 import { multiFormAction } from "../actions/multiformActions";
 import { QueryClient } from "@tanstack/react-query";
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 1000 * 60 * 5, // 5 minutes
-      cacheTime: 1000 * 60 * 60, // 1 hour
-    },
-  },
-});
+const queryClient = new QueryClient();
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -67,7 +60,7 @@ export const router = createBrowserRouter([
     loader: tripsLoader(queryClient),
   },
   {
-    path: "/trip/:id/:slug",
+    path: "/trip/:id/:slug", // single page here
     element: <SingleTrip />,
     errorElement: <Error />,
     loader: singleProductLoader(queryClient),

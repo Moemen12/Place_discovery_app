@@ -23,7 +23,7 @@ export const singleProductLoader =
   (queryClient) =>
   async ({ params }) => {
     try {
-      const response = await queryClient.ensureQueryData(
+      const response = await queryClient.fetchQuery(
         SingleTripQuery({ id: params.id, slug: params.slug })
       );
 

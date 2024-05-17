@@ -237,7 +237,7 @@ const TripHeader = ({ data }) => {
                     {shortDesc}
                   </b>
                 </div>
-                {/* i wanna cache the image below how ?? */}
+
                 <div className="trip-slider hidden sm:block">
                   <div className="flex items-center justify-center h-screen">
                     <div

@@ -4,10 +4,8 @@ import { MdOutlineCalendarMonth } from "react-icons/md";
 import { IoSend } from "react-icons/io5";
 import { format } from "date-fns";
 import { GoPeople } from "react-icons/go";
-import { FaStar } from "react-icons/fa";
-import { FaRegComment } from "react-icons/fa";
+import { FaStar, FaRegComment } from "react-icons/fa";
 import Skeleton from "react-loading-skeleton";
-
 import "react-loading-skeleton/dist/skeleton.css";
 import {
   Footer,
@@ -24,6 +22,7 @@ import {
 } from "../components";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import Viewer from "react-viewer";
 
 const SingleTrip = () => {
   const { trip } = useLoaderData();
@@ -33,7 +32,6 @@ const SingleTrip = () => {
   const {
     address,
     user_id,
-
     title,
     created_at,
     description,
@@ -44,6 +42,8 @@ const SingleTrip = () => {
     average_rating,
     images,
   } = trip.trip;
+
+  console.log(title);
 
   const [seeReviews, setSeeReviews] = useState(false);
 
@@ -74,7 +74,13 @@ const SingleTrip = () => {
   }, []);
 
   const baseUrl = useSelector((store) => store.baseUrl);
-  // const userInfo = useSelector((store) => store.userState.user);
+  const [viewerVisible, setViewerVisible] = useState(false);
+
+  // Create image objects for the viewer
+  const viewerImages = images.map((image) => ({
+    src: `${baseUrl}/storage${image.image_url}`,
+    alt: image.description || "Image",
+  }));
 
   return (
     <>
@@ -173,18 +179,24 @@ const SingleTrip = () => {
                 </div>
               </div>
             </div>
+
+            <Viewer
+              visible={viewerVisible}
+              onClose={() => setViewerVisible(false)}
+              images={viewerImages}
+            />
+
             <Slider id="single-slider" perView={perView}>
-              {images.map((image) => {
-                return (
-                  <SliderHelper key={image.id} className="mx-2">
-                    <img
-                      src={`${baseUrl}/storage${image.image_url}`}
-                      className="h-28 w-48 sm:w-72 sm:h-48 rounded-xl object-cover"
-                      alt=""
-                    />
-                  </SliderHelper>
-                );
-              })}
+              {images.map((image) => (
+                <SliderHelper key={image.id} className="mx-2">
+                  <img
+                    onClick={() => setViewerVisible(true)}
+                    src={`${baseUrl}/storage${image.image_url}`}
+                    className="h-28 w-48 sm:w-72 sm:h-48 rounded-xl object-cover"
+                    alt=""
+                  />
+                </SliderHelper>
+              ))}
             </Slider>
 
             <SinglePageCard trip={trip} baseUrl={baseUrl} />

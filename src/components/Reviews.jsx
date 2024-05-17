@@ -17,7 +17,7 @@ const Reviews = ({ reviews, baseUrl }) => {
   return (
     <>
       <div
-        className="flex-col gap-8 w-1/2 hidden overflow-y-scroll right-0 absolute top-12 md:h-3/5 lg:h-3/4 px-12"
+        className="flex-col gap-8 w-1/2 hidden overflow-y-scroll right-0 hide-scrollBar absolute top-12 md:h-3/5 lg:h-3/4 px-12"
         id="review"
       >
         <div
